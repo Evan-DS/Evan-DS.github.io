@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gillian Emerald | Software Engineer</title>
+    <title>Evan Dos Santos | Software Engineer</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -17,8 +17,27 @@
         body { font-family:'Roboto',sans-serif; line-height:1.6; color:#333; background-color:#f9f9f9; }
         a { text-decoration:none; color:inherit; }
 
-        /* Global container */
-        section { padding:80px 20px; }
+        /* Navbar */
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(255,255,255,0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        nav .logo { font-weight: bold; font-size: 1.2rem; color:#0077cc; }
+        nav ul { display: flex; list-style:none; gap:30px; }
+        nav ul li a { color:#333; font-weight:500; transition:0.3s; }
+        nav ul li a:hover { color:#0077cc; }
+
+        /* Sections */
+        section { padding:100px 20px; }
 
         /* Landing Section */
         .landing {
@@ -28,7 +47,7 @@
             color:#fff;
             padding:0 20px;
         }
-        .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
+        .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; color:#0077cc; }
         .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; }
         .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; }
         .cta-button { display:inline-block; padding:12px 30px; background-color:#0077cc; color:#fff; font-weight:bold; border-radius:5px; transition:0.3s; animation:fadeInUp 2.5s ease forwards; }
@@ -79,6 +98,8 @@
 
         /* Responsive */
         @media (max-width:768px){
+            nav { padding: 10px 20px; }
+            nav ul { gap:15px; }
             .landing h1{ font-size:2.2rem; }
             .landing h2{ font-size:1.2rem; }
             .landing p{ font-size:1rem; }
@@ -89,20 +110,32 @@
 </head>
 <body>
 
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Evan Dos Santos</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <!-- Landing Section -->
     <section class="landing">
-        <h1>Gillian Emerald</h1>
-        <h2>Software Engineer | Building scalable and modern applications</h2>
-        <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
+        <h1>Hi, I'm Evan Dos Santos</h1>
+        <h2>Software Engineer & IT Systems Specialist</h2>
+        <p>Computer Science graduate with a Software Engineering specialization, passionate about building robust systems and providing exceptional technical solutions. Experienced in full-stack development, system administration, and client support.</p>
         <a href="#about" class="cta-button">Learn More About Me</a>
     </section>
 
     <!-- About Section -->
     <section class="about" id="about">
-        <img src="headshot-placeholder.jpg" alt="Gillian Emerald - Headshot">
+        <img src="headshot-placeholder.jpg" alt="Evan Dos Santos - Headshot">
         <div class="about-text">
             <h2>About Me</h2>
-            <p>Hello! I'm Gillian, a Software Engineer with a passion for building high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
+            <p>Hello! I'm Evan, a Software Engineer passionate about creating high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
             <p>My career is driven by curiosity, creativity, and the desire to make a positive impact through technology. I enjoy working on collaborative projects and contributing to open-source communities.</p>
         </div>
     </section>
