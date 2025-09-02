@@ -1,147 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evan Dos Santos | Software Engineer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evan Dos Santos | Software Engineer</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico">
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico">
 
-    <style>
-        /* Reset */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; background-color:#eff4f; scroll-behavior:smooth; }
-        a { text-decoration:none; color:inherit; }
+<style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; background-color:#eff4f; scroll-behavior:smooth; }
+    a { text-decoration:none; color:inherit; }
 
-        /* Navbar */
-        nav {
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(255,255,255,0.95);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        nav .logo {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #2463eb;
-        }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            margin: 0 auto;
-            list-style: none;
-        }
-        .nav-links li a {
-            color: #344256;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .nav-links li a.active {
-            color: #2463eb;
-        }
-        .nav-links li a:hover {
-            color: #2463eb;
-        }
+    /* Navbar */
+    nav {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(255,255,255,0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    .nav-container {
+        display: flex;
+        width: 90%;
+        max-width: 1200px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    nav .logo {
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: #2463eb;
+        margin-right: 50px;
+    }
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+    }
+    .nav-links li a {
+        color: #344256;
+        font-weight: 500;
+        transition: 0.3s;
+        font-size: 1rem;
+    }
+    .nav-links li a.active, .nav-links li a:hover {
+        color: #2463eb;
+    }
 
-        /* Sections */
-        section { padding:100px 20px; }
+    /* Sections */
+    section { padding:100px 20px; }
 
-        /* Landing Section */
-        .landing {
-            display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh;
-            text-align:center;
-            background: linear-gradient(rgba(239,244,255,0.85), rgba(239,244,255,0.85)), url('background-placeholder.jpg') no-repeat center center/cover;
-            color:#344256;
-            padding:0 20px;
-        }
-        .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
-        .landing h1 .name { color:#2463eb; }
-        .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; color:#344256; }
-        .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; color:#344256; }
+    /* Landing Section */
+    .landing {
+        display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh;
+        text-align:center;
+        background: linear-gradient(rgba(239,244,255,0.85), rgba(239,244,255,0.85)), url('background-placeholder.jpg') no-repeat center center/cover;
+        color:#344256;
+        padding:0 20px;
+    }
+    .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
+    .landing h1 .name { color:#2463eb; }
+    .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; color:#344256; }
+    .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; color:#344256; }
 
-        /* CTA Buttons */
-        .cta-buttons { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; animation:fadeInUp 2.5s ease forwards; }
-        .cta-buttons a {
-            padding:12px 30px;
-            background-color:#2463eb;
-            color:#fff;
-            font-weight:bold;
-            border-radius:5px;
-            transition:0.3s;
-        }
-        .cta-buttons a:hover { background-color:#1c4acb; }
+    /* CTA Buttons */
+    .cta-buttons { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; animation:fadeInUp 2.5s ease forwards; }
+    .cta-buttons a {
+        padding:12px 30px;
+        background-color:#2463eb;
+        color:#fff;
+        font-weight:bold;
+        border-radius:5px;
+        transition:0.3s;
+    }
+    .cta-buttons a:hover { background-color:#1c4acb; }
 
-        /* About Section */
-        .about { display:flex; flex-direction:row; align-items:center; justify-content:center; gap:50px; background-color:#eff4f; }
-        .about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .about-text { max-width:600px; }
-        .about-text h2 { font-size:2rem; margin-bottom:20px; color:#2463eb; }
-        .about-text p { font-size:1.1rem; margin-bottom:10px; color:#344256; }
+    /* About Section */
+    .about { display:flex; flex-direction:row; align-items:center; justify-content:center; gap:50px; background-color:#eff4f; }
+    .about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+    .about-text { max-width:600px; }
+    .about-text h2 { font-size:2rem; margin-bottom:20px; color:#2463eb; position:relative; display:inline-block; text-align:center; }
+    .about-text h2::after { content: ""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .about-text p { font-size:1.1rem; margin-bottom:10px; color:#344256; }
 
-        /* Projects Section */
-        .projects { background-color:#eff4f; }
-        .projects h2 { text-align:center; font-size:2rem; margin-bottom:40px; color:#2463eb; }
-        .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
-        .project-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; }
-        .project-card:hover { transform:translateY(-5px); }
-        .project-card img { width:100%; height:150px; object-fit:cover; }
-        .project-card-content { padding:20px; }
-        .project-card-content h3 { font-size:1.3rem; margin-bottom:10px; color:#2463eb; }
-        .project-card-content p { font-size:0.95rem; margin-bottom:10px; color:#344256; }
-        .tech-stack { font-size:0.85rem; color:#555; margin-bottom:10px; }
-        .project-links a { margin-right:10px; color:#2463eb; font-weight:bold; }
+    /* Projects Section */
+    .projects { background-color:#eff4f; }
+    .projects h2 { text-align:center; font-size:2.2rem; margin-bottom:40px; color:#344256; position:relative; display:inline-block; }
+    .projects h2::after { content:""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
+    .project-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; }
+    .project-card:hover { transform:translateY(-5px); }
+    .project-card img { width:100%; height:150px; object-fit:cover; }
+    .project-card-content { padding:20px; }
+    .project-card-content h3 { font-size:1.3rem; margin-bottom:10px; color:#2463eb; text-align:center; position:relative; }
+    .project-card-content h3::after { content:""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .project-card-content p { font-size:0.95rem; margin-bottom:10px; color:#344256; }
+    .tech-stack { font-size:0.85rem; color:#555; margin-bottom:10px; }
+    .project-links a { margin-right:10px; color:#2463eb; font-weight:bold; }
 
-        /* Resume Section */
-        .resume h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#2463eb; }
-        .resume a { display:inline-block; margin-top:20px; padding:12px 25px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; }
-        .resume a:hover { background-color:#1c4acb; }
+    /* Resume Section */
+    .resume h2 { text-align:center; font-size:2.2rem; margin-bottom:30px; color:#344256; position:relative; display:inline-block; }
+    .resume h2::after { content:""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .resume a { display:inline-block; margin-top:20px; padding:12px 25px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; }
+    .resume a:hover { background-color:#1c4acb; }
 
-        /* Skills Section */
-        .skills h2 { text-align:center; font-size:2rem; margin-bottom:40px; color:#2463eb; }
-        .skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
-        .skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; color:#344256; }
+    /* Skills Section */
+    .skills h2 { text-align:center; font-size:2.2rem; margin-bottom:40px; color:#344256; position:relative; display:inline-block; }
+    .skills h2::after { content:""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
+    .skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; color:#344256; }
 
-        /* Contact Section */
-        .contact { background-color:#eff4f; max-width:700px; margin:0 auto; border-radius:10px; padding:40px 20px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .contact h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#2463eb; }
-        .contact form { display:flex; flex-direction:column; gap:15px; }
-        .contact input, .contact textarea { padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem; width:100%; color:#344256; }
-        .contact button { padding:12px; border:none; border-radius:5px; background-color:#2463eb; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
-        .contact button:hover { background-color:#1c4acb; }
-        .social-links { text-align:center; margin-top:20px; }
-        .social-links a { margin:0 10px; color:#2463eb; font-weight:bold; }
+    /* Contact Section */
+    .contact { background-color:#eff4f; max-width:700px; margin:0 auto; border-radius:10px; padding:40px 20px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+    .contact h2 { text-align:center; font-size:2.2rem; margin-bottom:30px; color:#344256; position:relative; display:inline-block; }
+    .contact h2::after { content:""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .contact form { display:flex; flex-direction:column; gap:15px; }
+    .contact input, .contact textarea { padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem; width:100%; color:#344256; }
+    .contact button { padding:12px; border:none; border-radius:5px; background-color:#2463eb; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .contact button:hover { background-color:#1c4acb; }
+    .social-links { text-align:center; margin-top:20px; }
+    .social-links a { margin:0 10px; color:#2463eb; font-weight:bold; }
 
-        /* Animations */
-        @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+    /* Animations */
+    @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
 
-        /* Responsive */
-        @media (max-width:768px){
-            nav { padding: 10px 20px; }
-            nav ul { gap:15px; }
-            .landing h1{ font-size:2.2rem; }
-            .landing h2{ font-size:1.2rem; }
-            .landing p{ font-size:1rem; }
-            .about { flex-direction:column; text-align:center; }
-            .about img{ width:200px; height:200px; }
-            .cta-buttons { flex-direction:column; gap:15px; }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width:768px){
+        nav { padding: 10px 20px; }
+        .nav-container { flex-direction:column; gap:10px; }
+        .landing h1{ font-size:2.2rem; }
+        .landing h2{ font-size:1.2rem; }
+        .landing p{ font-size:1rem; }
+        .about { flex-direction:column; text-align:center; }
+        .about img{ width:200px; height:200px; }
+        .cta-buttons { flex-direction:column; gap:15px; }
+    }
+</style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav-container">
         <div class="logo">Evan Dos Santos</div>
         <ul class="nav-links">
             <li><a href="#landing" class="nav-item">Home</a></li>
@@ -151,137 +163,138 @@
             <li><a href="#skills" class="nav-item">Skills</a></li>
             <li><a href="#contact" class="nav-item">Contact</a></li>
         </ul>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Landing Section -->
-    <section class="landing" id="landing">
-        <h1><span>Hi, I'm </span><span class="name">Evan Dos Santos</span></h1>
-        <h2>Software Engineer & IT Systems Specialist</h2>
-        <p>Computer Science graduate with a Software Engineering specialization, passionate about building robust systems and providing exceptional technical solutions. Experienced in full-stack development, system administration, and client support.</p>
-        <div class="cta-buttons">
-            <a href="#projects">View My Work</a>
-            <a href="#contact">Get in Touch</a>
-        </div>
-    </section>
+<!-- Landing Section -->
+<section class="landing" id="landing">
+    <h1><span>Hi, I'm </span><span class="name">Evan Dos Santos</span></h1>
+    <h2>Software Engineer & IT Systems Specialist</h2>
+    <p>Computer Science graduate with a Software Engineering specialization, passionate about building robust systems and providing exceptional technical solutions. Experienced in full-stack development, system administration, and client support.</p>
+    <div class="cta-buttons">
+        <a href="#projects">View My Work</a>
+        <a href="#contact">Get in Touch</a>
+    </div>
+</section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <img src="_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos - Headshot">
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>Hello! I'm Evan, a Computer Science Honours graduate from the University of Windsor with a Software Engineering specialization. I have hands-on experience in IT services, system administration, and software development, with over 2 years of professional experience in technical support and system management.</p>
-            <p>My technical journey includes developing robust server systems using C++, managing domain services with Active Directory, and providing comprehensive IT support to clients. I'm proficient in multiple programming languages including C++, C, Java, and have experience with OpenGL graphics programming.</p>
-            <p>I'm passionate about solving complex technical problems, optimizing system performance, and delivering exceptional customer service. Whether it's deploying enterprise systems, managing network infrastructure, or developing software solutions, I bring a detail-oriented approach and strong problem-solving skills to every project.</p>
-        </div>
-    </section>
+<!-- About Section -->
+<section class="about" id="about">
+    <img src="_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos - Headshot">
+    <div class="about-text">
+        <h2>About Me</h2>
+        <p>Hello! I'm Evan, a Computer Science Honours graduate from the University of Windsor with a Software Engineering specialization. I have hands-on experience in IT services, system administration, and software development, with over 2 years of professional experience in technical support and system management.</p>
+        <p>My technical journey includes developing robust server systems using C++, managing domain services with Active Directory, and providing comprehensive IT support to clients. I'm proficient in multiple programming languages including C++, C, Java, and have experience with OpenGL graphics programming.</p>
+        <p>I'm passionate about solving complex technical problems, optimizing system performance, and delivering exceptional customer service. Whether it's deploying enterprise systems, managing network infrastructure, or developing software solutions, I bring a detail-oriented approach and strong problem-solving skills to every project.</p>
+    </div>
+</section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <img src="project1-placeholder.jpg" alt="Project 1">
-                <div class="project-card-content">
-                    <h3>Project One</h3>
-                    <p>A brief description of Project One, highlighting its purpose and key features.</p>
-                    <div class="tech-stack">Technologies: HTML, CSS, JavaScript</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="project2-placeholder.jpg" alt="Project 2">
-                <div class="project-card-content">
-                    <h3>Project Two</h3>
-                    <p>A brief description of Project Two, highlighting its purpose and key features.</p>
-                    <div class="tech-stack">Technologies: React, Node.js, MongoDB</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="project3-placeholder.jpg" alt="Project 3">
-                <div class="project-card-content">
-                    <h3>Project Three</h3>
-                    <p>A brief description of Project Three, highlighting its purpose and key features.</p>
-                    <div class="tech-stack">Technologies: Python, Flask, SQL</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
+<!-- Projects Section -->
+<section class="projects" id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+        <div class="project-card">
+            <img src="project1-placeholder.jpg" alt="Project 1">
+            <div class="project-card-content">
+                <h3>Project One</h3>
+                <p>A brief description of Project One, highlighting its purpose and key features.</p>
+                <div class="tech-stack">Technologies: HTML, CSS, JavaScript</div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live</a>
+                    <a href="#" target="_blank">GitHub</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Resume Section -->
-    <section class="resume" id="resume">
-        <h2>Resume</h2>
-        <p style="text-align:center;">Download my professional resume in PDF format.</p>
-        <div style="text-align:center;">
-            <a href="resume-placeholder.pdf" download>Download Resume</a>
+        <div class="project-card">
+            <img src="project2-placeholder.jpg" alt="Project 2">
+            <div class="project-card-content">
+                <h3>Project Two</h3>
+                <p>A brief description of Project Two, highlighting its purpose and key features.</p>
+                <div class="tech-stack">Technologies: React, Node.js, MongoDB</div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <h2>Skills</h2>
-        <div class="skill-grid">
-            <div class="skill">JavaScript</div>
-            <div class="skill">Python</div>
-            <div class="skill">React</div>
-            <div class="skill">Node.js</div>
-            <div class="skill">HTML & CSS</div>
-            <div class="skill">Git & GitHub</div>
-            <div class="skill">SQL / Databases</div>
-            <div class="skill">Problem Solving</div>
-            <div class="skill">Team Collaboration</div>
+        <div class="project-card">
+            <img src="project3-placeholder.jpg" alt="Project 3">
+            <div class="project-card-content">
+                <h3>Project Three</h3>
+                <p>A brief description of Project Three, highlighting its purpose and key features.</p>
+                <div class="tech-stack">Technologies: Python, Flask, SQL</div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2>Contact Me</h2>
-        <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div class="social-links">
-            <a href="mailto:your-email@example.com">Email</a>
-            <a href="#" target="_blank">LinkedIn</a>
-            <a href="#" target="_blank">GitHub</a>
-        </div>
-    </section>
+<!-- Resume Section -->
+<section class="resume" id="resume">
+    <h2>Resume</h2>
+    <p style="text-align:center;">Download my professional resume in PDF format.</p>
+    <div style="text-align:center;">
+        <a href="resume-placeholder.pdf" download>Download Resume</a>
+    </div>
+</section>
 
-    <!-- Active link highlighting -->
-    <script>
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".nav-links li a");
+<!-- Skills Section -->
+<section class="skills" id="skills">
+    <h2>Skills</h2>
+    <div class="skill-grid">
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+        <div class="skill">React</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">HTML & CSS</div>
+        <div class="skill">Git & GitHub</div>
+        <div class="skill">SQL / Databases</div>
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Team Collaboration</div>
+    </div>
+</section>
 
-        window.addEventListener("scroll", () => {
-            let current = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-                    current = section.getAttribute("id");
-                }
-            });
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <div class="social-links">
+        <a href="mailto:your-email@example.com">Email</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">GitHub</a>
+    </div>
+</section>
 
-            navLinks.forEach(link => {
-                link.classList.remove("active");
-                if (link.getAttribute("href") === "#" + current) {
-                    link.classList.add("active");
-                }
-            });
+<!-- Active link highlighting -->
+<script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-links li a");
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute("id");
+            }
         });
-    </script>
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === "#" + current) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
