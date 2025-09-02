@@ -1,126 +1,86 @@
-<!-- Projects Section -->
-<section class="projects container" id="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-        <div class="project-card">
-            <img src="project1-placeholder.jpg" alt="Project 1">
-            <div class="project-card-content">
-                <h3>Project One</h3>
-                <p>A brief description of Project One, highlighting its purpose and key features.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">HTML</span>
-                    <span class="tech-badge">CSS</span>
-                    <span class="tech-badge">JavaScript</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="project-btn">Live</a>
-                    <a href="#" target="_blank" class="project-btn">GitHub</a>
-                </div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evan Dos Santos | Software Engineer | UNDER CONSTRUCTION</title>
 
-        <div class="project-card">
-            <img src="project2-placeholder.jpg" alt="Project 2">
-            <div class="project-card-content">
-                <h3>Project Two</h3>
-                <p>A brief description of Project Two, highlighting its purpose and key features.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">React</span>
-                    <span class="tech-badge">Node.js</span>
-                    <span class="tech-badge">MongoDB</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="project-btn">Live</a>
-                    <a href="#" target="_blank" class="project-btn">GitHub</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <img src="project3-placeholder.jpg" alt="Project 3">
-            <div class="project-card-content">
-                <h3>Project Three</h3>
-                <p>A brief description of Project Three, highlighting its purpose and key features.</p>
-                <div class="tech-stack">
-                    <span class="tech-badge">Python</span>
-                    <span class="tech-badge">Flask</span>
-                    <span class="tech-badge">SQL</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="project-btn">Live</a>
-                    <a href="#" target="_blank" class="project-btn">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Skills Section -->
-<section class="skills container" id="skills">
-    <h2>Skills</h2>
-    <div class="skill-grid">
-        <span class="skill-badge">JavaScript</span>
-        <span class="skill-badge">Python</span>
-        <span class="skill-badge">React</span>
-        <span class="skill-badge">Node.js</span>
-        <span class="skill-badge">HTML & CSS</span>
-        <span class="skill-badge">Git & GitHub</span>
-        <span class="skill-badge">SQL / Databases</span>
-        <span class="skill-badge">Problem Solving</span>
-        <span class="skill-badge">Team Collaboration</span>
-    </div>
-</section>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* Project Card Enhancements */
-.project-card { 
-    position:relative; 
-    background:#fff; 
-    border-radius:12px; 
-    overflow:hidden; 
-    box-shadow:0 6px 20px rgba(0,0,0,0.05); 
-    transition:transform 0.3s, box-shadow 0.3s; 
-}
-.project-card:hover { 
-    transform:translateY(-5px); 
-    box-shadow:0 12px 30px rgba(0,0,0,0.1); 
-}
-.project-card img { width:100%; height:160px; object-fit:cover; }
-.project-card-content { padding:20px; }
-.project-card-content h3 { font-size:1.25rem; margin-bottom:10px; color:#0077cc; }
-.project-card-content p { font-size:0.95rem; margin-bottom:15px; color:#4a5568; }
-.tech-badge {
-    display:inline-block; 
-    background:#e0f0ff; 
-    color:#0077cc; 
-    padding:4px 10px; 
-    border-radius:20px; 
-    font-size:0.8rem; 
-    margin-right:6px; 
-    margin-bottom:6px; 
-}
-.project-links { margin-top:10px; }
-.project-btn { 
-    display:inline-block; 
-    padding:6px 16px; 
-    border-radius:6px; 
-    background:#0077cc; 
-    color:#fff; 
-    font-size:0.85rem; 
-    margin-right:8px; 
-    transition:0.3s; 
-}
-.project-btn:hover { background:#005fa3; transform:translateY(-2px); }
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Roboto', sans-serif; line-height:1.6; color:#333; background:#f8f9fb; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; }
 
-/* Skills Section Enhancements */
-.skill-grid { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
-.skill-badge { 
-    background:#e0f0ff; 
-    color:#0077cc; 
-    padding:10px 18px; 
-    border-radius:20px; 
-    font-weight:500; 
-    transition:0.3s; 
+/* Navigation Bar */
+nav {
+    position:fixed; top:0; left:0; width:100%; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.1); z-index:1000;
 }
-.skill-badge:hover { background:#cce4ff; transform:translateY(-2px); }
+nav .nav-container {
+    max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:15px 20px;
+}
+nav .logo { font-weight:700; font-size:1.2rem; color:#0077cc; }
+nav ul { display:flex; list-style:none; gap:20px; }
+nav ul li a { color:#4a5568; font-weight:500; transition:0.3s; }
+nav ul li a:hover { color:#0077cc; }
+
+/* Sections */
+section { padding:100px 20px; max-width:1100px; margin:0 auto; }
+.landing { 
+    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; 
+    height:100vh; background: linear-gradient(rgba(236,243,252,0.6), rgba(246,248,251,0.6)), url('background-placeholder.jpg') no-repeat center/cover; 
+    color:#4a5568; padding-top:60px;
+}
+.landing h1 { font-size:3rem; font-weight:700; margin-bottom:0.5rem; }
+.landing h2 { font-size:1.5rem; font-weight:500; margin-bottom:1.5rem; }
+.landing p { font-size:1.1rem; max-width:600px; margin-bottom:2rem; }
+.cta-button { display:inline-block; padding:12px 30px; background:#0077cc; color:#fff; font-weight:500; border-radius:6px; transition:0.3s; }
+.cta-button:hover { background:#005fa3; transform:translateY(-2px); }
+
+/* About Section */
+.about { display:flex; flex-direction:row; align-items:center; gap:50px; background:#fff; padding:60px 20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+.about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+.about-text h2 { font-size:2rem; margin-bottom:20px; color:#0077cc; }
+.about-text p { font-size:1.05rem; margin-bottom:15px; color:#4a5568; }
+
+/* Adding photo: replace 'headshot-placeholder.jpg' with your file path */
 </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">Evan Dos Santos</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Landing Section -->
+<section class="landing">
+    <h1>Evan Dos Santos</h1>
+    <h2>Software Engineer | Building scalable and modern applications</h2>
+    <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
+    <a href="#about" class="cta-button">Learn More About Me</a>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+    <img src="headshot-placeholder.jpg" alt="Evan Dos Santos - Headshot">
+    <div class="about-text">
+        <h2>About Me</h2>
+        <p>Hello! I'm Evan, a Software Engineer with a passion for building high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
+        <p>My career is driven by curiosity, creativity, and the desire to make a positive impact through technology. I enjoy working on collaborative projects and contributing to open-source communities.</p>
+    </div>
+</section>
+
+</body>
+</html>
