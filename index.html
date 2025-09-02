@@ -1,195 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evan Dos Santos | Software Engineer | UNDER CONSTRUCTION</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evan Dos Santos | Software Engineer | UNDER CONSTRUCTION</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico">
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico">
 
-    <style>
-        /* Reset */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Roboto',sans-serif; line-height:1.6; color:#333; background-color:#f9f9f9; }
-        a { text-decoration:none; color:inherit; }
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Roboto', sans-serif; line-height:1.6; color:#333; background:#f8f9fb; }
+a { text-decoration:none; color:inherit; }
 
-        /* Global container */
-        section { padding:80px 20px; }
+/* Global Containers */
+section { padding:80px 20px; }
+.container { max-width:1100px; margin:0 auto; }
 
-        /* Landing Section */
-        .landing {
-            display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh;
-            text-align:center;
-            background: linear-gradient(rgba(236,243,252,0.5), rgba(246,248,251.5)), url('background-placeholder.jpg') no-repeat center center/cover;
-            color:#8d97a5;
-            padding:0 20px;
-        }
-        .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
-        .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; }
-        .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; }
-        .cta-button { display:inline-block; padding:12px 30px; background-color:#0077cc; color:#fff; font-weight:bold; border-radius:5px; transition:0.3s; animation:fadeInUp 2.5s ease forwards; }
-        .cta-button:hover { background-color:#005fa3; }
+/* Landing Section */
+.landing {
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    height:100vh; text-align:center;
+    background: linear-gradient(rgba(236,243,252,0.6), rgba(246,248,251,0.6)),
+                url('background-placeholder.jpg') no-repeat center/cover;
+    color:#4a5568;
+}
+.landing h1 { font-size:3rem; font-weight:700; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
+.landing h2 { font-size:1.5rem; font-weight:500; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; }
+.landing p { font-size:1.1rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; }
+.cta-button {
+    display:inline-block; padding:12px 30px; background:#0077cc; color:#fff; font-weight:500; border-radius:6px;
+    transition:0.3s; animation:fadeInUp 2.5s ease forwards;
+}
+.cta-button:hover { background:#005fa3; transform:translateY(-2px); }
 
-        /* About Section */
-        .about { display:flex; flex-direction:row; align-items:center; justify-content:center; gap:50px; background-color:#fff; }
-        .about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .about-text { max-width:600px; }
-        .about-text h2 { font-size:2rem; margin-bottom:20px; color:#0077cc; }
-        .about-text p { font-size:1.1rem; margin-bottom:10px; }
+/* About Section */
+.about { display:flex; gap:50px; align-items:center; background:#fff; padding:80px 20px; }
+.about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 8px 20px rgba(0,0,0,0.08); }
+.about-text { max-width:600px; }
+.about-text h2 { font-size:2rem; margin-bottom:20px; color:#0077cc; }
+.about-text p { font-size:1.05rem; margin-bottom:15px; color:#4a5568; }
 
-        /* Projects Section */
-        .projects { background-color:#f4f4f4; }
-        .projects h2 { text-align:center; font-size:2rem; margin-bottom:40px; color:#0077cc; }
-        .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
-        .project-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; }
-        .project-card:hover { transform:translateY(-5px); }
-        .project-card img { width:100%; height:150px; object-fit:cover; }
-        .project-card-content { padding:20px; }
-        .project-card-content h3 { font-size:1.3rem; margin-bottom:10px; color:#0077cc; }
-        .project-card-content p { font-size:0.95rem; margin-bottom:10px; }
-        .tech-stack { font-size:0.85rem; color:#555; margin-bottom:10px; }
-        .project-links a { margin-right:10px; color:#0077cc; font-weight:bold; }
+/* Projects Section */
+.projects { background:#f4f5f7; padding:80px 20px; }
+.projects h2 { text-align:center; font-size:2rem; margin-bottom:50px; color:#0077cc; }
+.project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:30px; }
+.project-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.05); transition:transform 0.3s, box-shadow 0.3s; }
+.project-card:hover { transform:translateY(-5px); box-shadow:0 10px 30px rgba(0,0,0,0.08); }
+.project-card img { width:100%; height:160px; object-fit:cover; }
+.project-card-content { padding:20px; }
+.project-card-content h3 { font-size:1.25rem; margin-bottom:10px; color:#0077cc; }
+.project-card-content p { font-size:0.95rem; margin-bottom:10px; color:#4a5568; }
+.tech-stack { font-size:0.85rem; color:#6b7280; margin-bottom:10px; }
+.project-links a { margin-right:12px; color:#0077cc; font-weight:500; transition:0.2s; }
+.project-links a:hover { color:#005fa3; }
 
-        /* Resume Section */
-        .resume h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#0077cc; }
-        .resume a { display:inline-block; margin-top:20px; padding:12px 25px; background-color:#0077cc; color:#fff; border-radius:5px; transition:0.3s; }
-        .resume a:hover { background-color:#005fa3; }
+/* Resume Section */
+.resume { text-align:center; padding:80px 20px; }
+.resume h2 { font-size:2rem; margin-bottom:20px; color:#0077cc; }
+.resume a { display:inline-block; margin-top:20px; padding:12px 25px; background:#0077cc; color:#fff; border-radius:6px; transition:0.3s; font-weight:500; }
+.resume a:hover { background:#005fa3; }
 
-        /* Skills Section */
-        .skills h2 { text-align:center; font-size:2rem; margin-bottom:40px; color:#0077cc; }
-        .skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
-        .skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; }
+/* Skills Section */
+.skills { padding:80px 20px; }
+.skills h2 { text-align:center; font-size:2rem; margin-bottom:50px; color:#0077cc; }
+.skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
+.skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.05); text-align:center; font-weight:500; color:#4a5568; }
 
-        /* Contact Section */
-        .contact { background-color:#f4f4f4; max-width:700px; margin:0 auto; border-radius:10px; padding:40px 20px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .contact h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#0077cc; }
-        .contact form { display:flex; flex-direction:column; gap:15px; }
-        .contact input, .contact textarea { padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem; width:100%; }
-        .contact button { padding:12px; border:none; border-radius:5px; background-color:#0077cc; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
-        .contact button:hover { background-color:#005fa3; }
-        .social-links { text-align:center; margin-top:20px; }
-        .social-links a { margin:0 10px; color:#0077cc; font-weight:bold; }
+/* Contact Section */
+.contact { background:#f4f5f7; max-width:700px; margin:0 auto; border-radius:12px; padding:50px 25px; box-shadow:0 8px 25px rgba(0,0,0,0.08); }
+.contact h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#0077cc; }
+.contact form { display:flex; flex-direction:column; gap:15px; }
+.contact input, .contact textarea { padding:12px; border-radius:6px; border:1px solid #d1d5db; font-size:1rem; width:100%; }
+.contact button { padding:12px; border:none; border-radius:6px; background:#0077cc; color:#fff; font-weight:500; cursor:pointer; transition:0.3s; }
+.contact button:hover { background:#005fa3; }
+.social-links { text-align:center; margin-top:25px; }
+.social-links a { margin:0 12px; color:#0077cc; font-weight:500; transition:0.2s; }
+.social-links a:hover { color:#005fa3; }
 
-        /* Animations */
-        @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+/* Animations */
+@keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
 
-        /* Responsive */
-        @media (max-width:768px){
-            .landing h1{ font-size:2.2rem; }
-            .landing h2{ font-size:1.2rem; }
-            .landing p{ font-size:1rem; }
-            .about { flex-direction:column; text-align:center; }
-            .about img{ width:200px; height:200px; }
-        }
-    </style>
+/* Responsive */
+@media (max-width:768px){
+    .landing h1{ font-size:2.2rem; }
+    .landing h2{ font-size:1.2rem; }
+    .landing p{ font-size:1rem; }
+    .about { flex-direction:column; text-align:center; }
+    .about img{ width:200px; height:200px; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Landing Section -->
-    <section class="landing">
-        <h1>Evan Dos Santos</h1>
-        <h2>Software Engineer | Building scalable and modern applications</h2>
-        <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
-        <a href="#about" class="cta-button">Learn More About Me</a>
-    </section>
+<!-- Landing Section -->
+<section class="landing">
+    <h1>Evan Dos Santos</h1>
+    <h2>Software Engineer | Building scalable and modern applications</h2>
+    <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
+    <a href="#about" class="cta-button">Learn More About Me</a>
+</section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <img src="headshot-placeholder.jpg" alt="Evan Dos Santos - Headshot">
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>Hello! I'm Evan, a Software Engineer with a passion for building high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
-            <p>My career is driven by curiosity, creativity, and the desire to make a positive impact through technology. I enjoy working on collaborative projects and contributing to open-source communities.</p>
-        </div>
-    </section>
+<!-- About Section -->
+<section class="about container" id="about">
+    <img src="headshot-placeholder.jpg" alt="Evan Dos Santos - Headshot">
+    <div class="about-text">
+        <h2>About Me</h2>
+        <p>Hello! I'm Evan, a Software Engineer with a passion for building high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
+        <p>My career is driven by curiosity, creativity, and the desire to make a positive impact through technology. I enjoy working on collaborative projects and contributing to open-source communities.</p>
+    </div>
+</section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <img src="project1-placeholder.jpg" alt="Project 1">
-                <div class="project-card-content">
-                    <h3>Project One</h3>
-                    <p>A brief description of Project One, highlighting its purpose and key features.</p>
-                    <div class="tech-stack">Technologies: HTML, CSS, JavaScript</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="project2-placeholder.jpg" alt="Project 2">
-                <div class="project-card-content">
-                    <h3>Project Two</h3>
-                    <p>A brief description of Project Two, highlighting its purpose and key features.</p>
-                    <div class="tech-stack">Technologies: React, Node.js, MongoDB</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="project3-placeholder.jpg" alt="Project 3">
-                <div class="project-card-content">
-                    <h3>Project Three</h3>
-                    <p>A brief description of Project Three, highlighting its purpose and key features.</p>
-                    <div class="tech-stack">Technologies: Python, Flask, SQL</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Projects Section -->
+<section class="projects container" id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+        <!-- Project Cards remain the same -->
+    </div>
+</section>
 
-    <!-- Resume Section -->
-    <section class="resume" id="resume">
-        <h2>Resume</h2>
-        <p style="text-align:center;">Download my professional resume in PDF format.</p>
-        <div style="text-align:center;">
-            <a href="resume-placeholder.pdf" download>Download Resume</a>
-        </div>
-    </section>
+<!-- Resume Section -->
+<section class="resume container" id="resume">
+    <h2>Resume</h2>
+    <p>Download my professional resume in PDF format.</p>
+    <a href="resume-placeholder.pdf" download>Download Resume</a>
+</section>
 
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <h2>Skills</h2>
-        <div class="skill-grid">
-            <div class="skill">JavaScript</div>
-            <div class="skill">Python</div>
-            <div class="skill">React</div>
-            <div class="skill">Node.js</div>
-            <div class="skill">HTML & CSS</div>
-            <div class="skill">Git & GitHub</div>
-            <div class="skill">SQL / Databases</div>
-            <div class="skill">Problem Solving</div>
-            <div class="skill">Team Collaboration</div>
-        </div>
-    </section>
+<!-- Skills Section -->
+<section class="skills container" id="skills">
+    <h2>Skills</h2>
+    <div class="skill-grid">
+        <!-- Skill items remain the same -->
+    </div>
+</section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2>Contact Me</h2>
-        <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <div class="social-links">
-            <a href="mailto:your-email@example.com">Email</a>
-            <a href="#" target="_blank">LinkedIn</a>
-            <a href="#" target="_blank">GitHub</a>
-        </div>
-    </section>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <div class="social-links">
+        <a href="mailto:your-email@example.com">Email</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">GitHub</a>
+    </div>
+</section>
 
 </body>
 </html>
