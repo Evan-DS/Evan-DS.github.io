@@ -14,7 +14,7 @@
 <style>
     /* Reset */
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; background-color:#eff4f; scroll-behavior:smooth; }
+    body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; scroll-behavior:smooth; }
     a { text-decoration:none; color:inherit; }
 
     /* Navbar */
@@ -118,7 +118,7 @@
         align-items: flex-start;
         justify-content: center;
         gap: 50px;
-        background-color: #eff4f;
+        background-color: #ffffff;
     }
     .about img {
         width: 250px;
@@ -133,7 +133,7 @@
     }
 
     /* Projects Section */
-    .projects { background-color:#eff4f; }
+    .projects { background-color:#f8fafc; }
     .project-grid {
         display: flex;
         flex-wrap: wrap;
@@ -151,10 +151,12 @@
     .project-links a { margin-right:10px; color:#2463eb; font-weight:bold; }
 
     /* Resume Section */
+    .resume { background-color: #ffffff; }
     .resume a { display:inline-block; margin-top:20px; padding:12px 25px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; }
     .resume a:hover { background-color:#1c4acb; }
 
     /* Skills Section */
+    .skills { background-color:#f8fafc; }
     .skill-grid {
         display: flex;
         flex-wrap: wrap;
@@ -164,14 +166,7 @@
     .skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; color:#344256; width: 120px; }
 
     /* Contact Section */
-    .contact {
-        background-color: #eff4f;
-        max-width: 700px;
-        margin: 0 auto;
-        border-radius: 10px;
-        padding: 40px 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
+    .contact { background-color: #ffffff; max-width: 700px; margin: 0 auto; border-radius: 10px; padding: 40px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     .contact form {
         max-width: 500px;
         width: 100%;
@@ -199,7 +194,21 @@
     }
     .contact button:hover { background-color: #1c4acb; }
     .social-links { text-align: center; margin-top: 20px; }
-    .social-links a { margin: 0 10px; color: #2463eb; font-weight: bold; }
+    .social-links a { margin: 0 10px; font-weight: bold; color:#2463eb; }
+
+    /* Footer */
+    footer {
+        background-color: #344256;
+        color: #eff4f;
+        padding:40px 20px;
+        text-align:center;
+    }
+    footer h2 { color:#ffffff; font-size:1.8rem; font-weight:bold; margin-bottom:5px; }
+    footer p { color:#eff4f; margin:0; }
+    footer hr { border:1px solid #eff4f; width:90%; margin:20px auto; }
+
+    .footer-social a { margin:0 10px; font-size:1.4rem; color:#eff4f; transition:0.3s; }
+    .footer-social a:hover { color:#2463eb; }
 
     /* Animations */
     @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
@@ -342,22 +351,29 @@
 </section>
 
 <!-- Footer Section -->
-<footer style="background-color:#344256; color:#eff4f; padding:40px 20px; text-align:center;">
+<footer>
     <div style="margin-bottom:20px;">
-        <h2 style="font-size:1.8rem; font-weight:bold; margin-bottom:5px;">Evan Dos Santos</h2>
-        <p style="font-size:1rem; margin:0;">Software Engineer & IT Systems Specialist</p>
+        <h2>Evan Dos Santos</h2>
+        <p>Software Engineer & IT Systems Specialist</p>
     </div>
-    <div class="footer-social" style="margin-bottom:20px;">
-        <a href="#" target="_blank" style="color:#eff4f; margin:0 10px; font-size:1.2rem;">LinkedIn</a>
-        <a href="#" target="_blank" style="color:#eff4f; margin:0 10px; font-size:1.2rem;">GitHub</a>
-        <a href="#" target="_blank" style="color:#eff4f; margin:0 10px; font-size:1.2rem;">Twitter</a>
-        <a href="mailto:your-email@example.com" style="color:#eff4f; margin:0 10px; font-size:1.2rem;">Email</a>
+    <div class="footer-social">
+        <a href="#" target="_blank">
+            <img src="linkedin.svg" alt="LinkedIn" width="24">
+        </a>
+        <a href="#" target="_blank">
+            <img src="github.svg" alt="GitHub" width="24">
+        </a>
+        <a href="#" target="_blank">
+            <img src="twitter.svg" alt="Twitter" width="24">
+        </a>
+        <a href="mailto:your-email@example.com">
+            <img src="email.svg" alt="Email" width="24">
+        </a>
     </div>
-    <hr style="border:0.5px solid #eff4f; margin:20px auto; width:90%;">
-    <p style="font-size:0.8rem; margin-top:10px;">© 2024 Evan Dos Santos. All rights reserved. Built with passion and modern web technologies.</p>
+    <hr>
+    <p>© 2024 Evan Dos Santos. All rights reserved. Built with passion and modern web technologies.</p>
 </footer>
 
-<!-- Active link highlighting -->
 <script>
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-links li a");
@@ -367,7 +383,7 @@
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 100;
             const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop) {
+            if(pageYOffset >= sectionTop){
                 current = section.getAttribute("id");
             }
         });
