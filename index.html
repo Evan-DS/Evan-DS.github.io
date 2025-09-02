@@ -14,9 +14,9 @@
     <style>
         /* Reset */
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; background-color:#eff4f; }
+        body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; background-color:#eff4f; scroll-behavior:smooth; }
         a { text-decoration:none; color:inherit; }
-        
+
         /* Navbar */
         nav {
             width: 100%;
@@ -27,14 +27,32 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 80px; /* reduced side padding to bring content toward center */
+            padding: 15px 50px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
         }
-        nav .logo { font-weight: bold; font-size: 1.2rem; color:#2463eb; }
-        nav ul { display: flex; list-style:none; gap:30px; }
-        nav ul li a { color:#344256; font-weight:500; transition:0.3s; }
-        nav ul li a:hover { color:#2463eb; }
+        nav .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #2463eb;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            margin: 0 auto;
+            list-style: none;
+        }
+        .nav-links li a {
+            color: #344256;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-links li a.active {
+            color: #2463eb;
+        }
+        .nav-links li a:hover {
+            color: #2463eb;
+        }
 
         /* Sections */
         section { padding:100px 20px; }
@@ -48,7 +66,7 @@
             padding:0 20px;
         }
         .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
-        .landing h1 .name { color:#2463eb; } /* Name highlighted */
+        .landing h1 .name { color:#2463eb; }
         .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; color:#344256; }
         .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; color:#344256; }
 
@@ -125,17 +143,18 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">Evan Dos Santos</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <ul class="nav-links">
+            <li><a href="#landing" class="nav-item">Home</a></li>
+            <li><a href="#about" class="nav-item">About</a></li>
+            <li><a href="#projects" class="nav-item">Projects</a></li>
+            <li><a href="#resume" class="nav-item">Resume</a></li>
+            <li><a href="#skills" class="nav-item">Skills</a></li>
+            <li><a href="#contact" class="nav-item">Contact</a></li>
         </ul>
     </nav>
 
     <!-- Landing Section -->
-    <section class="landing">
+    <section class="landing" id="landing">
         <h1><span>Hi, I'm </span><span class="name">Evan Dos Santos</span></h1>
         <h2>Software Engineer & IT Systems Specialist</h2>
         <p>Computer Science graduate with a Software Engineering specialization, passionate about building robust systems and providing exceptional technical solutions. Experienced in full-stack development, system administration, and client support.</p>
@@ -239,6 +258,30 @@
             <a href="#" target="_blank">GitHub</a>
         </div>
     </section>
+
+    <!-- Active link highlighting -->
+    <script>
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-links li a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === "#" + current) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
