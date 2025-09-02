@@ -1,7 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gillian Emerald | Software Engineer</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon (optional placeholder) -->
+    <link rel="icon" href="favicon.ico">
+
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Landing section styling */
+        .landing {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background-placeholder.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .landing h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .landing h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1.5s ease forwards;
+        }
+
+        .landing p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 2s ease forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #0077cc;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            animation: fadeInUp 2.5s ease forwards;
+        }
+
+        .cta-button:hover {
+            background-color: #005fa3;
+        }
+
+        /* Simple fade-in-up animation */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive typography */
+        @media (max-width: 768px) {
+            .landing h1 {
+                font-size: 2.2rem;
+            }
+            .landing h2 {
+                font-size: 1.2rem;
+            }
+            .landing p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+    <!-- Landing / Home Section -->
+    <section class="landing">
+        <h1>Gillian Emerald</h1>
+        <h2>Software Engineer | Building scalable and modern applications</h2>
+        <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
+        <a href="#about" class="cta-button">Learn More About Me</a>
+    </section>
+
 </body>
 </html>
