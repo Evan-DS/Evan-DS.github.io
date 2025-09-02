@@ -1,86 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evan Dos Santos | Software Engineer | UNDER CONSTRUCTION</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gillian Emerald | Software Engineer</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
-/* Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Roboto', sans-serif; line-height:1.6; color:#333; background:#f8f9fb; scroll-behavior:smooth; }
-a { text-decoration:none; color:inherit; }
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
 
-/* Navigation Bar */
-nav {
-    position:fixed; top:0; left:0; width:100%; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.1); z-index:1000;
-}
-nav .nav-container {
-    max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:15px 20px;
-}
-nav .logo { font-weight:700; font-size:1.2rem; color:#0077cc; }
-nav ul { display:flex; list-style:none; gap:20px; }
-nav ul li a { color:#4a5568; font-weight:500; transition:0.3s; }
-nav ul li a:hover { color:#0077cc; }
+    <style>
+        /* Reset */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Roboto',sans-serif; line-height:1.6; color:#333; background-color:#f9f9f9; }
+        a { text-decoration:none; color:inherit; }
 
-/* Sections */
-section { padding:100px 20px; max-width:1100px; margin:0 auto; }
-.landing { 
-    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; 
-    height:100vh; background: linear-gradient(rgba(236,243,252,0.6), rgba(246,248,251,0.6)), url('background-placeholder.jpg') no-repeat center/cover; 
-    color:#4a5568; padding-top:60px;
-}
-.landing h1 { font-size:3rem; font-weight:700; margin-bottom:0.5rem; }
-.landing h2 { font-size:1.5rem; font-weight:500; margin-bottom:1.5rem; }
-.landing p { font-size:1.1rem; max-width:600px; margin-bottom:2rem; }
-.cta-button { display:inline-block; padding:12px 30px; background:#0077cc; color:#fff; font-weight:500; border-radius:6px; transition:0.3s; }
-.cta-button:hover { background:#005fa3; transform:translateY(-2px); }
+        /* Global container */
+        section { padding:80px 20px; }
 
-/* About Section */
-.about { display:flex; flex-direction:row; align-items:center; gap:50px; background:#fff; padding:60px 20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
-.about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-.about-text h2 { font-size:2rem; margin-bottom:20px; color:#0077cc; }
-.about-text p { font-size:1.05rem; margin-bottom:15px; color:#4a5568; }
+        /* Landing Section */
+        .landing {
+            display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh;
+            text-align:center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background-placeholder.jpg') no-repeat center center/cover;
+            color:#fff;
+            padding:0 20px;
+        }
+        .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
+        .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; }
+        .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; }
+        .cta-button { display:inline-block; padding:12px 30px; background-color:#0077cc; color:#fff; font-weight:bold; border-radius:5px; transition:0.3s; animation:fadeInUp 2.5s ease forwards; }
+        .cta-button:hover { background-color:#005fa3; }
 
-/* Adding photo: replace 'headshot-placeholder.jpg' with your file path */
-</style>
+        /* About Section */
+        .about { display:flex; flex-direction:row; align-items:center; justify-content:center; gap:50px; background-color:#fff; }
+        .about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        .about-text { max-width:600px; }
+        .about-text h2 { font-size:2rem; margin-bottom:20px; color:#0077cc; }
+        .about-text p { font-size:1.1rem; margin-bottom:10px; }
+
+        /* Projects Section */
+        .projects { background-color:#f4f4f4; }
+        .projects h2 { text-align:center; font-size:2rem; margin-bottom:40px; color:#0077cc; }
+        .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
+        .project-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; }
+        .project-card:hover { transform:translateY(-5px); }
+        .project-card img { width:100%; height:150px; object-fit:cover; }
+        .project-card-content { padding:20px; }
+        .project-card-content h3 { font-size:1.3rem; margin-bottom:10px; color:#0077cc; }
+        .project-card-content p { font-size:0.95rem; margin-bottom:10px; }
+        .tech-stack { font-size:0.85rem; color:#555; margin-bottom:10px; }
+        .project-links a { margin-right:10px; color:#0077cc; font-weight:bold; }
+
+        /* Resume Section */
+        .resume h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#0077cc; }
+        .resume a { display:inline-block; margin-top:20px; padding:12px 25px; background-color:#0077cc; color:#fff; border-radius:5px; transition:0.3s; }
+        .resume a:hover { background-color:#005fa3; }
+
+        /* Skills Section */
+        .skills h2 { text-align:center; font-size:2rem; margin-bottom:40px; color:#0077cc; }
+        .skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
+        .skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; }
+
+        /* Contact Section */
+        .contact { background-color:#f4f4f4; max-width:700px; margin:0 auto; border-radius:10px; padding:40px 20px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        .contact h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#0077cc; }
+        .contact form { display:flex; flex-direction:column; gap:15px; }
+        .contact input, .contact textarea { padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem; width:100%; }
+        .contact button { padding:12px; border:none; border-radius:5px; background-color:#0077cc; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
+        .contact button:hover { background-color:#005fa3; }
+        .social-links { text-align:center; margin-top:20px; }
+        .social-links a { margin:0 10px; color:#0077cc; font-weight:bold; }
+
+        /* Animations */
+        @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+
+        /* Responsive */
+        @media (max-width:768px){
+            .landing h1{ font-size:2.2rem; }
+            .landing h2{ font-size:1.2rem; }
+            .landing p{ font-size:1rem; }
+            .about { flex-direction:column; text-align:center; }
+            .about img{ width:200px; height:200px; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Navigation Bar -->
-<nav>
-    <div class="nav-container">
-        <div class="logo">Evan Dos Santos</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+    <!-- Landing Section -->
+    <section class="landing">
+        <h1>Gillian Emerald</h1>
+        <h2>Software Engineer | Building scalable and modern applications</h2>
+        <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
+        <a href="#about" class="cta-button">Learn More About Me</a>
+    </section>
 
-<!-- Landing Section -->
-<section class="landing">
-    <h1>Evan Dos Santos</h1>
-    <h2>Software Engineer | Building scalable and modern applications</h2>
-    <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
-    <a href="#about" class="cta-button">Learn More About Me</a>
-</section>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <img src="headshot-placeholder.jpg" alt="Gillian Emerald - Headshot">
+        <div class="about-text">
+            <h2>About Me</h2>
+            <p>Hello! I'm Gillian, a Software Engineer with a passion for building high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
+            <p>My career is driven by curiosity, creativity, and the desire to make a positive impact through technology. I enjoy working on collaborative projects and contributing to open-source communities.</p>
+        </div>
+    </section>
 
-<!-- About Section -->
-<section class="about" id="about">
-    <img src="_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos - Headshot">
-    <div class="about-text">
-        <h2>About Me</h2>
-        <p>Hello! I'm Evan, a Software Engineer with a passion for building high-quality web and software applications. I specialize in designing scalable platforms, solving complex problems, and continuously learning new technologies.</p>
-        <p>My career is driven by curiosity, creativity, and the desire to make a positive impact through technology. I enjoy working on collaborative projects and contributing to open-source communities.</p>
-    </div>
-</section>
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="project1-placeholder.jpg" alt="Project 1">
+                <div class="project-card-content">
+                    <h3>Project One</h3>
+                    <p>A brief description of Project One, highlighting its purpose and key features.</p>
+                    <div class="tech-stack">Technologies: HTML, CSS, JavaScript</div>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live</a>
+                        <a href="#" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="project2-placeholder.jpg" alt="Project 2">
+                <div class="project-card-content">
+                    <h3>Project Two</h3>
+                    <p>A brief description of Project Two, highlighting its purpose and key features.</p>
+                    <div class="tech-stack">Technologies: React, Node.js, MongoDB</div>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live</a>
+                        <a href="#" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="project3-placeholder.jpg" alt="Project 3">
+                <div class="project-card-content">
+                    <h3>Project Three</h3>
+                    <p>A brief description of Project Three, highlighting its purpose and key features.</p>
+                    <div class="tech-stack">Technologies: Python, Flask, SQL</div>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live</a>
+                        <a href="#" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section class="resume" id="resume">
+        <h2>Resume</h2>
+        <p style="text-align:center;">Download my professional resume in PDF format.</p>
+        <div style="text-align:center;">
+            <a href="resume-placeholder.pdf" download>Download Resume</a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2>Skills</h2>
+        <div class="skill-grid">
+            <div class="skill">JavaScript</div>
+            <div class="skill">Python</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">HTML & CSS</div>
+            <div class="skill">Git & GitHub</div>
+            <div class="skill">SQL / Databases</div>
+            <div class="skill">Problem Solving</div>
+            <div class="skill">Team Collaboration</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Contact Me</h2>
+        <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div class="social-links">
+            <a href="mailto:your-email@example.com">Email</a>
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">GitHub</a>
+        </div>
+    </section>
 
 </body>
 </html>
