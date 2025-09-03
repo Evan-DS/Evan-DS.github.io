@@ -372,10 +372,32 @@ function openInfrastructureDemo() {
         <button class="btn btn-secondary" onclick="generateReport()">
           <i class="fas fa-file-alt"></i> Generate Report
         </button>
+        <button class="btn btn-primary" onclick="addUser()">
+          <i class="fas fa-user-plus"></i> Add User
+        </button>
+        <button class="btn btn-secondary" onclick="resetPassword()">
+          <i class="fas fa-key"></i> Reset Password
+        </button>
       </div>
 
-      <div class="server-grid" id="server-grid">
-        <!-- Server cards will be populated by JavaScript -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+            <i class="fas fa-server"></i> Server Infrastructure
+          </h3>
+          <div class="server-grid" id="server-grid">
+            <!-- Server cards will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+            <i class="fas fa-users"></i> Active Directory Users
+          </h3>
+          <div class="users-container" id="users-container">
+            <!-- User accounts will be populated by JavaScript -->
+          </div>
+        </div>
       </div>
 
       <div class="technical-info">
@@ -391,20 +413,20 @@ function openInfrastructureDemo() {
             </ul>
           </div>
           <div class="technical-section">
-            <strong>Automation Features</strong>
+            <strong>User Management</strong>
             <ul>
               <li>Active Directory integration</li>
-              <li>Automated user provisioning</li>
-              <li>Policy enforcement</li>
-              <li>Security compliance checks</li>
+              <li>User account provisioning</li>
+              <li>Password policy enforcement</li>
+              <li>Group membership management</li>
             </ul>
           </div>
           <div class="technical-section">
-            <strong>Deployment Tools</strong>
+            <strong>Automation Features</strong>
             <ul>
-              <li>Microsoft Endpoint Manager</li>
-              <li>Application deployment via Intune</li>
-              <li>Configuration management</li>
+              <li>Automated user provisioning</li>
+              <li>Policy enforcement</li>
+              <li>Security compliance checks</li>
               <li>Remote troubleshooting</li>
             </ul>
           </div>
@@ -755,13 +777,16 @@ class GraphicsDemo {
 class InfrastructureDemo {
   constructor() {
     this.servers = [];
+    this.users = [];
     this.updateInterval = null;
     this.init();
   }
 
   init() {
     this.generateServers();
+    this.generateUsers();
     this.renderServers();
+    this.renderUsers();
     this.startUpdates();
   }
 
@@ -854,6 +879,89 @@ class InfrastructureDemo {
     });
   }
 
+  generateUsers() {
+    const departments = ['IT', 'HR', 'Finance', 'Marketing', 'Sales', 'Engineering'];
+    const firstNames = ['John', 'Sarah', 'Mike', 'Emily', 'David', 'Lisa', 'Chris', 'Anna', 'Tom', 'Maria'];
+    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+    
+    this.users = [];
+    for (let i = 0; i < 12; i++) {
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      const department = departments[Math.floor(Math.random() * departments.length)];
+      
+      this.users.push({
+        id: `user${i + 1}`,
+        name: `${firstName} ${lastName}`,
+        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@company.com`,
+        department,
+        status: Math.random() > 0.1 ? 'active' : 'disabled',
+        lastLogin: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toLocaleDateString(),
+        groups: this.generateGroups(department)
+      });
+    }
+  }
+
+  generateGroups(department) {
+    const baseGroups = ['Domain Users', 'Company All'];
+    const departmentGroups = {
+      'IT': ['IT Support', 'Administrators', 'Backup Operators'],
+      'HR': ['HR Staff', 'Payroll Access'],
+      'Finance': ['Finance Team', 'Accounting Access'],
+      'Marketing': ['Marketing Team', 'Social Media'],
+      'Sales': ['Sales Team', 'CRM Access'],
+      'Engineering': ['Developers', 'Code Repository Access']
+    };
+    
+    const groups = [...baseGroups];
+    const deptGroups = departmentGroups[department] || [];
+    groups.push(...deptGroups.slice(0, Math.floor(Math.random() * deptGroups.length) + 1));
+    
+    return groups;
+  }
+
+  renderUsers() {
+    const container = document.getElementById('users-container');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="users-list">
+        ${this.users.map(user => `
+          <div class="user-card ${user.status}">
+            <div class="user-header">
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="user-info">
+                <div class="user-name">${user.name}</div>
+                <div class="user-email">${user.email}</div>
+              </div>
+              <div class="user-status">
+                <span class="status-badge ${user.status}">${user.status}</span>
+              </div>
+            </div>
+            <div class="user-details">
+              <div class="user-detail">
+                <span class="detail-label">Department:</span>
+                <span class="detail-value">${user.department}</span>
+              </div>
+              <div class="user-detail">
+                <span class="detail-label">Last Login:</span>
+                <span class="detail-value">${user.lastLogin}</span>
+              </div>
+              <div class="user-groups">
+                <span class="detail-label">Groups:</span>
+                <div class="groups-list">
+                  ${user.groups.map(group => `<span class="group-tag">${group}</span>`).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
   destroy() {
     if (this.updateInterval) {
       clearInterval(this.updateInterval);
@@ -868,7 +976,9 @@ class AlgorithmDemo {
     this.ctx = this.canvas.getContext('2d');
     this.array = [];
     this.isRunning = false;
+    this.shouldStop = false;
     this.stats = { comparisons: 0, swaps: 0, startTime: 0 };
+    this.currentAnimation = null;
     
     this.init();
   }
@@ -884,8 +994,12 @@ class AlgorithmDemo {
     const arraySizeValue = document.getElementById('arraySizeValue');
     const speed = document.getElementById('speed');
     const speedValue = document.getElementById('speedValue');
+    const algorithmSelect = document.getElementById('algorithmSelect');
 
     arraySize.addEventListener('input', (e) => {
+      if (this.isRunning) {
+        this.stopSorting();
+      }
       arraySizeValue.textContent = e.target.value;
       this.generateArray(parseInt(e.target.value));
       this.render();
@@ -893,6 +1007,14 @@ class AlgorithmDemo {
 
     speed.addEventListener('input', (e) => {
       speedValue.textContent = e.target.value;
+    });
+
+    algorithmSelect.addEventListener('change', (e) => {
+      if (this.isRunning) {
+        this.stopSorting();
+      }
+      this.resetStats();
+      document.getElementById('complexity').textContent = this.getComplexity(e.target.value);
     });
   }
 
@@ -937,13 +1059,14 @@ class AlgorithmDemo {
 
   async bubbleSort() {
     const n = this.array.length;
-    for (let i = 0; i < n - 1; i++) {
-      for (let j = 0; j < n - i - 1; j++) {
+    for (let i = 0; i < n - 1 && !this.shouldStop; i++) {
+      for (let j = 0; j < n - i - 1 && !this.shouldStop; j++) {
         this.array[j].state = 'comparing';
         this.array[j + 1].state = 'comparing';
         this.stats.comparisons++;
         
         await this.delay();
+        if (this.shouldStop) return;
         this.render();
         
         if (this.array[j].value > this.array[j + 1].value) {
@@ -955,15 +1078,20 @@ class AlgorithmDemo {
           this.stats.swaps++;
           
           await this.delay();
+          if (this.shouldStop) return;
           this.render();
         }
         
         this.array[j].state = 'default';
         this.array[j + 1].state = 'default';
       }
-      this.array[n - i - 1].state = 'sorted';
+      if (!this.shouldStop) {
+        this.array[n - i - 1].state = 'sorted';
+      }
     }
-    this.array[0].state = 'sorted';
+    if (!this.shouldStop) {
+      this.array[0].state = 'sorted';
+    }
   }
 
   async quickSort(low = 0, high = this.array.length - 1) {
@@ -1018,7 +1146,9 @@ class AlgorithmDemo {
   delay() {
     const speed = document.getElementById('speed').value;
     const delayTime = 1000 / speed;
-    return new Promise(resolve => setTimeout(resolve, delayTime));
+    return new Promise(resolve => {
+      this.currentAnimation = setTimeout(resolve, delayTime);
+    });
   }
 
   updateStats() {
@@ -1041,8 +1171,26 @@ class AlgorithmDemo {
     return complexities[algorithm] || 'O(n²)';
   }
 
-  destroy() {
+  stopSorting() {
     this.isRunning = false;
+    this.shouldStop = true;
+    if (this.currentAnimation) {
+      clearTimeout(this.currentAnimation);
+    }
+    // Reset all elements to default state
+    this.array.forEach(element => {
+      element.state = 'default';
+    });
+    this.render();
+  }
+
+  resetStats() {
+    this.stats = { comparisons: 0, swaps: 0, startTime: 0 };
+    this.updateStats();
+  }
+
+  destroy() {
+    this.stopSorting();
   }
 }
 
@@ -1052,6 +1200,7 @@ function startSorting() {
   if (!demo || demo.isRunning) return;
 
   demo.isRunning = true;
+  demo.shouldStop = false;
   demo.stats = { comparisons: 0, swaps: 0, startTime: Date.now() };
   
   const algorithm = document.getElementById('algorithmSelect').value;
@@ -1062,29 +1211,43 @@ function startSorting() {
     if (!demo.isRunning) clearInterval(updateStats);
   }, 100);
 
-  switch (algorithm) {
-    case 'bubble':
-      demo.bubbleSort().then(() => demo.isRunning = false);
-      break;
-    case 'quick':
-      demo.quickSort().then(() => demo.isRunning = false);
-      break;
-    default:
-      demo.bubbleSort().then(() => demo.isRunning = false);
-  }
+  const runAlgorithm = async () => {
+    try {
+      switch (algorithm) {
+        case 'bubble':
+          await demo.bubbleSort();
+          break;
+        case 'quick':
+          await demo.quickSort();
+          break;
+        case 'merge':
+          await demo.bubbleSort(); // Simplified - using bubble for now
+          break;
+        case 'heap':
+          await demo.bubbleSort(); // Simplified - using bubble for now
+          break;
+        default:
+          await demo.bubbleSort();
+      }
+    } catch (error) {
+      console.log('Sorting interrupted');
+    } finally {
+      demo.isRunning = false;
+      demo.shouldStop = false;
+    }
+  };
+
+  runAlgorithm();
 }
 
 function resetArray() {
   const demo = demoInstances.algorithm;
   if (!demo) return;
 
-  demo.isRunning = false;
+  demo.stopSorting();
   demo.generateArray(parseInt(document.getElementById('arraySize').value));
   demo.render();
-  
-  // Reset stats
-  demo.stats = { comparisons: 0, swaps: 0, startTime: 0 };
-  demo.updateStats();
+  demo.resetStats();
 }
 
 function refreshInfrastructure() {
@@ -1092,11 +1255,51 @@ function refreshInfrastructure() {
   if (!demo) return;
 
   demo.generateServers();
+  demo.generateUsers();
   demo.renderServers();
+  demo.renderUsers();
 }
 
 function generateReport() {
   portfolioApp.showToast('Infrastructure report generated successfully!', 'success');
+}
+
+function addUser() {
+  const demo = demoInstances.infrastructure;
+  if (!demo) return;
+
+  const firstNames = ['Alex', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Riley'];
+  const lastNames = ['Thompson', 'Anderson', 'White', 'Clark', 'Lewis', 'Walker'];
+  const departments = ['IT', 'HR', 'Finance', 'Marketing', 'Sales', 'Engineering'];
+  
+  const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+  const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+  const department = departments[Math.floor(Math.random() * departments.length)];
+  
+  const newUser = {
+    id: `user${demo.users.length + 1}`,
+    name: `${firstName} ${lastName}`,
+    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@company.com`,
+    department,
+    status: 'active',
+    lastLogin: 'Never',
+    groups: demo.generateGroups(department)
+  };
+  
+  demo.users.push(newUser);
+  demo.renderUsers();
+  portfolioApp.showToast(`User ${newUser.name} added successfully!`, 'success');
+}
+
+function resetPassword() {
+  const demo = demoInstances.infrastructure;
+  if (!demo) return;
+  
+  const activeUsers = demo.users.filter(user => user.status === 'active');
+  if (activeUsers.length > 0) {
+    const randomUser = activeUsers[Math.floor(Math.random() * activeUsers.length)];
+    portfolioApp.showToast(`Password reset for ${randomUser.name} completed!`, 'success');
+  }
 }
 
 function downloadResume() {
