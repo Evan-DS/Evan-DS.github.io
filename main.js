@@ -3,85 +3,91 @@ const portfolioData = {
   personalInfo: {
     name: "Evan Dos Santos",
     title: "Software Engineer",
-    tagline: "Passionate software engineer with expertise in full-stack development, creating innovative solutions with modern technologies and best practices.",
-    email: "evandossantos@email.com",
+    tagline: "Computer Science graduate with Software Engineering specialization. Experienced in IT consulting, systems administration, and developing innovative solutions with modern technologies.",
+    email: "evangeorgedossantos@yahoo.ca",
     social: {
-      linkedin: "https://linkedin.com/in/evandossantos",
-      github: "https://github.com/evandossantos",
+      linkedin: "https://linkedin.com/in/evan-g-dos-santos",
+      github: "https://github.com/Evan-DS",
       twitter: "https://twitter.com/evandossantos"
     }
   },
 
   projects: [
     {
-      id: "graphics-renderer",
-      title: "3D Graphics Renderer",
-      description: "Advanced 3D graphics rendering using OpenGL concepts with vector mathematics and real-time rendering.",
-      technologies: ["JavaScript", "Canvas API", "3D Mathematics"],
+      id: "graphics-engine",
+      title: "3D Graphics Engine",
+      description: "Advanced 3D graphics rendering engine built with C++ and OpenGL, featuring vector mathematics, matrix transformations, and backface culling for real-time 3D visualization.",
+      technologies: ["C++", "OpenGL", "Vector Math", "Visual Studio"],
       image: "fas fa-cube",
       demoType: "graphics",
-      githubUrl: "https://github.com/evandossantos/graphics-renderer",
+      githubUrl: "https://github.com/Evan-DS/graphics-engine",
+      featured: true
+    },
+    {
+      id: "infrastructure-management",
+      title: "IT Infrastructure Management System",
+      description: "Comprehensive IT management solution for enterprise environments, featuring automated deployment, user account management, and network monitoring capabilities.",
+      technologies: ["C++", "Active Directory", "Network Admin", "Security"],
+      image: "fas fa-network-wired",
+      demoType: "infrastructure",
+      githubUrl: "https://github.com/Evan-DS/infrastructure-management",
       featured: true
     },
     {
       id: "algorithm-visualizer",
-      title: "Algorithm Visualizer",
-      description: "Interactive visualization of sorting and pathfinding algorithms with real-time performance metrics.",
-      technologies: ["React", "D3.js", "Algorithms"],
-      image: "fas fa-chart-line",
+      title: "Algorithm Visualization Suite",
+      description: "Interactive educational tool showcasing various sorting algorithms and data structures with real-time performance analysis and step-by-step visualization.",
+      technologies: ["Java", "Eclipse IDE", "Algorithms", "Data Structures"],
+      image: "fas fa-sort-amount-up",
       demoType: "algorithm",
-      githubUrl: "https://github.com/evandossantos/algorithm-visualizer",
-      featured: true
-    },
-    {
-      id: "ecommerce-platform",
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with payment processing, inventory management, and admin dashboard.",
-      technologies: ["React", "Node.js", "PostgreSQL"],
-      image: "fas fa-shopping-cart",
-      demoType: "ecommerce",
-      githubUrl: "https://github.com/evandossantos/ecommerce-platform",
+      githubUrl: "https://github.com/Evan-DS/algorithm-visualizer",
       featured: true
     }
   ],
 
   skills: {
-    frontend: [
-      { name: "React", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "JavaScript", level: 95 },
-      { name: "CSS/Sass", level: 88 }
+    programming: [
+      { name: "C++", level: 95 },
+      { name: "Java", level: 90 },
+      { name: "Python", level: 85 },
+      { name: "JavaScript", level: 80 }
     ],
-    backend: [
-      { name: "Node.js", level: 85 },
-      { name: "Python", level: 80 },
-      { name: "Express.js", level: 87 },
-      { name: "REST APIs", level: 90 }
+    tools: [
+      { name: "Visual Studio", level: 95 },
+      { name: "Eclipse IDE", level: 90 },
+      { name: "OpenGL", level: 85 },
+      { name: "Git", level: 88 }
     ],
-    database: [
-      { name: "PostgreSQL", level: 82 },
-      { name: "MongoDB", level: 78 },
-      { name: "Git", level: 92 },
-      { name: "Docker", level: 75 }
+    systems: [
+      { name: "Active Directory", level: 92 },
+      { name: "Microsoft Office Suite", level: 95 },
+      { name: "Network Administration", level: 88 },
+      { name: "Cloud Platforms", level: 82 }
+    ],
+    additional: [
+      { name: "Customer Support", level: 95 },
+      { name: "Technical Documentation", level: 90 },
+      { name: "Project Management", level: 85 },
+      { name: "Problem Solving", level: 95 }
     ]
   },
 
   about: {
     highlights: [
       {
-        icon: "fas fa-code",
-        title: "Clean Code",
-        description: "Writing maintainable, well-documented code"
+        icon: "fas fa-graduation-cap",
+        title: "Education Excellence",
+        description: "B.Sc. (Hons) Computer Science with Software Engineering Specialization"
       },
       {
-        icon: "fas fa-lightbulb",
-        title: "Problem Solving",
-        description: "Innovative solutions to complex challenges"
+        icon: "fas fa-tools",
+        title: "Technical Expertise",
+        description: "5+ years experience with C++, Java, OpenGL, and enterprise systems"
       },
       {
-        icon: "fas fa-users",
-        title: "Collaboration",
-        description: "Effective teamwork and communication"
+        icon: "fas fa-handshake",
+        title: "Client Relations",
+        description: "Professional experience in IT consulting and customer support"
       }
     ]
   }
@@ -580,29 +586,6 @@ class AnimationController {
     });
   }
 
-  // Utility function to animate elements on scroll
-  animateOnScroll(elements, animationClass = 'animate-fade-in') {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(animationClass);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    elements.forEach(element => observer.observe(element));
-  }
-
-  // Stagger animation for multiple elements
-  staggerAnimation(elements, animationClass = 'animate-slide-up', delay = 100) {
-    elements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add(animationClass);
-      }, index * delay);
-    });
-  }
-
   // Cleanup function
   destroy() {
     this.observers.forEach(observer => observer.disconnect());
@@ -750,7 +733,7 @@ class ContactForm {
         to_name: 'Evan Dos Santos'
       };
 
-      // Send email using EmailJS
+      // Send email using EmailJS (or fallback)
       if (window.emailjs && emailJSConfig?.serviceId && emailJSConfig?.templateId) {
         await emailjs.send(
           emailJSConfig.serviceId,
@@ -814,6 +797,152 @@ class ContactForm {
     const toast = document.getElementById('toast');
     toast.classList.remove('show');
   }
+}
+
+// Modal functionality
+class ModalManager {
+  constructor() {
+    this.modals = document.querySelectorAll('.modal');
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    // Close buttons
+    document.querySelectorAll('.modal-close').forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        this.closeModal(closeBtn.closest('.modal'));
+      });
+    });
+
+    // Click outside to close
+    this.modals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          this.closeModal(modal);
+        }
+      });
+    });
+
+    // Escape key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeAllModals();
+      }
+    });
+  }
+
+  openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  closeModal(modal) {
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  closeAllModals() {
+    this.modals.forEach(modal => {
+      this.closeModal(modal);
+    });
+  }
+}
+
+// Project demo functions
+function openGraphicsDemo() {
+  const modalManager = new ModalManager();
+  modalManager.openModal('graphics-modal');
+  
+  // Initialize graphics demo if not already done
+  const container = document.getElementById('graphics-demo-container');
+  if (container && !container.querySelector('.graphics-demo')) {
+    const graphicsDemo = new GraphicsDemo('graphics-demo-container');
+  }
+}
+
+function openAlgorithmDemo() {
+  const modalManager = new ModalManager();
+  modalManager.openModal('algorithm-modal');
+}
+
+function openInfrastructureDemo() {
+  const modalManager = new ModalManager();
+  modalManager.openModal('infrastructure-modal');
+}
+
+function downloadResume() {
+  // Create a comprehensive resume download
+  const resumeContent = `EVAN DOS SANTOS
+Software Engineer & Computer Science Graduate
+
+Contact Information:
+• Email: evangeorgedossantos@yahoo.ca
+• Location: London, Ontario, Canada
+• LinkedIn: linkedin.com/in/evan-g-dos-santos
+• GitHub: github.com/Evan-DS
+
+EDUCATION
+Bachelor of Science Honours Computer Science with Software Engineering Specialization (Co-op)
+University of Windsor, ON | September 2020 - August 2024
+• Honours Graduate, Catholic Central High School (2019)
+• Ontario Scholar Award (2019)
+• Top 2019 graduate of Computer Engineering and Construction
+
+PROFESSIONAL EXPERIENCE
+
+IT Services Consultant | University of Windsor, Windsor, ON | May 2022 - August 2024
+• Applied standard information technology record keeping, analysis, and research to resolve service requests
+• Balanced multiple support channels including live chats, phone calls, and ticketing systems
+• Worked with Microsoft Endpoint to deploy computers to faculty and pushed applications through Intune
+• Set up Xerox printers for clients and enabled printing through drivers and software via IP or print queues
+
+Systems & Domain Administrator Co-Op | CenterLine Ltd., Windsor, ON | January 2023 - April 2023
+• Developed robust server systems using C++ while providing technical support and implementing security measures
+• Managed user accounts, access controls, and security policies using Active Directory
+• Successfully managed LAN and WAN networks, including virtual machine environments
+• Installed, configured, and maintained computer systems and servers for optimal functionality
+
+Home Solutions Specialist | Best Buy Canada Ltd., London, ON | October 2019 - November 2020
+• Managed POS systems, sold inventory, and advertised promotional plans
+• Marketed televisions and home audio systems utilizing advanced technical knowledge
+• Operated digital and paper systems for filing and scheduling services including contracting and warranties
+
+TECHNICAL SKILLS
+Programming Languages: C++, Java, Python, JavaScript
+Development Tools: Visual Studio, Eclipse IDE, OpenGL, Git
+IT & Systems: Active Directory, Microsoft Office Suite, Network Administration, Cloud Platforms
+Soft Skills: Technical Support, Client Relations, Problem Solving, System Analysis, Project Management
+
+CERTIFICATIONS & TRAINING
+• WHMIS Training (September 2023)
+• G Drivers License (November 2019)
+• Standard First-aid and CPR/AED Training (May 2015)
+
+CORE COMPETENCIES
+• 5+ years of Visual Studio and Eclipse IDE development experience
+• Expertise in C++, C, Java, Algorithms, and Sorting
+• Professional experience with Cloud Platforms and Enterprise Resource Planning
+• OpenGL experience including Rendering, Vectors, Matrix Transformations, and Backface Culling
+• Excellence in Microsoft Office Suite including Word, Excel, PowerPoint (Macros, Pivot Tables)`;
+
+  const blob = new Blob([resumeContent], { type: 'text/plain' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Evan_Dos_Santos_Resume.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
 }
 
 // 3D Graphics Demo
@@ -1195,192 +1324,15 @@ class GraphicsDemo {
       this.ctx.moveTo(projectedStart[0], projectedStart[1]);
       this.ctx.lineTo(projectedEnd[0], projectedEnd[1]);
       this.ctx.strokeStyle = axis.color;
-      this.ctx.lineWidth = 3;
+      this.ctx.lineWidth = 2;
       this.ctx.stroke();
     });
   }
 }
 
-// Modal functions for project demos
-function openGraphicsDemo() {
-  const modal = document.getElementById('graphics-modal');
-  modal.classList.add('active');
-  modal.querySelector('.modal-content').classList.add('animate-modal');
-  
-  // Initialize graphics demo
-  new GraphicsDemo('graphics-demo-container');
-  
-  // Setup modal close
-  setupModalClose(modal);
-}
-
-function openAlgorithmDemo() {
-  const modal = document.getElementById('algorithm-modal');
-  modal.classList.add('active');
-  modal.querySelector('.modal-content').classList.add('animate-modal');
-  setupModalClose(modal);
-}
-
-function openEcommerceDemo() {
-  const modal = document.getElementById('ecommerce-modal');
-  modal.classList.add('active');
-  modal.querySelector('.modal-content').classList.add('animate-modal');
-  setupModalClose(modal);
-}
-
-function setupModalClose(modal) {
-  const closeBtn = modal.querySelector('.modal-close');
-  
-  const closeModal = () => {
-    modal.classList.remove('active');
-  };
-  
-  closeBtn.onclick = closeModal;
-  
-  modal.onclick = (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  };
-  
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      closeModal();
-    }
-  });
-}
-
-// Download Resume function
-function downloadResume() {
-  // Create a downloadable resume PDF link
-  // In a real implementation, you would link to an actual PDF file
-  const resumeData = `
-Evan Dos Santos
-Software Engineer
-
-Contact Information:
-Email: evandossantos@email.com
-LinkedIn: linkedin.com/in/evandossantos
-GitHub: github.com/evandossantos
-
-Professional Summary:
-Passionate software engineer with expertise in full-stack development,
-creating innovative solutions with modern technologies and best practices.
-
-Technical Skills:
-Frontend: React, TypeScript, JavaScript, CSS/Sass
-Backend: Node.js, Python, Express.js, REST APIs
-Database: PostgreSQL, MongoDB
-Tools: Git, Docker
-Cloud: AWS, Kubernetes, CI/CD, Linux
-
-Experience:
-Software Engineer
-- Developed full-stack web applications using React and Node.js
-- Implemented responsive designs and modern UI/UX practices
-- Built and maintained RESTful APIs and database systems
-- Collaborated with cross-functional teams on project delivery
-
-Projects:
-- 3D Graphics Renderer: Advanced rendering using OpenGL concepts
-- Algorithm Visualizer: Interactive sorting and pathfinding algorithms
-- E-Commerce Platform: Full-stack solution with payment processing
-
-Education:
-Bachelor's Degree in Computer Science or related field
-`;
-
-  // Create a blob with the resume content
-  const blob = new Blob([resumeData], { type: 'text/plain' });
-  const url = window.URL.createObjectURL(blob);
-  
-  // Create a temporary download link
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'Evan_Dos_Santos_Resume.txt';
-  document.body.appendChild(link);
-  link.click();
-  
-  // Clean up
-  document.body.removeChild(link);
-  window.URL.revokeObjectURL(url);
-  
-  // Show success message using global toast function
-  if (typeof window.showToast === 'function') {
-    window.showToast('Resume downloaded successfully!', 'success');
-  } else {
-    alert('Resume downloaded successfully!');
-  }
-}
-
-// Service Worker registration (optional)
-function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then((registration) => {
-          console.log('SW registered: ', registration);
-        })
-        .catch((registrationError) => {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-}
-
-// Utility functions for common animations
-const animationUtils = {
-  // Fade in animation
-  fadeIn(element, duration = 300) {
-    element.style.opacity = '0';
-    element.style.transition = `opacity ${duration}ms ease`;
-    
-    requestAnimationFrame(() => {
-      element.style.opacity = '1';
-    });
-  },
-
-  // Slide up animation
-  slideUp(element, duration = 300) {
-    element.style.transform = 'translateY(20px)';
-    element.style.opacity = '0';
-    element.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
-    
-    requestAnimationFrame(() => {
-      element.style.transform = 'translateY(0)';
-      element.style.opacity = '1';
-    });
-  },
-
-  // Scale in animation
-  scaleIn(element, duration = 300) {
-    element.style.transform = 'scale(0.8)';
-    element.style.opacity = '0';
-    element.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
-    
-    requestAnimationFrame(() => {
-      element.style.transform = 'scale(1)';
-      element.style.opacity = '1';
-    });
-  },
-
-  // Pulse animation
-  pulse(element, duration = 1000) {
-    element.style.animation = `pulse ${duration}ms ease-in-out infinite`;
-  },
-
-  // Remove all animations
-  removeAnimations(element) {
-    element.style.animation = '';
-    element.style.transition = '';
-    element.style.transform = '';
-    element.style.opacity = '';
-  }
-};
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize the main application
+  // Initialize core app
   const app = new PortfolioApp();
   
   // Initialize navigation
@@ -1392,125 +1344,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize contact form
   const contactForm = new ContactForm();
   
-  // Make utilities and instances globally available
-  window.portfolioApp = app;
-  window.navigation = navigation;
-  window.animationController = animationController;
-  window.animationUtils = animationUtils;
-  window.portfolioData = portfolioData;
-  window.emailJSConfig = emailJSConfig;
+  // Initialize modal manager
+  const modalManager = new ModalManager();
   
-  // Make showToast function available globally
-  window.showToast = (message, type = 'info') => {
-    contactForm.showToast(message, type);
-  };
-  
-  // Make demo functions globally available
-  window.openGraphicsDemo = openGraphicsDemo;
-  window.openAlgorithmDemo = openAlgorithmDemo;
-  window.openEcommerceDemo = openEcommerceDemo;
-  window.downloadResume = downloadResume;
-  
-  // Initialize viewport height fix
-  app.updateViewportHeight();
-  window.addEventListener('resize', app.updateViewportHeight);
-  
-  // Setup project card hover animations
-  const projectCards = document.querySelectorAll('.project-card');
-  projectCards.forEach(card => {
-    card.classList.add('hover-lift');
-  });
-
-  // Setup button hover effects
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(button => {
-    button.classList.add('hover-scale');
-  });
-
-  // Animate about highlights when section comes into view
-  const aboutHighlights = document.querySelectorAll('.highlight-item');
-  if (aboutHighlights.length > 0) {
-    const aboutSection = document.getElementById('about');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animationController.staggerAnimation(aboutHighlights, 'animate-slide-in-left', 150);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    
-    if (aboutSection) observer.observe(aboutSection);
-  }
-
-  // Animate project cards
-  const projectGrid = document.querySelector('.projects-grid');
-  if (projectGrid) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const projectCards = entry.target.querySelectorAll('.project-card');
-          animationController.staggerAnimation(projectCards, 'animate-scale-in', 200);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    
-    observer.observe(projectGrid);
-  }
-  
-  // Optional: Register service worker for PWA functionality
-  // registerServiceWorker();
-  
-  // Log that the portfolio is ready
-  console.log('🚀 Portfolio loaded successfully!');
+  console.log('Portfolio website loaded successfully!');
 });
-
-// Handle loading states
-window.addEventListener('load', () => {
-  // Hide any loading indicators
-  const loader = document.querySelector('.loader');
-  if (loader) {
-    loader.style.opacity = '0';
-    setTimeout(() => {
-      loader.style.display = 'none';
-    }, 300);
-  }
-  
-  // Start any animations that depend on full page load
-  document.body.classList.add('page-loaded');
-});
-
-// Error handling
-window.addEventListener('error', (e) => {
-  console.error('Global error:', e.error);
-  // Optionally send error to analytics or error reporting service
-});
-
-window.addEventListener('unhandledrejection', (e) => {
-  console.error('Unhandled promise rejection:', e.reason);
-  // Optionally send error to analytics or error reporting service
-});
-
-// Handle reduced motion preferences
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  // Disable animations for users who prefer reduced motion
-  const style = document.createElement('style');
-  style.textContent = `
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  `;
-  document.head.appendChild(style);
-}
-
-// Expose utility functions globally
-window.utils = {
-  debounce: PortfolioApp.debounce,
-  throttle: PortfolioApp.throttle,
-  isElementInViewport: PortfolioApp.isElementInViewport,
-  formatDate: PortfolioApp.formatDate,
-  validateEmail: PortfolioApp.validateEmail
-};
