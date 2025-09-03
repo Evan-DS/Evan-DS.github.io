@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Software Engineer Portfolio</title>
+    <meta name="description" content="Professional portfolio of Alex Johnson, Software Engineer specializing in full-stack development, system architecture, and enterprise solutions.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Alex Johnson</div>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="nav-mobile" id="nav-mobile">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="text-primary">Alex Johnson</span>
+                </h1>
+                <h2 class="hero-subtitle">Senior Software Engineer</h2>
+                <p class="hero-description">
+                    Passionate about creating innovative solutions that drive business success. 
+                    Specialized in full-stack development, system architecture, and leading high-performing engineering teams.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
+                         alt="Alex Johnson - Professional headshot" class="profile-image">
+                </div>
+                
+                <div class="about-text">
+                    <div class="about-bio">
+                        <p>
+                            I'm a Senior Software Engineer with over 8 years of experience building scalable web applications 
+                            and enterprise systems. My passion lies in solving complex technical challenges and mentoring 
+                            development teams to achieve exceptional results.
+                        </p>
+                        <p>
+                            Throughout my career, I've led the development of mission-critical applications serving millions 
+                            of users, optimized system performance by 300%, and architected cloud-native solutions that 
+                            reduced operational costs by 40%.
+                        </p>
+                        <p>
+                            When I'm not coding, I enjoy contributing to open-source projects, exploring new technologies, 
+                            and sharing knowledge through technical writing and speaking at industry conferences.
+                        </p>
+                    </div>
+                    
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span>Toronto, Canada</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <span>alex.johnson@email.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar text-primary"></i>
+                            <span>8+ Years Experience</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-actions">
+                        <a href="#" class="btn btn-accent" onclick="downloadResume()">
+                            <i class="fas fa-download"></i>
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    Here are some of my recent projects that showcase my skills and passion for creating innovative solutions.
+                </p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1: Enterprise System Monitor -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=300&fit=crop" 
+                         alt="Enterprise System Monitor Dashboard" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Enterprise System Monitor</h3>
+                        <p class="project-description">
+                            Real-time infrastructure monitoring platform with advanced alerting and analytics capabilities 
+                            for enterprise environments managing 500+ servers.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag tech-cpp">C++</span>
+                            <span class="tech-tag tech-react">React</span>
+                            <span class="tech-tag tech-node">Node.js</span>
+                            <span class="tech-tag tech-postgresql">PostgreSQL</span>
+                            <span class="tech-tag tech-redis">Redis</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="enterprise-system-monitor.html" class="project-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>View Details</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Database Administration Suite -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&h=300&fit=crop" 
+                         alt="Database Administration Interface" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Database Administration Suite</h3>
+                        <p class="project-description">
+                            Comprehensive SQL Server management platform with connection pooling, performance monitoring, 
+                            and automated backup systems achieving 99.9% uptime.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag tech-cpp">C++</span>
+                            <span class="tech-tag tech-sql">SQL Server</span>
+                            <span class="tech-tag tech-powershell">PowerShell</span>
+                            <span class="tech-tag tech-react">React</span>
+                            <span class="tech-tag tech-typescript">TypeScript</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="database-admin-suite.html" class="project-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>View Details</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: 3D Graphics Renderer -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=300&fit=crop" 
+                         alt="3D Graphics Rendering Engine" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">3D Graphics Renderer</h3>
+                        <p class="project-description">
+                            Advanced 3D graphics rendering engine using OpenGL with real-time lighting, vector mathematics, 
+                            and interactive camera controls for educational visualization.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag tech-cpp">C++</span>
+                            <span class="tech-tag tech-opengl">OpenGL</span>
+                            <span class="tech-tag tech-glfw">GLFW</span>
+                            <span class="tech-tag tech-glm">GLM</span>
+                            <span class="tech-tag tech-shaders">GLSL</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="3d-graphics-renderer.html" class="project-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>View Details</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Network Infrastructure Manager -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=300&fit=crop" 
+                         alt="Network Infrastructure Management" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Network Infrastructure Manager</h3>
+                        <p class="project-description">
+                            Comprehensive network management solution for enterprise LAN/WAN environments with automated 
+                            configuration, monitoring, and troubleshooting capabilities.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag tech-cpp">C++</span>
+                            <span class="tech-tag tech-python">Python</span>
+                            <span class="tech-tag tech-snmp">SNMP</span>
+                            <span class="tech-tag tech-react">React</span>
+                            <span class="tech-tag tech-docker">Docker</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="network-infrastructure-manager.html" class="project-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>View Details</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Algorithm Optimization Suite -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=600&h=300&fit=crop" 
+                         alt="Algorithm Visualization" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Algorithm Optimization Suite</h3>
+                        <p class="project-description">
+                            Interactive algorithm visualization and performance analysis tool with real-time complexity 
+                            comparisons and educational demonstrations for computer science concepts.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag tech-cpp">C++</span>
+                            <span class="tech-tag tech-java">Java</span>
+                            <span class="tech-tag tech-react">React</span>
+                            <span class="tech-tag tech-d3">D3.js</span>
+                            <span class="tech-tag tech-typescript">TypeScript</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="algorithm-optimization-suite.html" class="project-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>View Details</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: Active Directory Management Console -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=300&fit=crop" 
+                         alt="Active Directory Management" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Active Directory Management Console</h3>
+                        <p class="project-description">
+                            Enterprise domain services administration platform for comprehensive user management, 
+                            security policy enforcement, and organizational structure maintenance across 10,000+ users.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag tech-cpp">C++</span>
+                            <span class="tech-tag tech-powershell">PowerShell</span>
+                            <span class="tech-tag tech-ldap">LDAP</span>
+                            <span class="tech-tag tech-windows">Windows SDK</span>
+                            <span class="tech-tag tech-react">React</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="active-directory-management.html" class="project-link">
+                                <i class="fas fa-info-circle"></i>
+                                <span>View Details</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-cta">
+                <a href="https://github.com/alexjohnson" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                    <span>View All Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    A comprehensive overview of my technical skills and the tools I use to bring ideas to life.
+                </p>
+            </div>
+            
+            <div class="skills-grid">
+                <!-- Frontend Skills -->
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="category-title">Frontend</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">TypeScript</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Vue.js</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="category-title">Backend</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">C++</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Java</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Skills -->
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="category-title">Database & Cloud</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">PostgreSQL</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL Server</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Redis</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">AWS</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Skills -->
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="category-title">Tools & Other</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Git</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Docker</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Linux</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Agile/Scrum</span>
+                            <div class="skill-level">
+                                <div class="skill-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                    <span class="dot active"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">
+                    I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together.
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>alex.johnson@email.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Toronto, Canada</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/alexjohnson" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/alexjohnson" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/alexjohnson" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <span class="error-message" id="subject-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Alex Johnson. All rights reserved.</p>
+                <p>Built with passion using HTML, CSS, and JavaScript.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
