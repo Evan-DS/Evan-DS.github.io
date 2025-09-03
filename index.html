@@ -99,9 +99,17 @@
     .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; }
     .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; }
 
-    /* CTA Buttons */
-    .cta-buttons { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; animation:fadeInUp 2.5s ease forwards; }
-    .cta-buttons a {
+       /* CTA Buttons */
+    .cta-buttons { 
+        display:flex; 
+        gap:20px; 
+        flex-wrap:wrap; 
+        justify-content:center; 
+        animation:fadeInUp 2.5s ease forwards; 
+    }
+    
+    /* Solid button (View My Work) */
+    .cta-buttons a:first-child {
         padding:12px 30px;
         background-color:#2463eb;
         color:#fff;
@@ -109,7 +117,24 @@
         border-radius:5px;
         transition:0.3s;
     }
-    .cta-buttons a:hover { background-color:#1c4acb; }
+    .cta-buttons a:first-child:hover {
+        background-color:#1c4acb;
+    }
+    
+    /* Outline button (Get in Touch) */
+    .cta-buttons a:last-child {
+        padding:12px 30px;
+        background-color: transparent;
+        color: #2463eb;
+        font-weight:bold;
+        border: 2px solid #2463eb;
+        border-radius:5px;
+        transition:0.3s;
+    }
+    .cta-buttons a:last-child:hover {
+        background-color: #2463eb;
+        color:#ffffff;
+    }
 
     /* About Section */
     .about {
