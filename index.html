@@ -42,15 +42,15 @@
             background: linear-gradient(rgba(239, 244, 255, 0.7), rgba(239, 244, 255, 0.7)), url('background-placeholder.jpg') no-repeat center center/cover;
             padding:0 20px;
         }
-        .landing h1 { font-size:3.5rem; margin-bottom:0.5rem; }
+        .landing h1 { font-size:3rem; margin-bottom:0.5rem; }
         .landing h1 .name-highlight { color:#2463eb; }
-        .landing h2 { font-size:1.8rem; font-weight:400; margin-bottom:1.5rem; }
-        .landing p { font-size:1.25rem; max-width:700px; margin-bottom:2rem; }
+        .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; }
+        .landing p { font-size:1.2rem; max-width:700px; margin-bottom:2rem; }
 
         .landing-buttons { display:flex; gap:15px; }
         .cta-button {
             display:inline-block;
-            padding:14px 32px;
+            padding:12px 30px;
             background-color:#2463eb;
             color:#ffffff;
             font-weight:bold;
@@ -61,7 +61,7 @@
 
         .cta-button-outline {
             display:inline-block;
-            padding:14px 32px;
+            padding:12px 30px;
             background-color: transparent;
             color: #344256;
             font-weight:bold;
@@ -75,13 +75,13 @@
         .about { display:flex; flex-direction:row; align-items:flex-start; gap:50px; background-color:#ffffff; padding:100px 10%; }
         .about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
         .about-text { max-width:700px; }
-        .about-text h2 { font-size:2.2rem; margin-bottom:20px; text-align:center; color:#344256; position:relative; }
+        .about-text h2 { font-size:2rem; margin-bottom:20px; text-align:center; color:#344256; position:relative; }
         .about-text h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
-        .about-text p { font-size:1.2rem; margin-bottom:15px; text-align:justify; }
+        .about-text p { font-size:1.15rem; margin-bottom:15px; text-align:justify; }
 
         /* Projects Section */
         .projects { background-color:#f8fafc; padding:100px 10%; }
-        .projects h2 { font-size:2.2rem; text-align:center; margin-bottom:40px; color:#344256; position:relative; }
+        .projects h2 { font-size:2rem; text-align:center; margin-bottom:40px; color:#344256; position:relative; }
         .projects h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
 
         .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
@@ -96,21 +96,21 @@
 
         /* Resume Section */
         .resume { background-color:#ffffff; padding:100px 10%; text-align:center; }
-        .resume h2 { font-size:2.2rem; margin-bottom:30px; color:#344256; position:relative; }
+        .resume h2 { font-size:2rem; margin-bottom:30px; color:#344256; position:relative; }
         .resume h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
-        .resume a { display:inline-block; margin-top:20px; padding:14px 32px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; text-decoration:none; }
+        .resume a { display:inline-block; margin-top:20px; padding:12px 30px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; text-decoration:none; }
         .resume a:hover { background-color:#1a4ac0; }
 
         /* Skills Section */
-        .skills { background-color:#f8fafc; padding:100px 10%; }
-        .skills h2 { font-size:2.2rem; text-align:center; margin-bottom:40px; color:#344256; position:relative; }
+        .skills { background-color:#ffffff; padding:100px 10%; }
+        .skills h2 { font-size:2rem; text-align:center; margin-bottom:40px; color:#344256; position:relative; }
         .skills h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
         .skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
         .skill { background:#ffffff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; font-size:1.15rem; }
 
         /* Contact Section */
-        .contact { background-color:#ffffff; max-width:700px; margin:0 auto; border-radius:10px; padding:60px 40px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .contact h2 { text-align:center; font-size:2.2rem; margin-bottom:30px; color:#344256; position:relative; }
+        .contact { background-color:#f8fafc; max-width:700px; margin:0 auto; border-radius:10px; padding:60px 40px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+        .contact h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#344256; position:relative; }
         .contact h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
         .contact form { display:flex; flex-direction:column; gap:20px; }
         .contact input, .contact textarea { padding:12px; border-radius:5px; border:1px solid #ccc; font-size:1.15rem; width:100%; }
@@ -133,9 +133,9 @@
 
         /* Responsive */
         @media (max-width:768px){
-            .landing h1{ font-size:2.5rem; }
-            .landing h2{ font-size:1.4rem; }
-            .landing p{ font-size:1.1rem; }
+            .landing h1{ font-size:2.2rem; }
+            .landing h2{ font-size:1.2rem; }
+            .landing p{ font-size:1rem; }
             .about { flex-direction:column; text-align:center; align-items:center; }
             .about img{ width:200px; height:200px; margin-bottom:20px; }
         }
@@ -167,7 +167,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+       <!-- About Section -->
     <section class="about" id="about">
         <img src="_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos - Headshot">
         <div class="about-text">
@@ -182,7 +182,6 @@
     <section class="projects" id="projects">
         <h2>Projects</h2>
         <div class="project-grid">
-            <!-- Example project cards -->
             <div class="project-card">
                 <img src="project1-placeholder.jpg" alt="Project 1">
                 <div class="project-card-content">
@@ -195,6 +194,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Add other project cards as needed -->
         </div>
     </section>
 
@@ -232,9 +232,17 @@
         <div class="name">Evan Dos Santos</div>
         <div>Software Engineer & IT Systems Specialist</div>
         <div class="social-icons">
-            <!-- Example SVGs -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#ffffff" d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.41 7.86 10.95.57.1.78-.25.78-.55v-2.17c-3.2.7-3.87-1.55-3.87-1.55-.52-1.31-1.28-1.66-1.28-1.66-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.46-2.3 1.22-3.12-.12-.3-.53-1.52.12-3.18 0 0 .99-.32 3.24 1.18a11.3 11.3 0 0 1 5.88 0c2.25-1.5 3.24-1.18 3.24-1.18.65 1.66.24 2.88.12 3.18.76.82 1.22 1.86 1.22 3.12 0 4.43-2.69 5.41-5.25 5.7.42.36.8 1.09.8 2.2v3.25c0 .31.21.66.79.55A10.51 10.51 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg>
+            <a href="#" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="#ffffff" d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/>
+                </svg>
+            </a>
+            <a href="#" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="#ffffff" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.41 7.86 10.95.57.1.78-.25.78-.55v-2.17c-3.2.7-3.87-1.55-3.87-1.55-.52-1.31-1.28-1.66-1.28-1.66-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.46-2.3 1.22-3.12-.12-.3-.53-1.52.12-3.18 0 0 .99-.32 3.24 1.18a11.3 11.3 0 0 1 5.88 0c2.25-1.5 3.24-1.18 3.24-1.18.65 1.66.24 2.88.12 3.18.76.82 1.22 1.86 1.22 3.12 0 4.43-2.69 5.41-5.25 5.7.42.36.8 1.09.8 2.2v3.25c0 .31.21.66.79.55A10.51 10.51 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
+                </svg>
+            </a>
+            <!-- Add additional social icons as needed -->
         </div>
         <hr>
         <p>© 2024 Evan Dos Santos. All rights reserved. Built with passion and modern web technologies.</p>
