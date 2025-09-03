@@ -1,0 +1,983 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Software Engineer Portfolio</title>
+    <meta name="description" content="Professional portfolio of Alex Johnson, a passionate Software Engineer specializing in full-stack development and modern web technologies.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#1E293B',
+                        accent: '#10B981',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bounceGentle: {
+                            '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
+                            '40%': { transform: 'translateY(-10px)' },
+                            '60%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-inter text-slate-900 bg-slate-50">
+
+    <!-- @COMPONENT: Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-slate-200 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-bold text-xl text-primary">
+                    <span data-bind="user.name">Alex Johnson</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-slate-600 hover:text-primary transition-colors nav-link">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-primary transition-colors nav-link">About</a>
+                    <a href="#projects" class="text-slate-600 hover:text-primary transition-colors nav-link">Projects</a>
+                    <a href="#skills" class="text-slate-600 hover:text-primary transition-colors nav-link">Skills</a>
+                    <a href="#contact" class="text-slate-600 hover:text-primary transition-colors nav-link">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-slate-600 hover:text-primary" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden hidden bg-white border-t border-slate-200" id="mobile-menu">
+            <div class="px-4 py-4 space-y-4">
+                <a href="#home" class="block text-slate-600 hover:text-primary transition-colors nav-link">Home</a>
+                <a href="#about" class="block text-slate-600 hover:text-primary transition-colors nav-link">About</a>
+                <a href="#projects" class="block text-slate-600 hover:text-primary transition-colors nav-link">Projects</a>
+                <a href="#skills" class="block text-slate-600 hover:text-primary transition-colors nav-link">Skills</a>
+                <a href="#contact" class="block text-slate-600 hover:text-primary transition-colors nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- @COMPONENT: Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Modern geometric background with CSS -->
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100"></div>
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="animate-fade-in">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-secondary mb-6">
+                    Hi, I'm <span class="text-primary" data-bind="user.name">Alex Johnson</span>
+                </h1>
+                <h2 class="text-xl sm:text-2xl lg:text-3xl font-medium text-slate-600 mb-8" data-bind="user.title">
+                    Full-Stack Software Engineer
+                </h2>
+                <p class="text-lg sm:text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed" data-bind="user.tagline">
+                    Passionate about creating innovative digital solutions that make a difference. 
+                    I build scalable web applications with modern technologies and clean, efficient code.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#projects" class="bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="border-2 border-primary text-primary px-8 py-4 rounded-lg font-medium hover:bg-primary hover:text-white transition-all duration-300">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
+                <i class="fas fa-chevron-down text-slate-400 text-2xl"></i>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Hero Section -->
+
+    <!-- @COMPONENT: About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-secondary mb-4">About Me</h2>
+                <div class="w-24 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-up">
+                    <!-- Professional software engineer at modern desk with dual monitors -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
+                         alt="Alex Johnson - Professional headshot" 
+                         class="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                         data-mock-image="true" 
+                         data-implementation="Replace with actual professional headshot">
+                </div>
+                
+                <div class="animate-slide-up space-y-6">
+                    <div class="prose prose-lg text-slate-600">
+                        <p data-mock="true">
+                            Hello! I'm Alex, a passionate Software Engineer with over 5 years of experience 
+                            in full-stack development. I specialize in building scalable web applications 
+                            using modern technologies like React, Node.js, and cloud platforms.
+                        </p>
+                        <p data-mock="true">
+                            My journey in tech started with a Computer Science degree, but my real learning 
+                            comes from solving complex problems and staying curious about emerging technologies. 
+                            I believe in writing clean, maintainable code and creating user experiences that matter.
+                        </p>
+                        <p data-mock="true">
+                            When I'm not coding, you'll find me contributing to open-source projects, 
+                            mentoring fellow developers, or exploring new frameworks. I'm always excited 
+                            about the next challenge and opportunity to grow.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center space-x-2 text-slate-600">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                            <span data-bind="user.location">San Francisco, CA</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-slate-600">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <span data-bind="user.email">alex.johnson@email.com</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-slate-600">
+                            <i class="fas fa-calendar text-primary"></i>
+                            <span data-bind="user.experience">5+ Years Experience</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <a href="#" class="inline-flex items-center space-x-2 bg-accent text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-600 transition-colors" 
+                           data-event="click:downloadResume" 
+                           data-implementation="Should trigger PDF download">
+                            <i class="fas fa-download"></i>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: About Section -->
+
+    <!-- @COMPONENT: Projects Section -->
+    <section id="projects" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-secondary mb-4">Featured Projects</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    Here are some of my recent projects that showcase my skills and passion for creating innovative solutions.
+                </p>
+            </div>
+            
+            <!-- @MAP: projects.map(project => ( -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1: E-Commerce Platform -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group" data-mock="true">
+                    <!-- Modern e-commerce website dashboard on laptop screen -->
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="E-Commerce Platform project screenshot" 
+                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-3" data-bind="project.title">E-Commerce Platform</h3>
+                        <p class="text-slate-600 mb-4" data-bind="project.description">
+                            A full-featured e-commerce platform with user authentication, payment processing, 
+                            inventory management, and admin dashboard.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium" data-bind="project.tech">React</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium" data-bind="project.tech">Node.js</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium" data-bind="project.tech">MongoDB</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium" data-bind="project.tech">Stripe</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center space-x-2 text-primary hover:text-blue-700 transition-colors" 
+                               data-event="click:openLiveDemo" 
+                               data-implementation="Should open live project in new tab">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub repo in new tab">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Task Management App -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group" data-mock="true">
+                    <!-- Project management dashboard interface on computer screen -->
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Task Management App project screenshot" 
+                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-3" data-bind="project.title">Task Management App</h3>
+                        <p class="text-slate-600 mb-4" data-bind="project.description">
+                            A collaborative task management application with real-time updates, 
+                            team collaboration features, and advanced filtering capabilities.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium" data-bind="project.tech">Vue.js</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium" data-bind="project.tech">Firebase</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium" data-bind="project.tech">WebSocket</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium" data-bind="project.tech">Tailwind</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center space-x-2 text-primary hover:text-blue-700 transition-colors" 
+                               data-event="click:openLiveDemo" 
+                               data-implementation="Should open live project in new tab">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub repo in new tab">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Weather Analytics Dashboard -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group" data-mock="true">
+                    <!-- Weather data visualization dashboard on computer monitor -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Weather Analytics Dashboard project screenshot" 
+                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-3" data-bind="project.title">Weather Analytics Dashboard</h3>
+                        <p class="text-slate-600 mb-4" data-bind="project.description">
+                            A comprehensive weather analytics dashboard with interactive charts, 
+                            forecasting models, and location-based weather insights.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium" data-bind="project.tech">React</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium" data-bind="project.tech">D3.js</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium" data-bind="project.tech">Express</span>
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium" data-bind="project.tech">PostgreSQL</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center space-x-2 text-primary hover:text-blue-700 transition-colors" 
+                               data-event="click:openLiveDemo" 
+                               data-implementation="Should open live project in new tab">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub repo in new tab">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Social Media API -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group" data-mock="true">
+                    <!-- API documentation and code on multiple screens -->
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Social Media API project screenshot" 
+                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-3" data-bind="project.title">Social Media API</h3>
+                        <p class="text-slate-600 mb-4" data-bind="project.description">
+                            A RESTful API for a social media platform with user authentication, 
+                            posts, comments, likes, and real-time notifications.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium" data-bind="project.tech">Node.js</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium" data-bind="project.tech">Express</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium" data-bind="project.tech">MongoDB</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium" data-bind="project.tech">Redis</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center space-x-2 text-primary hover:text-blue-700 transition-colors" 
+                               data-event="click:openDocs" 
+                               data-implementation="Should open API documentation">
+                                <i class="fas fa-book"></i>
+                                <span>API Docs</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub repo in new tab">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Mobile Finance App -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group" data-mock="true">
+                    <!-- Mobile app interface mockup on phone screen -->
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Mobile Finance App project screenshot" 
+                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-3" data-bind="project.title">Mobile Finance App</h3>
+                        <p class="text-slate-600 mb-4" data-bind="project.description">
+                            A cross-platform mobile app for personal finance management with 
+                            expense tracking, budgeting, and financial goal setting.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium" data-bind="project.tech">React Native</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium" data-bind="project.tech">TypeScript</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium" data-bind="project.tech">Firebase</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium" data-bind="project.tech">Expo</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center space-x-2 text-primary hover:text-blue-700 transition-colors" 
+                               data-event="click:openAppStore" 
+                               data-implementation="Should open app store listing">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>App Store</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub repo in new tab">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: AI Content Generator -->
+                <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group" data-mock="true">
+                    <!-- AI/ML interface with data visualizations -->
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="AI Content Generator project screenshot" 
+                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-3" data-bind="project.title">AI Content Generator</h3>
+                        <p class="text-slate-600 mb-4" data-bind="project.description">
+                            An AI-powered content generation platform that creates blog posts, 
+                            social media content, and marketing copy using natural language processing.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium" data-bind="project.tech">Python</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium" data-bind="project.tech">FastAPI</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium" data-bind="project.tech">OpenAI</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium" data-bind="project.tech">Docker</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="flex items-center space-x-2 text-primary hover:text-blue-700 transition-colors" 
+                               data-event="click:openLiveDemo" 
+                               data-implementation="Should open live project in new tab">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="#" class="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub repo in new tab">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- @END_MAP )) -->
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center space-x-2 border-2 border-primary text-primary px-8 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-all duration-300" 
+                   data-event="click:viewAllProjects" 
+                   data-implementation="Should navigate to full projects page or GitHub">
+                    <span>View All Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Projects Section -->
+
+    <!-- @COMPONENT: Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-secondary mb-4">Skills & Technologies</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    A comprehensive overview of my technical skills and the tools I use to bring ideas to life.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Frontend Development -->
+                <div class="text-center p-6 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-300" data-mock="true">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-code text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-secondary mb-4">Frontend</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">React</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Vue.js</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">TypeScript</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Tailwind CSS</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Development -->
+                <div class="text-center p-6 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-300" data-mock="true">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-server text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-secondary mb-4">Backend</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Node.js</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Python</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Express.js</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">GraphQL</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database & Cloud -->
+                <div class="text-center p-6 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-300" data-mock="true">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-database text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-secondary mb-4">Database & Cloud</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">MongoDB</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">PostgreSQL</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">AWS</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Firebase</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Other -->
+                <div class="text-center p-6 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-300" data-mock="true">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-2xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-secondary mb-4">Tools & Other</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Git/GitHub</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Docker</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Jest/Testing</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600" data-bind="skill.name">Agile/Scrum</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Soft Skills -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-secondary text-center mb-8">Soft Skills</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="px-6 py-3 bg-blue-100 text-blue-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Problem Solving</span>
+                    <span class="px-6 py-3 bg-green-100 text-green-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Team Collaboration</span>
+                    <span class="px-6 py-3 bg-purple-100 text-purple-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Communication</span>
+                    <span class="px-6 py-3 bg-orange-100 text-orange-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Leadership</span>
+                    <span class="px-6 py-3 bg-red-100 text-red-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Adaptability</span>
+                    <span class="px-6 py-3 bg-indigo-100 text-indigo-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Critical Thinking</span>
+                    <span class="px-6 py-3 bg-yellow-100 text-yellow-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Time Management</span>
+                    <span class="px-6 py-3 bg-pink-100 text-pink-700 rounded-full font-medium" data-bind="softSkill.name" data-mock="true">Mentoring</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Skills Section -->
+
+    <!-- @COMPONENT: Contact Section -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-secondary mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                    I'm always interested in hearing about new opportunities and exciting projects. 
+                    Let's connect and discuss how we can work together.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-secondary mb-6">Let's Connect</h3>
+                        <p class="text-slate-600 mb-8" data-mock="true">
+                            Feel free to reach out through any of these channels. I typically respond within 24 hours.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-envelope text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary">Email</h4>
+                                <a href="mailto:alex.johnson@email.com" class="text-slate-600 hover:text-primary transition-colors" data-bind="user.email">alex.johnson@email.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary">Phone</h4>
+                                <a href="tel:+1234567890" class="text-slate-600 hover:text-primary transition-colors" data-bind="user.phone">+1 (234) 567-8900</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-secondary">Location</h4>
+                                <span class="text-slate-600" data-bind="user.location">San Francisco, CA</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div>
+                        <h4 class="font-semibold text-secondary mb-4">Find me on</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors" 
+                               data-event="click:openLinkedIn" 
+                               data-implementation="Should open LinkedIn profile in new tab">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors" 
+                               data-event="click:openGithub" 
+                               data-implementation="Should open GitHub profile in new tab">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors" 
+                               data-event="click:openTwitter" 
+                               data-implementation="Should open Twitter profile in new tab">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors" 
+                               data-event="click:openInstagram" 
+                               data-implementation="Should open Instagram profile in new tab">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <!-- @STATE: formData:object = {name: '', email: '', message: ''} -->
+                    <!-- @STATE: formErrors:object = {} -->
+                    <!-- @STATE: isSubmitting:boolean = false -->
+                    <form class="space-y-6" data-event="submit:handleContactSubmit" data-implementation="Should validate and submit contact form">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
+                            <input type="text" 
+                                   id="name" 
+                                   name="name" 
+                                   required 
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                                   placeholder="Your full name"
+                                   data-bind="formData.name"
+                                   data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email" 
+                                   required 
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                                   placeholder="your.email@example.com"
+                                   data-bind="formData.email"
+                                   data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-700 mb-2">Message</label>
+                            <textarea id="message" 
+                                      name="message" 
+                                      rows="6" 
+                                      required 
+                                      class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
+                                      placeholder="Tell me about your project or how we can work together..."
+                                      data-bind="formData.message"
+                                      data-mock="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                                data-bind="isSubmitting ? 'Sending...' : 'Send Message'"
+                                data-implementation="Should show loading state during submission">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: Contact Section -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-secondary text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-2" data-bind="user.name">Alex Johnson</h3>
+                    <p class="text-slate-300" data-bind="user.title">Full-Stack Software Engineer</p>
+                </div>
+                
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-slate-300 hover:text-white transition-colors" 
+                       data-event="click:openLinkedIn" 
+                       data-implementation="Should open LinkedIn profile in new tab">
+                        <i class="fab fa-linkedin-in text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition-colors" 
+                       data-event="click:openGithub" 
+                       data-implementation="Should open GitHub profile in new tab">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-300 hover:text-white transition-colors" 
+                       data-event="click:openTwitter" 
+                       data-implementation="Should open Twitter profile in new tab">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="mailto:alex.johnson@email.com" class="text-slate-300 hover:text-white transition-colors" 
+                       data-bind="user.email">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+                
+                <div class="border-t border-slate-600 pt-8">
+                    <p class="text-slate-400" data-mock="true">
+                        © 2024 Alex Johnson. All rights reserved. Built with passion and modern web technologies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        // Mobile menu functionality
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn?.addEventListener('click', () => {
+                mobileMenu?.classList.toggle('hidden');
+            });
+        })();
+
+        // Smooth scrolling for navigation links
+        (function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    mobileMenu?.classList.add('hidden');
+                });
+            });
+        })();
+
+        // Navbar background on scroll
+        (function() {
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar?.classList.add('bg-white/95');
+                    navbar?.classList.remove('bg-white/90');
+                } else {
+                    navbar?.classList.add('bg-white/90');
+                    navbar?.classList.remove('bg-white/95');
+                }
+            });
+        })();
+
+        // Intersection Observer for animations
+        (function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slide-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements that should animate
+            const animatedElements = document.querySelectorAll('.animate-slide-up');
+            animatedElements.forEach(el => observer.observe(el));
+        })();
+
+        // Form submission handler
+        (function() {
+            const contactForm = document.querySelector('form[data-event*="handleContactSubmit"]');
+            
+            contactForm?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // TODO: Implement form validation and submission logic
+                // This should validate inputs, show loading state, and submit to backend
+                
+                // Placeholder success message
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            });
+        })();
+
+        // Active navigation highlighting
+        (function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-primary');
+                    link.classList.add('text-slate-600');
+                    
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.remove('text-slate-600');
+                        link.classList.add('text-primary');
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
