@@ -10,97 +10,14 @@ const portfolioData = {
       github: "https://github.com/Evan-DS",
       twitter: "https://twitter.com/evandossantos"
     }
-  },
-
-  projects: [
-    {
-      id: "graphics-engine",
-      title: "3D Graphics Engine",
-      description: "Advanced 3D graphics rendering engine built with C++ and OpenGL, featuring vector mathematics, matrix transformations, and backface culling for real-time 3D visualization.",
-      technologies: ["C++", "OpenGL", "Vector Math", "Visual Studio"],
-      image: "fas fa-cube",
-      demoType: "graphics",
-      githubUrl: "https://github.com/Evan-DS/graphics-engine",
-      featured: true
-    },
-    {
-      id: "infrastructure-management",
-      title: "IT Infrastructure Management System",
-      description: "Comprehensive IT management solution for enterprise environments, featuring automated deployment, user account management, and network monitoring capabilities.",
-      technologies: ["C++", "Active Directory", "Network Admin", "Security"],
-      image: "fas fa-network-wired",
-      demoType: "infrastructure",
-      githubUrl: "https://github.com/Evan-DS/infrastructure-management",
-      featured: true
-    },
-    {
-      id: "algorithm-visualizer",
-      title: "Algorithm Visualization Suite",
-      description: "Interactive educational tool showcasing various sorting algorithms and data structures with real-time performance analysis and step-by-step visualization.",
-      technologies: ["Java", "Eclipse IDE", "Algorithms", "Data Structures"],
-      image: "fas fa-sort-amount-up",
-      demoType: "algorithm",
-      githubUrl: "https://github.com/Evan-DS/algorithm-visualizer",
-      featured: true
-    }
-  ],
-
-  skills: {
-    programming: [
-      { name: "C++", level: 95 },
-      { name: "Java", level: 90 },
-      { name: "Python", level: 85 },
-      { name: "JavaScript", level: 80 }
-    ],
-    tools: [
-      { name: "Visual Studio", level: 95 },
-      { name: "Eclipse IDE", level: 90 },
-      { name: "OpenGL", level: 85 },
-      { name: "Git", level: 88 }
-    ],
-    systems: [
-      { name: "Active Directory", level: 92 },
-      { name: "Microsoft Office Suite", level: 95 },
-      { name: "Network Administration", level: 88 },
-      { name: "Cloud Platforms", level: 82 }
-    ],
-    additional: [
-      { name: "Customer Support", level: 95 },
-      { name: "Technical Documentation", level: 90 },
-      { name: "Project Management", level: 85 },
-      { name: "Problem Solving", level: 95 }
-    ]
-  },
-
-  about: {
-    highlights: [
-      {
-        icon: "fas fa-graduation-cap",
-        title: "Education Excellence",
-        description: "B.Sc. (Hons) Computer Science with Software Engineering Specialization"
-      },
-      {
-        icon: "fas fa-tools",
-        title: "Technical Expertise",
-        description: "5+ years experience with C++, Java, OpenGL, and enterprise systems"
-      },
-      {
-        icon: "fas fa-handshake",
-        title: "Client Relations",
-        description: "Professional experience in IT consulting and customer support"
-      }
-    ]
   }
 };
 
-// EmailJS Configuration
-const emailJSConfig = {
-  publicKey: "YOUR_EMAILJS_PUBLIC_KEY", // Replace with your actual EmailJS public key
-  serviceId: "YOUR_SERVICE_ID", // Replace with your actual service ID
-  templateId: "YOUR_TEMPLATE_ID" // Replace with your actual template ID
-};
+// Global application state
+let portfolioApp = null;
+let demoInstances = {};
 
-// Main application initialization and utilities
+// Main Portfolio Application
 class PortfolioApp {
   constructor() {
     this.isLoaded = false;
@@ -109,412 +26,144 @@ class PortfolioApp {
 
   init() {
     this.setupEventListeners();
-    this.setupTheme();
-    this.setupLazyLoading();
-    this.setupPerformanceOptimizations();
+    this.setupScrollAnimations();
+    this.setupSkillAnimations();
     this.markAsLoaded();
   }
 
   setupEventListeners() {
-    // Global click handlers
-    document.addEventListener('click', this.handleGlobalClick.bind(this));
+    // Navigation and modal handling
+    this.setupNavigation();
+    this.setupModalHandlers();
     
+    // Contact form
+    this.setupContactForm();
+    
+    // Resume download
+    this.setupResumeDownload();
+
     // Global keyboard handlers
-    document.addEventListener('keydown', this.handleGlobalKeydown.bind(this));
-    
-    // Window resize handlers
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        this.handleResize();
-      }, 150);
-    });
-
-    // Handle page visibility changes
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        this.pauseAnimations();
-      } else {
-        this.resumeAnimations();
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeModals();
       }
     });
   }
 
-  handleGlobalClick(e) {
-    // Handle external links
-    if (e.target.tagName === 'A' && e.target.target === '_blank') {
-      // Add tracking or analytics here if needed
-      console.log('External link clicked:', e.target.href);
-    }
+  setupNavigation() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    // Handle smooth scroll for anchor links
-    if (e.target.classList.contains('nav-link') && e.target.getAttribute('href')?.startsWith('#')) {
-      e.preventDefault();
-      this.smoothScrollTo(e.target.getAttribute('href'));
-    }
-  }
-
-  handleGlobalKeydown(e) {
-    // Accessibility: Allow Enter key to activate buttons
-    if (e.key === 'Enter' && e.target.tagName === 'BUTTON') {
-      e.target.click();
-    }
-
-    // Handle escape key for modals
-    if (e.key === 'Escape') {
-      this.closeModals();
-    }
-  }
-
-  handleResize() {
-    // Update any responsive calculations
-    this.updateViewportHeight();
-    
-    // Redraw canvas elements if needed
-    const canvases = document.querySelectorAll('canvas');
-    canvases.forEach(canvas => {
-      // Trigger redraw event
-      const redrawEvent = new CustomEvent('redraw');
-      canvas.dispatchEvent(redrawEvent);
-    });
-  }
-
-  setupTheme() {
-    // Set up theme switching if needed
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Apply theme based on user preference or system setting
-    if (prefersDark) {
-      document.documentElement.classList.add('dark');
-    }
-
-    // Listen for theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    });
-  }
-
-  setupLazyLoading() {
-    // Lazy load images and heavy content
-    const lazyElements = document.querySelectorAll('[data-lazy]');
-    
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            this.loadElement(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        rootMargin: '50px'
-      });
-
-      lazyElements.forEach(element => observer.observe(element));
-    } else {
-      // Fallback for older browsers
-      lazyElements.forEach(element => this.loadElement(element));
-    }
-  }
-
-  loadElement(element) {
-    if (element.dataset.src) {
-      element.src = element.dataset.src;
-      element.removeAttribute('data-src');
-    }
-    
-    if (element.dataset.lazy) {
-      element.removeAttribute('data-lazy');
-      element.classList.add('loaded');
-    }
-  }
-
-  setupPerformanceOptimizations() {
-    // Debounce scroll events
-    let scrollTimeout;
-    let isScrolling = false;
-
-    const handleScroll = () => {
-      if (!isScrolling) {
-        window.requestAnimationFrame(() => {
-          // Scroll-dependent calculations here
-          isScrolling = false;
-        });
-        isScrolling = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Preload critical resources
-    this.preloadCriticalResources();
-  }
-
-  preloadCriticalResources() {
-    // Preload important fonts
-    const fontLinks = [
-      'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-    ];
-
-    fontLinks.forEach(href => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'style';
-      link.href = href;
-      document.head.appendChild(link);
-    });
-  }
-
-  smoothScrollTo(target) {
-    const element = document.querySelector(target);
-    if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for fixed navbar
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  updateViewportHeight() {
-    // Fix for mobile viewport height issues
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-
-  pauseAnimations() {
-    document.body.classList.add('animations-paused');
-  }
-
-  resumeAnimations() {
-    document.body.classList.remove('animations-paused');
-  }
-
-  closeModals() {
-    const activeModals = document.querySelectorAll('.modal.active');
-    activeModals.forEach(modal => {
-      modal.classList.remove('active');
-    });
-  }
-
-  markAsLoaded() {
-    this.isLoaded = true;
-    document.body.classList.add('loaded');
-    
-    // Dispatch custom event for other scripts
-    document.dispatchEvent(new CustomEvent('portfolioLoaded'));
-  }
-
-  // Utility methods
-  static debounce(func, wait, immediate) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        timeout = null;
-        if (!immediate) func(...args);
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func(...args);
-    };
-  }
-
-  static throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-      if (!inThrottle) {
-        func.apply(this, args);
-        inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
-      }
-    };
-  }
-
-  static isElementInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-  }
-
-  static formatDate(date) {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(date);
-  }
-
-  static validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  // Analytics tracking (placeholder)
-  trackEvent(category, action, label) {
-    // Implement your analytics tracking here
-    console.log('Analytics Event:', { category, action, label });
-    
-    // Example Google Analytics tracking
-    if (typeof gtag !== 'undefined') {
-      gtag('event', action, {
-        event_category: category,
-        event_label: label
-      });
-    }
-  }
-}
-
-// Navigation functionality
-class Navigation {
-  constructor() {
-    this.navbar = document.getElementById('navbar');
-    this.hamburger = document.getElementById('hamburger');
-    this.navMenu = document.querySelector('.nav-menu');
-    this.navLinks = document.querySelectorAll('.nav-link');
-    
-    this.init();
-  }
-
-  init() {
-    this.setupEventListeners();
-    this.setupScrollEffects();
-    this.setupSmoothScrolling();
-  }
-
-  setupEventListeners() {
     // Mobile menu toggle
-    this.hamburger?.addEventListener('click', () => {
-      this.toggleMobileMenu();
+    hamburger?.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu?.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking nav links
-    this.navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        this.closeMobileMenu();
+    // Smooth scrolling for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          this.smoothScrollTo(href);
+          
+          // Close mobile menu
+          hamburger?.classList.remove('active');
+          navMenu?.classList.remove('active');
+        }
       });
     });
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!this.navbar.contains(e.target)) {
-        this.closeMobileMenu();
-      }
-    });
+    // Update active navigation on scroll
+    this.setupScrollNavigation();
   }
 
-  setupScrollEffects() {
+  setupScrollNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
     let ticking = false;
+    
+    const updateActiveNavigation = () => {
+      const scrollPos = window.scrollY + 100;
 
-    const updateNavbar = () => {
-      const scrollY = window.scrollY;
-      
-      // Update navbar background
-      if (scrollY > 50) {
-        this.navbar.classList.add('bg-white/95', 'backdrop-blur-md');
-        this.navbar.classList.remove('bg-white/90');
-      } else {
-        this.navbar.classList.add('bg-white/90');
-        this.navbar.classList.remove('bg-white/95', 'backdrop-blur-md');
-      }
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
 
-      // Update active navigation
-      this.updateActiveNavigation();
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          
+          const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      });
       
       ticking = false;
     };
 
-    const requestTick = () => {
+    window.addEventListener('scroll', () => {
       if (!ticking) {
-        requestAnimationFrame(updateNavbar);
+        requestAnimationFrame(updateActiveNavigation);
         ticking = true;
       }
-    };
-
-    window.addEventListener('scroll', requestTick);
+    });
   }
 
-  updateActiveNavigation() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPos = window.scrollY + 100;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        // Remove active class from all nav links
-        this.navLinks.forEach(link => {
-          link.classList.remove('active');
-        });
-
-        // Add active class to current section's nav link
-        const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
+  setupModalHandlers() {
+    // Close modal when clicking outside
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        this.closeModals();
       }
     });
   }
 
-  setupSmoothScrolling() {
-    this.navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        const targetId = link.getAttribute('href');
-        if (targetId.startsWith('#')) {
-          const targetSection = document.querySelector(targetId);
-          
-          if (targetSection) {
-            const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-            
-            window.scrollTo({
-              top: offsetTop,
-              behavior: 'smooth'
-            });
-          }
-        }
-      });
+  setupContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.handleContactSubmit(form);
     });
   }
 
-  toggleMobileMenu() {
-    this.hamburger?.classList.toggle('active');
-    this.navMenu?.classList.toggle('active');
+  async handleContactSubmit(form) {
+    const submitButton = form.querySelector('button[type="submit"]');
+    const buttonText = submitButton.querySelector('.btn-text');
+    const buttonLoading = submitButton.querySelector('.btn-loading');
+
+    // Show loading state
+    buttonText.style.display = 'none';
+    buttonLoading.style.display = 'flex';
+    submitButton.disabled = true;
+
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      this.showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
+      form.reset();
+    } catch (error) {
+      this.showToast('Failed to send message. Please try again later.', 'error');
+    } finally {
+      buttonText.style.display = 'inline';
+      buttonLoading.style.display = 'none';
+      submitButton.disabled = false;
+    }
   }
 
-  closeMobileMenu() {
-    this.hamburger?.classList.remove('active');
-    this.navMenu?.classList.remove('active');
-  }
-}
-
-// Animation utilities and effects
-class AnimationController {
-  constructor() {
-    this.observers = new Map();
-    this.init();
-  }
-
-  init() {
-    this.setupScrollAnimations();
-    this.setupSkillBarAnimations();
-    this.initializeHeroAnimations();
+  setupResumeDownload() {
+    // Resume download functionality will be added here
   }
 
   setupScrollAnimations() {
-    // Create intersection observer for scroll animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -533,19 +182,15 @@ class AnimationController {
       });
     }, observerOptions);
 
-    // Observe sections for scroll animations
-    const animatedSections = document.querySelectorAll('section');
-    animatedSections.forEach(section => {
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
       section.classList.add('scroll-animate');
       observer.observe(section);
     });
-
-    this.observers.set('scroll', observer);
   }
 
-  setupSkillBarAnimations() {
+  setupSkillAnimations() {
     const skillBars = document.querySelectorAll('.skill-progress');
-    
     skillBars.forEach(bar => {
       const width = bar.getAttribute('data-width');
       if (width) {
@@ -562,790 +207,903 @@ class AnimationController {
       if (width) {
         setTimeout(() => {
           bar.style.width = `${width}%`;
-          bar.classList.add('animate');
-        }, index * 100); // Stagger the animations
+        }, index * 100);
       }
     });
   }
 
-  initializeHeroAnimations() {
-    // Add stagger animation to hero elements
-    const heroElements = document.querySelectorAll('.hero-text > *');
-    
-    heroElements.forEach((element, index) => {
-      element.style.setProperty('--stagger-index', index);
-      element.classList.add('animate-fade-in');
-      element.style.animationDelay = `${index * 0.1}s`;
-    });
-
-    // Animate hero shapes
-    const heroShapes = document.querySelectorAll('.hero-shape');
-    heroShapes.forEach((shape, index) => {
-      shape.classList.add('animate-float');
-      shape.style.animationDelay = `${index * 0.5}s`;
-    });
-  }
-
-  // Cleanup function
-  destroy() {
-    this.observers.forEach(observer => observer.disconnect());
-    this.observers.clear();
-  }
-}
-
-// Contact Form functionality
-class ContactForm {
-  constructor() {
-    this.form = document.getElementById('contact-form');
-    this.submitButton = this.form?.querySelector('button[type="submit"]');
-    this.buttonText = this.submitButton?.querySelector('.btn-text');
-    this.buttonLoading = this.submitButton?.querySelector('.btn-loading');
-    
-    this.init();
-  }
-
-  init() {
-    if (!this.form) return;
-    
-    // Initialize EmailJS
-    this.initializeEmailJS();
-    
-    // Setup form submission
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.handleSubmit();
-    });
-
-    // Setup form validation
-    this.setupFormValidation();
-  }
-
-  initializeEmailJS() {
-    if (window.emailjs && emailJSConfig?.publicKey) {
-      emailjs.init(emailJSConfig.publicKey);
-    }
-  }
-
-  setupFormValidation() {
-    const inputs = this.form.querySelectorAll('input, textarea');
-    
-    inputs.forEach(input => {
-      input.addEventListener('blur', () => {
-        this.validateField(input);
+  smoothScrollTo(target) {
+    const element = document.querySelector(target);
+    if (element) {
+      const offsetTop = element.offsetTop - 80; // Account for fixed navbar
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
       });
-
-      input.addEventListener('input', () => {
-        this.clearFieldError(input);
-      });
-    });
-  }
-
-  validateField(field) {
-    const formGroup = field.closest('.form-group');
-    const value = field.value.trim();
-    let isValid = true;
-    let errorMessage = '';
-
-    // Clear previous errors
-    this.clearFieldError(field);
-
-    // Check if field is required and empty
-    if (field.hasAttribute('required') && !value) {
-      isValid = false;
-      errorMessage = `${this.getFieldLabel(field)} is required`;
-    }
-
-    // Email validation
-    if (field.type === 'email' && value && !this.isValidEmail(value)) {
-      isValid = false;
-      errorMessage = 'Please enter a valid email address';
-    }
-
-    // Display error if validation fails
-    if (!isValid) {
-      this.showFieldError(field, errorMessage);
-    }
-
-    return isValid;
-  }
-
-  clearFieldError(field) {
-    const formGroup = field.closest('.form-group');
-    formGroup.classList.remove('error');
-    
-    const existingError = formGroup.querySelector('.error-message');
-    if (existingError) {
-      existingError.remove();
     }
   }
 
-  showFieldError(field, message) {
-    const formGroup = field.closest('.form-group');
-    formGroup.classList.add('error');
-    
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.textContent = message;
-    formGroup.appendChild(errorDiv);
-  }
-
-  getFieldLabel(field) {
-    const label = field.closest('.form-group').querySelector('label');
-    return label ? label.textContent : field.name;
-  }
-
-  isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  validateForm() {
-    const inputs = this.form.querySelectorAll('input, textarea');
-    let isValid = true;
-
-    inputs.forEach(input => {
-      if (!this.validateField(input)) {
-        isValid = false;
-      }
+  closeModals() {
+    const activeModals = document.querySelectorAll('.modal.active');
+    activeModals.forEach(modal => {
+      modal.classList.remove('active');
     });
 
-    return isValid;
-  }
-
-  async handleSubmit() {
-    // Validate form
-    if (!this.validateForm()) {
-      this.showToast('Please fix the errors above', 'error');
-      return;
-    }
-
-    // Show loading state
-    this.setLoadingState(true);
-
-    try {
-      // Get form data
-      const formData = new FormData(this.form);
-      const templateParams = {
-        from_name: formData.get('name'),
-        from_email: formData.get('email'),
-        subject: formData.get('subject'),
-        message: formData.get('message'),
-        to_name: 'Evan Dos Santos'
-      };
-
-      // Send email using EmailJS (or fallback)
-      if (window.emailjs && emailJSConfig?.serviceId && emailJSConfig?.templateId) {
-        await emailjs.send(
-          emailJSConfig.serviceId,
-          emailJSConfig.templateId,
-          templateParams
-        );
-        
-        this.showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-        this.form.reset();
-      } else {
-        // Fallback - just show success message
-        console.log('Contact form submission:', templateParams);
-        this.showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-        this.form.reset();
+    // Clean up demo instances
+    Object.values(demoInstances).forEach(demo => {
+      if (demo && demo.destroy) {
+        demo.destroy();
       }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      this.showToast('Failed to send message. Please try again later.', 'error');
-    } finally {
-      this.setLoadingState(false);
-    }
-  }
-
-  setLoadingState(loading) {
-    if (!this.submitButton) return;
-    
-    if (loading) {
-      this.submitButton.classList.add('loading');
-      this.submitButton.disabled = true;
-    } else {
-      this.submitButton.classList.remove('loading');
-      this.submitButton.disabled = false;
-    }
+    });
+    demoInstances = {};
   }
 
   showToast(message, type = 'info') {
-    const toast = document.getElementById('toast');
-    const toastMessage = toast.querySelector('.toast-message');
-    const toastClose = toast.querySelector('.toast-close');
-    
-    // Set message and type
-    toastMessage.textContent = message;
+    const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     
-    // Show toast
-    toast.classList.add('show');
-    
-    // Auto hide after 5 seconds
-    const hideTimer = setTimeout(() => {
-      this.hideToast();
-    }, 5000);
-    
-    // Manual close
-    toastClose.onclick = () => {
-      clearTimeout(hideTimer);
-      this.hideToast();
-    };
-  }
-
-  hideToast() {
-    const toast = document.getElementById('toast');
-    toast.classList.remove('show');
-  }
-}
-
-// Modal functionality
-class ModalManager {
-  constructor() {
-    this.modals = document.querySelectorAll('.modal');
-    this.init();
-  }
-
-  init() {
-    this.setupEventListeners();
-  }
-
-  setupEventListeners() {
-    // Close buttons
-    document.querySelectorAll('.modal-close').forEach(closeBtn => {
-      closeBtn.addEventListener('click', () => {
-        this.closeModal(closeBtn.closest('.modal'));
-      });
-    });
-
-    // Click outside to close
-    this.modals.forEach(modal => {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          this.closeModal(modal);
-        }
-      });
-    });
-
-    // Escape key to close
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        this.closeAllModals();
-      }
-    });
-  }
-
-  openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  closeModal(modal) {
-    if (modal) {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  }
-
-  closeAllModals() {
-    this.modals.forEach(modal => {
-      this.closeModal(modal);
-    });
-  }
-}
-
-// Project demo functions
-function openGraphicsDemo() {
-  const modalManager = new ModalManager();
-  modalManager.openModal('graphics-modal');
-  
-  // Initialize graphics demo if not already done
-  const container = document.getElementById('graphics-demo-container');
-  if (container && !container.querySelector('.graphics-demo')) {
-    const graphicsDemo = new GraphicsDemo('graphics-demo-container');
-  }
-}
-
-function openAlgorithmDemo() {
-  const modalManager = new ModalManager();
-  modalManager.openModal('algorithm-modal');
-}
-
-function openInfrastructureDemo() {
-  const modalManager = new ModalManager();
-  modalManager.openModal('infrastructure-modal');
-}
-
-function downloadResume() {
-  // Create a comprehensive resume download
-  const resumeContent = `EVAN DOS SANTOS
-Software Engineer & Computer Science Graduate
-
-Contact Information:
-• Email: evangeorgedossantos@yahoo.ca
-• Location: London, Ontario, Canada
-• LinkedIn: linkedin.com/in/evan-g-dos-santos
-• GitHub: github.com/Evan-DS
-
-EDUCATION
-Bachelor of Science Honours Computer Science with Software Engineering Specialization (Co-op)
-University of Windsor, ON | September 2020 - August 2024
-• Honours Graduate, Catholic Central High School (2019)
-• Ontario Scholar Award (2019)
-• Top 2019 graduate of Computer Engineering and Construction
-
-PROFESSIONAL EXPERIENCE
-
-IT Services Consultant | University of Windsor, Windsor, ON | May 2022 - August 2024
-• Applied standard information technology record keeping, analysis, and research to resolve service requests
-• Balanced multiple support channels including live chats, phone calls, and ticketing systems
-• Worked with Microsoft Endpoint to deploy computers to faculty and pushed applications through Intune
-• Set up Xerox printers for clients and enabled printing through drivers and software via IP or print queues
-
-Systems & Domain Administrator Co-Op | CenterLine Ltd., Windsor, ON | January 2023 - April 2023
-• Developed robust server systems using C++ while providing technical support and implementing security measures
-• Managed user accounts, access controls, and security policies using Active Directory
-• Successfully managed LAN and WAN networks, including virtual machine environments
-• Installed, configured, and maintained computer systems and servers for optimal functionality
-
-Home Solutions Specialist | Best Buy Canada Ltd., London, ON | October 2019 - November 2020
-• Managed POS systems, sold inventory, and advertised promotional plans
-• Marketed televisions and home audio systems utilizing advanced technical knowledge
-• Operated digital and paper systems for filing and scheduling services including contracting and warranties
-
-TECHNICAL SKILLS
-Programming Languages: C++, Java, Python, JavaScript
-Development Tools: Visual Studio, Eclipse IDE, OpenGL, Git
-IT & Systems: Active Directory, Microsoft Office Suite, Network Administration, Cloud Platforms
-Soft Skills: Technical Support, Client Relations, Problem Solving, System Analysis, Project Management
-
-CERTIFICATIONS & TRAINING
-• WHMIS Training (September 2023)
-• G Drivers License (November 2019)
-• Standard First-aid and CPR/AED Training (May 2015)
-
-CORE COMPETENCIES
-• 5+ years of Visual Studio and Eclipse IDE development experience
-• Expertise in C++, C, Java, Algorithms, and Sorting
-• Professional experience with Cloud Platforms and Enterprise Resource Planning
-• OpenGL experience including Rendering, Vectors, Matrix Transformations, and Backface Culling
-• Excellence in Microsoft Office Suite including Word, Excel, PowerPoint (Macros, Pivot Tables)`;
-
-  const blob = new Blob([resumeContent], { type: 'text/plain' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'Evan_Dos_Santos_Resume.txt';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  window.URL.revokeObjectURL(url);
-}
-
-// 3D Graphics Demo
-class GraphicsDemo {
-  constructor(containerId) {
-    this.container = document.getElementById(containerId);
-    this.canvas = null;
-    this.ctx = null;
-    this.isAnimating = false;
-    this.rotation = { x: 0, y: 0, z: 0 };
-    this.currentShape = 'cube';
-    this.animationId = null;
-    
-    this.shapes = {
-      cube: {
-        vertices: [
-          [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
-          [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]
-        ],
-        faces: [
-          [0, 1, 2, 3], [4, 7, 6, 5], [0, 4, 5, 1],
-          [2, 6, 7, 3], [0, 3, 7, 4], [1, 5, 6, 2]
-        ],
-        color: '#3b82f6'
-      },
-      pyramid: {
-        vertices: [
-          [-1, -1, -1], [1, -1, -1], [1, -1, 1], [-1, -1, 1],
-          [0, 1, 0]
-        ],
-        faces: [
-          [0, 1, 2, 3], [0, 4, 1], [1, 4, 2], [2, 4, 3], [3, 4, 0]
-        ],
-        color: '#ef4444'
-      },
-      sphere: {
-        vertices: [],
-        faces: [],
-        color: '#10b981'
-      }
-    };
-    
-    this.init();
-  }
-
-  init() {
-    this.generateSphere();
-    this.createDemo();
-  }
-
-  generateSphere(radius = 1, segments = 16) {
-    const vertices = [];
-    const faces = [];
-
-    // Generate vertices
-    for (let i = 0; i <= segments; i++) {
-      const theta = (i * Math.PI) / segments;
-      for (let j = 0; j <= segments; j++) {
-        const phi = (j * 2 * Math.PI) / segments;
-        
-        const x = radius * Math.sin(theta) * Math.cos(phi);
-        const y = radius * Math.cos(theta);
-        const z = radius * Math.sin(theta) * Math.sin(phi);
-        
-        vertices.push([x, y, z]);
-      }
-    }
-
-    // Generate faces
-    for (let i = 0; i < segments; i++) {
-      for (let j = 0; j < segments; j++) {
-        const first = i * (segments + 1) + j;
-        const second = first + segments + 1;
-        
-        faces.push([first, second, first + 1]);
-        faces.push([second, second + 1, first + 1]);
-      }
-    }
-
-    this.shapes.sphere.vertices = vertices;
-    this.shapes.sphere.faces = faces;
-  }
-
-  createDemo() {
-    if (!this.container) return;
-
-    this.container.innerHTML = `
-      <div class="graphics-demo">
-        <div class="graphics-controls">
-          <div class="shape-controls">
-            <button class="shape-btn active" data-shape="cube">Cube</button>
-            <button class="shape-btn" data-shape="pyramid">Pyramid</button>
-            <button class="shape-btn" data-shape="sphere">Sphere</button>
-          </div>
-          
-          <div class="animation-controls">
-            <button class="btn btn-primary" id="animate-btn">
-              <i class="fas fa-play"></i> Animate
-            </button>
-            <button class="btn btn-secondary" id="reset-btn">
-              <i class="fas fa-undo"></i> Reset
-            </button>
-          </div>
-        </div>
-
-        <div class="graphics-canvas-container">
-          <canvas class="graphics-canvas" width="600" height="400"></canvas>
-        </div>
-
-        <div class="rotation-controls">
-          <div class="rotation-control">
-            <label>X Rotation</label>
-            <input type="range" id="rotation-x" min="0" max="${Math.PI * 2}" step="0.1" value="0">
-            <div class="rotation-value">0°</div>
-          </div>
-          <div class="rotation-control">
-            <label>Y Rotation</label>
-            <input type="range" id="rotation-y" min="0" max="${Math.PI * 2}" step="0.1" value="0">
-            <div class="rotation-value">0°</div>
-          </div>
-          <div class="rotation-control">
-            <label>Z Rotation</label>
-            <input type="range" id="rotation-z" min="0" max="${Math.PI * 2}" step="0.1" value="0">
-            <div class="rotation-value">0°</div>
-          </div>
-        </div>
-
-        <div class="technical-info">
-          <h4><i class="fas fa-bolt"></i> Technical Implementation</h4>
-          <div class="technical-grid">
-            <div class="technical-section">
-              <strong>Rendering Features:</strong>
-              <ul>
-                <li>• 3D to 2D projection</li>
-                <li>• Matrix transformations</li>
-                <li>• Backface culling</li>
-                <li>• Simple lighting model</li>
-              </ul>
-            </div>
-            <div class="technical-section">
-              <strong>Vector Mathematics:</strong>
-              <ul>
-                <li>• Rotation matrices (X, Y, Z)</li>
-                <li>• Perspective projection</li>
-                <li>• Real-time calculations</li>
-                <li>• Coordinate transformations</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    toast.innerHTML = `
+      <div class="toast-content">
+        <div class="toast-message">${message}</div>
+        <button class="toast-close">&times;</button>
       </div>
     `;
 
-    this.setupCanvas();
-    this.setupEventListeners();
-    this.drawShape();
+    document.body.appendChild(toast);
+
+    // Show toast
+    setTimeout(() => toast.classList.add('show'), 100);
+
+    // Handle close button
+    toast.querySelector('.toast-close').addEventListener('click', () => {
+      this.hideToast(toast);
+    });
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => this.hideToast(toast), 5000);
   }
 
-  setupCanvas() {
-    this.canvas = this.container.querySelector('.graphics-canvas');
-    this.ctx = this.canvas?.getContext('2d');
+  hideToast(toast) {
+    toast.classList.remove('show');
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 300);
+  }
+
+  markAsLoaded() {
+    this.isLoaded = true;
+    document.body.classList.add('loaded');
+  }
+}
+
+// Demo Functions
+function openGraphicsDemo() {
+  const modal = document.getElementById('graphics-modal');
+  const container = document.getElementById('graphics-demo-container');
+  
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <div class="graphics-demo">
+      <div class="graphics-controls">
+        <div class="shape-controls">
+          <button class="shape-btn active" data-shape="cube">Cube</button>
+          <button class="shape-btn" data-shape="pyramid">Pyramid</button>
+          <button class="shape-btn" data-shape="sphere">Sphere</button>
+        </div>
+      </div>
+      
+      <div class="graphics-canvas-container">
+        <canvas class="graphics-canvas" width="600" height="400"></canvas>
+      </div>
+
+      <div class="rotation-controls">
+        <div class="rotation-control">
+          <label>X Rotation</label>
+          <input type="range" id="rotationX" min="0" max="360" value="0">
+          <div class="rotation-value">0°</div>
+        </div>
+        <div class="rotation-control">
+          <label>Y Rotation</label>
+          <input type="range" id="rotationY" min="0" max="360" value="0">
+          <div class="rotation-value">0°</div>
+        </div>
+        <div class="rotation-control">
+          <label>Z Rotation</label>
+          <input type="range" id="rotationZ" min="0" max="360" value="0">
+          <div class="rotation-value">0°</div>
+        </div>
+      </div>
+
+      <div class="technical-info">
+        <h4><i class="fas fa-info-circle"></i> Technical Implementation</h4>
+        <div class="technical-grid">
+          <div class="technical-section">
+            <strong>Core Technologies</strong>
+            <ul>
+              <li>C++ with OpenGL</li>
+              <li>GLFW for window management</li>
+              <li>GLM for matrix mathematics</li>
+              <li>Custom shader pipeline</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Rendering Features</strong>
+            <ul>
+              <li>Real-time 3D transformations</li>
+              <li>Vector-based calculations</li>
+              <li>Backface culling optimization</li>
+              <li>Perspective projection</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Performance Optimizations</strong>
+            <ul>
+              <li>Vertex buffer objects</li>
+              <li>Efficient matrix operations</li>
+              <li>Frustum culling</li>
+              <li>Level-of-detail rendering</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Initialize 3D graphics demo
+  demoInstances.graphics = new GraphicsDemo();
+  modal.classList.add('active');
+}
+
+function openInfrastructureDemo() {
+  const modal = document.getElementById('infrastructure-modal');
+  const container = document.getElementById('infrastructure-demo-container');
+  
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <div class="infrastructure-demo">
+      <div class="demo-controls">
+        <button class="btn btn-primary" onclick="refreshInfrastructure()">
+          <i class="fas fa-sync"></i> Refresh Data
+        </button>
+        <button class="btn btn-secondary" onclick="generateReport()">
+          <i class="fas fa-file-alt"></i> Generate Report
+        </button>
+      </div>
+
+      <div class="server-grid" id="server-grid">
+        <!-- Server cards will be populated by JavaScript -->
+      </div>
+
+      <div class="technical-info">
+        <h4><i class="fas fa-info-circle"></i> Infrastructure Management Features</h4>
+        <div class="technical-grid">
+          <div class="technical-section">
+            <strong>Monitoring Capabilities</strong>
+            <ul>
+              <li>Real-time system metrics</li>
+              <li>Network performance tracking</li>
+              <li>Resource utilization alerts</li>
+              <li>Service health monitoring</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Automation Features</strong>
+            <ul>
+              <li>Active Directory integration</li>
+              <li>Automated user provisioning</li>
+              <li>Policy enforcement</li>
+              <li>Security compliance checks</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Deployment Tools</strong>
+            <ul>
+              <li>Microsoft Endpoint Manager</li>
+              <li>Application deployment via Intune</li>
+              <li>Configuration management</li>
+              <li>Remote troubleshooting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Initialize infrastructure demo
+  demoInstances.infrastructure = new InfrastructureDemo();
+  modal.classList.add('active');
+}
+
+function openAlgorithmDemo() {
+  const modal = document.getElementById('algorithm-modal');
+  const container = document.getElementById('algorithm-demo-container');
+  
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <div class="algorithm-demo">
+      <div class="algorithm-controls">
+        <div class="control-group">
+          <label>Algorithm:</label>
+          <select class="algorithm-select" id="algorithmSelect">
+            <option value="bubble">Bubble Sort</option>
+            <option value="quick">Quick Sort</option>
+            <option value="merge">Merge Sort</option>
+            <option value="heap">Heap Sort</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>Array Size:</label>
+          <input type="range" id="arraySize" min="10" max="100" value="30">
+          <span id="arraySizeValue">30</span>
+        </div>
+
+        <div class="control-group">
+          <label>Speed:</label>
+          <input type="range" id="speed" min="1" max="10" value="5">
+          <span id="speedValue">5</span>
+        </div>
+
+        <button class="btn btn-primary" onclick="startSorting()">
+          <i class="fas fa-play"></i> Start
+        </button>
+        <button class="btn btn-secondary" onclick="resetArray()">
+          <i class="fas fa-redo"></i> Reset
+        </button>
+      </div>
+
+      <canvas class="algorithm-canvas" id="algorithmCanvas" width="800" height="300"></canvas>
+
+      <div class="algorithm-stats" id="algorithmStats">
+        <div class="stat-card">
+          <div class="stat-value" id="comparisons">0</div>
+          <div class="stat-label">Comparisons</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="swaps">0</div>
+          <div class="stat-label">Swaps</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="time">0ms</div>
+          <div class="stat-label">Time Elapsed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="complexity">O(n²)</div>
+          <div class="stat-label">Time Complexity</div>
+        </div>
+      </div>
+
+      <div class="technical-info">
+        <h4><i class="fas fa-info-circle"></i> Algorithm Analysis</h4>
+        <div class="technical-grid">
+          <div class="technical-section">
+            <strong>Visualization Features</strong>
+            <ul>
+              <li>Real-time sorting animation</li>
+              <li>Performance metrics tracking</li>
+              <li>Color-coded element states</li>
+              <li>Step-by-step progression</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Educational Components</strong>
+            <ul>
+              <li>Big O complexity analysis</li>
+              <li>Operation count display</li>
+              <li>Algorithm comparison</li>
+              <li>Interactive learning tools</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Implementation Details</strong>
+            <ul>
+              <li>Java-based core engine</li>
+              <li>Custom animation framework</li>
+              <li>Efficient array manipulation</li>
+              <li>Performance optimization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Initialize algorithm demo
+  demoInstances.algorithm = new AlgorithmDemo();
+  modal.classList.add('active');
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+    
+    // Clean up specific demo instance
+    if (demoInstances[modalId.replace('-modal', '')]) {
+      const demo = demoInstances[modalId.replace('-modal', '')];
+      if (demo && demo.destroy) {
+        demo.destroy();
+      }
+      delete demoInstances[modalId.replace('-modal', '')];
+    }
+  }
+}
+
+// 3D Graphics Demo Class
+class GraphicsDemo {
+  constructor() {
+    this.canvas = document.querySelector('.graphics-canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.currentShape = 'cube';
+    this.rotation = { x: 0, y: 0, z: 0 };
+    this.animationId = null;
+    
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+    this.startAnimation();
   }
 
   setupEventListeners() {
     // Shape selection
-    this.container.querySelectorAll('.shape-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.container.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.shape-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.currentShape = btn.dataset.shape;
-        this.drawShape();
       });
-    });
-
-    // Animation controls
-    const animateBtn = this.container.querySelector('#animate-btn');
-    const resetBtn = this.container.querySelector('#reset-btn');
-
-    animateBtn?.addEventListener('click', () => {
-      this.toggleAnimation();
-    });
-
-    resetBtn?.addEventListener('click', () => {
-      this.resetRotation();
     });
 
     // Rotation controls
-    ['x', 'y', 'z'].forEach(axis => {
-      const slider = this.container.querySelector(`#rotation-${axis}`);
-      const valueDisplay = slider?.nextElementSibling;
-
-      slider?.addEventListener('input', (e) => {
-        this.rotation[axis] = parseFloat(e.target.value);
-        const degrees = Math.round((this.rotation[axis] * 180) / Math.PI);
-        if (valueDisplay) valueDisplay.textContent = `${degrees}°`;
-        if (!this.isAnimating) this.drawShape();
+    ['X', 'Y', 'Z'].forEach(axis => {
+      const slider = document.getElementById(`rotation${axis}`);
+      const valueDisplay = slider.parentNode.querySelector('.rotation-value');
+      
+      slider.addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        this.rotation[axis.toLowerCase()] = value * Math.PI / 180;
+        valueDisplay.textContent = `${value}°`;
       });
     });
   }
 
-  toggleAnimation() {
-    const animateBtn = this.container.querySelector('#animate-btn');
-    
-    this.isAnimating = !this.isAnimating;
-    
-    if (this.isAnimating) {
-      animateBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
-      this.animate();
-    } else {
-      animateBtn.innerHTML = '<i class="fas fa-play"></i> Animate';
-      if (this.animationId) {
-        cancelAnimationFrame(this.animationId);
-      }
-    }
+  startAnimation() {
+    const animate = () => {
+      this.render();
+      this.animationId = requestAnimationFrame(animate);
+    };
+    animate();
   }
 
-  animate() {
-    if (!this.isAnimating) return;
-
-    this.rotation.x += 0.01;
-    this.rotation.y += 0.02;
-    this.rotation.z += 0.005;
-
-    this.updateSliders();
-    this.drawShape();
-
-    this.animationId = requestAnimationFrame(() => this.animate());
-  }
-
-  updateSliders() {
-    ['x', 'y', 'z'].forEach(axis => {
-      const slider = this.container.querySelector(`#rotation-${axis}`);
-      const valueDisplay = slider?.nextElementSibling;
-      
-      if (slider) {
-        slider.value = this.rotation[axis];
-        const degrees = Math.round((this.rotation[axis] * 180) / Math.PI);
-        if (valueDisplay) valueDisplay.textContent = `${degrees}°`;
-      }
-    });
-  }
-
-  resetRotation() {
-    this.rotation = { x: 0, y: 0, z: 0 };
-    this.isAnimating = false;
+  render() {
+    // Clear canvas
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
-    const animateBtn = this.container.querySelector('#animate-btn');
-    animateBtn.innerHTML = '<i class="fas fa-play"></i> Animate';
+    // Set up drawing context
+    this.ctx.save();
+    this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
     
-    if (this.animationId) {
-      cancelAnimationFrame(this.animationId);
+    // Draw the selected shape
+    switch (this.currentShape) {
+      case 'cube':
+        this.drawCube();
+        break;
+      case 'pyramid':
+        this.drawPyramid();
+        break;
+      case 'sphere':
+        this.drawSphere();
+        break;
     }
     
-    this.updateSliders();
-    this.drawShape();
+    this.ctx.restore();
   }
 
-  // 3D transformation functions
-  rotateX(point, angle) {
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
-    return [
-      point[0],
-      point[1] * cos - point[2] * sin,
-      point[1] * sin + point[2] * cos
+  drawCube() {
+    const size = 80;
+    const vertices = [
+      [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
+      [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
     ];
-  }
 
-  rotateY(point, angle) {
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
-    return [
-      point[0] * cos + point[2] * sin,
-      point[1],
-      -point[0] * sin + point[2] * cos
-    ];
-  }
+    const rotatedVertices = vertices.map(vertex => this.rotateVertex(vertex));
+    const projectedVertices = rotatedVertices.map(vertex => this.projectVertex(vertex));
 
-  rotateZ(point, angle) {
-    const cos = Math.cos(angle);
-    const sin = Math.sin(angle);
-    return [
-      point[0] * cos - point[1] * sin,
-      point[0] * sin + point[1] * cos,
-      point[2]
-    ];
-  }
-
-  project(point) {
-    const distance = 5;
-    const scale = 100;
+    // Draw edges
+    this.ctx.strokeStyle = '#3b82f6';
+    this.ctx.lineWidth = 2;
     
-    const projected = [
-      (point[0] * distance) / (point[2] + distance) * scale + this.canvas.width / 2,
-      (point[1] * distance) / (point[2] + distance) * scale + this.canvas.height / 2
-    ];
-    
-    return projected;
-  }
-
-  drawShape() {
-    if (!this.ctx || !this.canvas) return;
-
-    this.ctx.fillStyle = '#1f2937';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-    const currentShapeData = this.shapes[this.currentShape];
-    
-    // Transform vertices
-    const transformedVertices = currentShapeData.vertices.map(vertex => {
-      let point = [...vertex];
-      point = this.rotateX(point, this.rotation.x);
-      point = this.rotateY(point, this.rotation.y);
-      point = this.rotateZ(point, this.rotation.z);
-      return point;
-    });
-
-    // Draw faces
-    currentShapeData.faces.forEach(face => {
-      const projectedVertices = face.map(vertexIndex => 
-        this.project(transformedVertices[vertexIndex])
-      );
-
-      // Calculate face center for depth testing
-      const center = face.reduce((acc, vertexIndex) => {
-        const vertex = transformedVertices[vertexIndex];
-        return [acc[0] + vertex[0], acc[1] + vertex[1], acc[2] + vertex[2]];
-      }, [0, 0, 0]).map(sum => sum / face.length);
-
-      if (center[2] > -2) { // Simple depth test
-        this.ctx.beginPath();
-        this.ctx.moveTo(projectedVertices[0][0], projectedVertices[0][1]);
-        projectedVertices.slice(1).forEach(vertex => {
-          this.ctx.lineTo(vertex[0], vertex[1]);
-        });
-        this.ctx.closePath();
-
-        // Simple lighting
-        const lightIntensity = Math.max(0.3, (center[2] + 3) / 4);
-        const color = currentShapeData.color;
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        
-        this.ctx.fillStyle = `rgba(${Math.floor(r * lightIntensity)}, ${Math.floor(g * lightIntensity)}, ${Math.floor(b * lightIntensity)}, 0.8)`;
-        this.ctx.fill();
-        
-        this.ctx.strokeStyle = '#94a3b8';
-        this.ctx.lineWidth = 1;
-        this.ctx.stroke();
-      }
-    });
-
-    // Draw coordinate axes
-    this.drawAxes(transformedVertices);
-  }
-
-  drawAxes(transformedVertices) {
-    const axisLength = 2;
-    const axes = [
-      { start: [0, 0, 0], end: [axisLength, 0, 0], color: '#ef4444' }, // X - Red
-      { start: [0, 0, 0], end: [0, axisLength, 0], color: '#10b981' }, // Y - Green
-      { start: [0, 0, 0], end: [0, 0, axisLength], color: '#3b82f6' }  // Z - Blue
+    const edges = [
+      [0, 1], [1, 2], [2, 3], [3, 0], // front face
+      [4, 5], [5, 6], [6, 7], [7, 4], // back face
+      [0, 4], [1, 5], [2, 6], [3, 7]  // connecting edges
     ];
 
-    axes.forEach(axis => {
-      let start = this.rotateX([...axis.start], this.rotation.x);
-      start = this.rotateY(start, this.rotation.y);
-      start = this.rotateZ(start, this.rotation.z);
-      
-      let end = this.rotateX([...axis.end], this.rotation.x);
-      end = this.rotateY(end, this.rotation.y);
-      end = this.rotateZ(end, this.rotation.z);
-
-      const projectedStart = this.project(start);
-      const projectedEnd = this.project(end);
-
+    edges.forEach(edge => {
+      const [start, end] = edge;
       this.ctx.beginPath();
-      this.ctx.moveTo(projectedStart[0], projectedStart[1]);
-      this.ctx.lineTo(projectedEnd[0], projectedEnd[1]);
-      this.ctx.strokeStyle = axis.color;
-      this.ctx.lineWidth = 2;
+      this.ctx.moveTo(projectedVertices[start][0], projectedVertices[start][1]);
+      this.ctx.lineTo(projectedVertices[end][0], projectedVertices[end][1]);
       this.ctx.stroke();
     });
   }
+
+  drawPyramid() {
+    const size = 80;
+    const vertices = [
+      [0, -size, 0], // apex
+      [-size, size, -size], [size, size, -size], [size, size, size], [-size, size, size] // base
+    ];
+
+    const rotatedVertices = vertices.map(vertex => this.rotateVertex(vertex));
+    const projectedVertices = rotatedVertices.map(vertex => this.projectVertex(vertex));
+
+    this.ctx.strokeStyle = '#10b981';
+    this.ctx.lineWidth = 2;
+
+    const edges = [
+      [0, 1], [0, 2], [0, 3], [0, 4], // apex to base
+      [1, 2], [2, 3], [3, 4], [4, 1]  // base edges
+    ];
+
+    edges.forEach(edge => {
+      const [start, end] = edge;
+      this.ctx.beginPath();
+      this.ctx.moveTo(projectedVertices[start][0], projectedVertices[start][1]);
+      this.ctx.lineTo(projectedVertices[end][0], projectedVertices[end][1]);
+      this.ctx.stroke();
+    });
+  }
+
+  drawSphere() {
+    const radius = 80;
+    const segments = 16;
+    
+    this.ctx.strokeStyle = '#8b5cf6';
+    this.ctx.lineWidth = 2;
+
+    // Draw latitude lines
+    for (let i = 0; i <= segments; i++) {
+      const lat = (i / segments) * Math.PI - Math.PI / 2;
+      const y = Math.sin(lat) * radius;
+      const circleRadius = Math.cos(lat) * radius;
+      
+      this.drawRotatedCircle(0, y, 0, circleRadius, 'horizontal');
+    }
+
+    // Draw longitude lines
+    for (let i = 0; i < segments; i++) {
+      const lon = (i / segments) * 2 * Math.PI;
+      this.drawRotatedCircle(0, 0, 0, radius, 'vertical', lon);
+    }
+  }
+
+  drawRotatedCircle(centerX, centerY, centerZ, radius, orientation, angle = 0) {
+    const points = 32;
+    this.ctx.beginPath();
+    
+    for (let i = 0; i <= points; i++) {
+      const t = (i / points) * 2 * Math.PI;
+      let x, y, z;
+      
+      if (orientation === 'horizontal') {
+        x = Math.cos(t) * radius;
+        y = centerY;
+        z = Math.sin(t) * radius;
+      } else {
+        x = Math.cos(t + angle) * radius;
+        y = Math.sin(t) * radius;
+        z = Math.cos(t + angle) * radius * 0.3;
+      }
+      
+      const rotated = this.rotateVertex([x, y, z]);
+      const projected = this.projectVertex(rotated);
+      
+      if (i === 0) {
+        this.ctx.moveTo(projected[0], projected[1]);
+      } else {
+        this.ctx.lineTo(projected[0], projected[1]);
+      }
+    }
+    
+    this.ctx.stroke();
+  }
+
+  rotateVertex([x, y, z]) {
+    // Rotate around X axis
+    const cosX = Math.cos(this.rotation.x);
+    const sinX = Math.sin(this.rotation.x);
+    const y1 = y * cosX - z * sinX;
+    const z1 = y * sinX + z * cosX;
+    
+    // Rotate around Y axis
+    const cosY = Math.cos(this.rotation.y);
+    const sinY = Math.sin(this.rotation.y);
+    const x2 = x * cosY + z1 * sinY;
+    const z2 = -x * sinY + z1 * cosY;
+    
+    // Rotate around Z axis
+    const cosZ = Math.cos(this.rotation.z);
+    const sinZ = Math.sin(this.rotation.z);
+    const x3 = x2 * cosZ - y1 * sinZ;
+    const y3 = x2 * sinZ + y1 * cosZ;
+    
+    return [x3, y3, z2];
+  }
+
+  projectVertex([x, y, z]) {
+    const distance = 300;
+    const scale = distance / (distance + z);
+    return [x * scale, y * scale];
+  }
+
+  destroy() {
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+  }
 }
 
-// Initialize everything when DOM is loaded
+// Infrastructure Demo Class
+class InfrastructureDemo {
+  constructor() {
+    this.servers = [];
+    this.updateInterval = null;
+    this.init();
+  }
+
+  init() {
+    this.generateServers();
+    this.renderServers();
+    this.startUpdates();
+  }
+
+  generateServers() {
+    const serverNames = [
+      'DC-SERVER-01', 'WEB-SERVER-02', 'DB-SERVER-03', 'APP-SERVER-04',
+      'MAIL-SERVER-05', 'FILE-SERVER-06', 'BACKUP-SERVER-07', 'DNS-SERVER-08'
+    ];
+
+    this.servers = serverNames.map(name => ({
+      name,
+      status: Math.random() > 0.8 ? (Math.random() > 0.5 ? 'warning' : 'offline') : 'online',
+      cpu: Math.random() * 100,
+      memory: Math.random() * 100,
+      disk: Math.random() * 100,
+      network: Math.random() * 100
+    }));
+  }
+
+  renderServers() {
+    const container = document.getElementById('server-grid');
+    if (!container) return;
+
+    container.innerHTML = this.servers.map(server => `
+      <div class="server-card ${server.status}">
+        <div class="server-header">
+          <div class="server-name">${server.name}</div>
+          <div class="server-status">
+            <div class="status-dot ${server.status}"></div>
+            ${server.status.charAt(0).toUpperCase() + server.status.slice(1)}
+          </div>
+        </div>
+        <div class="server-metrics">
+          <div class="metric">
+            <span class="metric-label">CPU Usage</span>
+            <span class="metric-value">${server.cpu.toFixed(1)}%</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-progress cpu-progress" style="width: ${server.cpu}%"></div>
+          </div>
+          
+          <div class="metric">
+            <span class="metric-label">Memory</span>
+            <span class="metric-value">${server.memory.toFixed(1)}%</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-progress memory-progress" style="width: ${server.memory}%"></div>
+          </div>
+          
+          <div class="metric">
+            <span class="metric-label">Disk Space</span>
+            <span class="metric-value">${server.disk.toFixed(1)}%</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-progress disk-progress" style="width: ${server.disk}%"></div>
+          </div>
+          
+          <div class="metric">
+            <span class="metric-label">Network</span>
+            <span class="metric-value">${server.network.toFixed(1)}%</span>
+          </div>
+          <div class="metric-bar">
+            <div class="metric-progress network-progress" style="width: ${server.network}%"></div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  startUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.updateMetrics();
+      this.renderServers();
+    }, 3000);
+  }
+
+  updateMetrics() {
+    this.servers.forEach(server => {
+      // Simulate metric changes
+      server.cpu = Math.max(0, Math.min(100, server.cpu + (Math.random() - 0.5) * 20));
+      server.memory = Math.max(0, Math.min(100, server.memory + (Math.random() - 0.5) * 15));
+      server.disk = Math.max(0, Math.min(100, server.disk + (Math.random() - 0.5) * 5));
+      server.network = Math.max(0, Math.min(100, server.network + (Math.random() - 0.5) * 30));
+      
+      // Occasionally change status
+      if (Math.random() > 0.95) {
+        const statuses = ['online', 'warning', 'offline'];
+        server.status = statuses[Math.floor(Math.random() * statuses.length)];
+      }
+    });
+  }
+
+  destroy() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+}
+
+// Algorithm Demo Class
+class AlgorithmDemo {
+  constructor() {
+    this.canvas = document.getElementById('algorithmCanvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.array = [];
+    this.isRunning = false;
+    this.stats = { comparisons: 0, swaps: 0, startTime: 0 };
+    
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+    this.generateArray();
+    this.render();
+  }
+
+  setupEventListeners() {
+    const arraySize = document.getElementById('arraySize');
+    const arraySizeValue = document.getElementById('arraySizeValue');
+    const speed = document.getElementById('speed');
+    const speedValue = document.getElementById('speedValue');
+
+    arraySize.addEventListener('input', (e) => {
+      arraySizeValue.textContent = e.target.value;
+      this.generateArray(parseInt(e.target.value));
+      this.render();
+    });
+
+    speed.addEventListener('input', (e) => {
+      speedValue.textContent = e.target.value;
+    });
+  }
+
+  generateArray(size = 30) {
+    this.array = [];
+    for (let i = 0; i < size; i++) {
+      this.array.push({
+        value: Math.floor(Math.random() * 280) + 10,
+        state: 'default'
+      });
+    }
+  }
+
+  render() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    const barWidth = this.canvas.width / this.array.length;
+    
+    this.array.forEach((element, index) => {
+      const x = index * barWidth;
+      const height = element.value;
+      const y = this.canvas.height - height;
+      
+      // Choose color based on state
+      switch (element.state) {
+        case 'comparing':
+          this.ctx.fillStyle = '#f59e0b';
+          break;
+        case 'swapping':
+          this.ctx.fillStyle = '#ef4444';
+          break;
+        case 'sorted':
+          this.ctx.fillStyle = '#10b981';
+          break;
+        default:
+          this.ctx.fillStyle = '#3b82f6';
+      }
+      
+      this.ctx.fillRect(x, y, barWidth - 1, height);
+    });
+  }
+
+  async bubbleSort() {
+    const n = this.array.length;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        this.array[j].state = 'comparing';
+        this.array[j + 1].state = 'comparing';
+        this.stats.comparisons++;
+        
+        await this.delay();
+        this.render();
+        
+        if (this.array[j].value > this.array[j + 1].value) {
+          this.array[j].state = 'swapping';
+          this.array[j + 1].state = 'swapping';
+          
+          // Swap elements
+          [this.array[j], this.array[j + 1]] = [this.array[j + 1], this.array[j]];
+          this.stats.swaps++;
+          
+          await this.delay();
+          this.render();
+        }
+        
+        this.array[j].state = 'default';
+        this.array[j + 1].state = 'default';
+      }
+      this.array[n - i - 1].state = 'sorted';
+    }
+    this.array[0].state = 'sorted';
+  }
+
+  async quickSort(low = 0, high = this.array.length - 1) {
+    if (low < high) {
+      const pi = await this.partition(low, high);
+      await this.quickSort(low, pi - 1);
+      await this.quickSort(pi + 1, high);
+    }
+  }
+
+  async partition(low, high) {
+    const pivot = this.array[high].value;
+    this.array[high].state = 'comparing';
+    let i = low - 1;
+
+    for (let j = low; j < high; j++) {
+      this.array[j].state = 'comparing';
+      this.stats.comparisons++;
+      
+      await this.delay();
+      this.render();
+
+      if (this.array[j].value < pivot) {
+        i++;
+        this.array[i].state = 'swapping';
+        this.array[j].state = 'swapping';
+        
+        [this.array[i], this.array[j]] = [this.array[j], this.array[i]];
+        this.stats.swaps++;
+        
+        await this.delay();
+        this.render();
+        
+        this.array[i].state = 'default';
+      }
+      this.array[j].state = 'default';
+    }
+
+    this.array[i + 1].state = 'swapping';
+    [this.array[i + 1], this.array[high]] = [this.array[high], this.array[i + 1]];
+    this.stats.swaps++;
+    
+    await this.delay();
+    this.render();
+    
+    this.array[i + 1].state = 'sorted';
+    this.array[high].state = 'default';
+    
+    return i + 1;
+  }
+
+  delay() {
+    const speed = document.getElementById('speed').value;
+    const delayTime = 1000 / speed;
+    return new Promise(resolve => setTimeout(resolve, delayTime));
+  }
+
+  updateStats() {
+    document.getElementById('comparisons').textContent = this.stats.comparisons;
+    document.getElementById('swaps').textContent = this.stats.swaps;
+    
+    if (this.stats.startTime > 0) {
+      const elapsed = Date.now() - this.stats.startTime;
+      document.getElementById('time').textContent = `${elapsed}ms`;
+    }
+  }
+
+  getComplexity(algorithm) {
+    const complexities = {
+      bubble: 'O(n²)',
+      quick: 'O(n log n)',
+      merge: 'O(n log n)',
+      heap: 'O(n log n)'
+    };
+    return complexities[algorithm] || 'O(n²)';
+  }
+
+  destroy() {
+    this.isRunning = false;
+  }
+}
+
+// Global functions for demo controls
+function startSorting() {
+  const demo = demoInstances.algorithm;
+  if (!demo || demo.isRunning) return;
+
+  demo.isRunning = true;
+  demo.stats = { comparisons: 0, swaps: 0, startTime: Date.now() };
+  
+  const algorithm = document.getElementById('algorithmSelect').value;
+  document.getElementById('complexity').textContent = demo.getComplexity(algorithm);
+
+  const updateStats = setInterval(() => {
+    demo.updateStats();
+    if (!demo.isRunning) clearInterval(updateStats);
+  }, 100);
+
+  switch (algorithm) {
+    case 'bubble':
+      demo.bubbleSort().then(() => demo.isRunning = false);
+      break;
+    case 'quick':
+      demo.quickSort().then(() => demo.isRunning = false);
+      break;
+    default:
+      demo.bubbleSort().then(() => demo.isRunning = false);
+  }
+}
+
+function resetArray() {
+  const demo = demoInstances.algorithm;
+  if (!demo) return;
+
+  demo.isRunning = false;
+  demo.generateArray(parseInt(document.getElementById('arraySize').value));
+  demo.render();
+  
+  // Reset stats
+  demo.stats = { comparisons: 0, swaps: 0, startTime: 0 };
+  demo.updateStats();
+}
+
+function refreshInfrastructure() {
+  const demo = demoInstances.infrastructure;
+  if (!demo) return;
+
+  demo.generateServers();
+  demo.renderServers();
+}
+
+function generateReport() {
+  portfolioApp.showToast('Infrastructure report generated successfully!', 'success');
+}
+
+function downloadResume() {
+  portfolioApp.showToast('Resume download will be available soon!', 'info');
+}
+
+// Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize core app
-  const app = new PortfolioApp();
-  
-  // Initialize navigation
-  const navigation = new Navigation();
-  
-  // Initialize animations
-  const animationController = new AnimationController();
-  
-  // Initialize contact form
-  const contactForm = new ContactForm();
-  
-  // Initialize modal manager
-  const modalManager = new ModalManager();
-  
-  console.log('Portfolio website loaded successfully!');
+  portfolioApp = new PortfolioApp();
 });
