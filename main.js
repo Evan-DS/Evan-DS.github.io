@@ -353,7 +353,7 @@ function openGraphicsDemo() {
   `;
 
   // Initialize 3D graphics demo
-  demoInstances.graphics = new GraphicsDemo();
+  demoInstances.graphics = new GraphicsDemo('graphics-demo-container');
   modal.classList.add('active');
 }
 
@@ -375,7 +375,7 @@ function openInfrastructureDemo() {
         <button class="btn btn-primary" onclick="addUser()">
           <i class="fas fa-user-plus"></i> Add User
         </button>
-        <button class="btn btn-secondary" onclick="resetPassword()">
+        <button class="btn btn-secondary" onclick="showPasswordResetModal()">
           <i class="fas fa-key"></i> Reset Password
         </button>
       </div>
@@ -556,214 +556,388 @@ function closeModal(modalId) {
   }
 }
 
-// 3D Graphics Demo Class
+// 3D Graphics Demo Class  
 class GraphicsDemo {
-  constructor() {
-    this.canvas = document.querySelector('.graphics-canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.currentShape = 'cube';
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+    this.canvas = null;
+    this.ctx = null;
+    this.isAnimating = false;
     this.rotation = { x: 0, y: 0, z: 0 };
+    this.currentShape = 'cube';
     this.animationId = null;
+    
+    this.shapes = {
+      cube: {
+        vertices: [
+          [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+          [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]
+        ],
+        faces: [
+          [0, 1, 2, 3], [4, 7, 6, 5], [0, 4, 5, 1],
+          [2, 6, 7, 3], [0, 3, 7, 4], [1, 5, 6, 2]
+        ],
+        color: '#3b82f6'
+      },
+      pyramid: {
+        vertices: [
+          [-1, -1, -1], [1, -1, -1], [1, -1, 1], [-1, -1, 1],
+          [0, 1, 0]
+        ],
+        faces: [
+          [0, 1, 2, 3], [0, 4, 1], [1, 4, 2], [2, 4, 3], [3, 4, 0]
+        ],
+        color: '#ef4444'
+      },
+      sphere: {
+        vertices: [],
+        faces: [],
+        color: '#10b981'
+      }
+    };
     
     this.init();
   }
 
   init() {
+    this.generateSphere();
+    this.createDemo();
+  }
+
+  generateSphere(radius = 1, segments = 16) {
+    const vertices = [];
+    const faces = [];
+
+    // Generate vertices
+    for (let i = 0; i <= segments; i++) {
+      const theta = (i * Math.PI) / segments;
+      for (let j = 0; j <= segments; j++) {
+        const phi = (j * 2 * Math.PI) / segments;
+        
+        const x = radius * Math.sin(theta) * Math.cos(phi);
+        const y = radius * Math.cos(theta);
+        const z = radius * Math.sin(theta) * Math.sin(phi);
+        
+        vertices.push([x, y, z]);
+      }
+    }
+
+    // Generate faces
+    for (let i = 0; i < segments; i++) {
+      for (let j = 0; j < segments; j++) {
+        const first = i * (segments + 1) + j;
+        const second = first + segments + 1;
+        
+        faces.push([first, second, first + 1]);
+        faces.push([second, second + 1, first + 1]);
+      }
+    }
+
+    this.shapes.sphere.vertices = vertices;
+    this.shapes.sphere.faces = faces;
+  }
+
+  createDemo() {
+    if (!this.container) return;
+
+    this.container.innerHTML = `
+      <div class="graphics-demo">
+        <div class="graphics-controls">
+          <div class="shape-controls">
+            <button class="shape-btn active" data-shape="cube">Cube</button>
+            <button class="shape-btn" data-shape="pyramid">Pyramid</button>
+            <button class="shape-btn" data-shape="sphere">Sphere</button>
+          </div>
+          
+          <div class="animation-controls">
+            <button class="btn btn-primary" id="animate-btn">
+              <i class="fas fa-play"></i> Animate
+            </button>
+            <button class="btn btn-secondary" id="reset-btn">
+              <i class="fas fa-undo"></i> Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="graphics-canvas-container">
+          <canvas class="graphics-canvas" width="600" height="400"></canvas>
+        </div>
+
+        <div class="rotation-controls">
+          <div class="rotation-control">
+            <label>X Rotation</label>
+            <input type="range" id="rotation-x" min="0" max="${Math.PI * 2}" step="0.1" value="0">
+            <div class="rotation-value">0°</div>
+          </div>
+          <div class="rotation-control">
+            <label>Y Rotation</label>
+            <input type="range" id="rotation-y" min="0" max="${Math.PI * 2}" step="0.1" value="0">
+            <div class="rotation-value">0°</div>
+          </div>
+          <div class="rotation-control">
+            <label>Z Rotation</label>
+            <input type="range" id="rotation-z" min="0" max="${Math.PI * 2}" step="0.1" value="0">
+            <div class="rotation-value">0°</div>
+          </div>
+        </div>
+
+        <div class="technical-info">
+          <h4><i class="fas fa-bolt"></i> Technical Implementation</h4>
+          <div class="technical-grid">
+            <div class="technical-section">
+              <strong>Rendering Features:</strong>
+              <ul>
+                <li>• 3D to 2D projection</li>
+                <li>• Matrix transformations</li>
+                <li>• Backface culling</li>
+                <li>• Simple lighting model</li>
+              </ul>
+            </div>
+            <div class="technical-section">
+              <strong>Vector Mathematics:</strong>
+              <ul>
+                <li>• Rotation matrices (X, Y, Z)</li>
+                <li>• Perspective projection</li>
+                <li>• Real-time calculations</li>
+                <li>• Coordinate transformations</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.setupCanvas();
     this.setupEventListeners();
-    this.startAnimation();
+    this.drawShape();
+  }
+
+  setupCanvas() {
+    this.canvas = this.container.querySelector('.graphics-canvas');
+    this.ctx = this.canvas?.getContext('2d');
   }
 
   setupEventListeners() {
     // Shape selection
-    document.querySelectorAll('.shape-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
+    this.container.querySelectorAll('.shape-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.container.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.currentShape = btn.dataset.shape;
+        this.drawShape();
       });
+    });
+
+    // Animation controls
+    const animateBtn = this.container.querySelector('#animate-btn');
+    const resetBtn = this.container.querySelector('#reset-btn');
+
+    animateBtn?.addEventListener('click', () => {
+      this.toggleAnimation();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      this.resetRotation();
     });
 
     // Rotation controls
-    ['X', 'Y', 'Z'].forEach(axis => {
-      const slider = document.getElementById(`rotation${axis}`);
-      const valueDisplay = slider.parentNode.querySelector('.rotation-value');
-      
-      slider.addEventListener('input', (e) => {
-        const value = parseInt(e.target.value);
-        this.rotation[axis.toLowerCase()] = value * Math.PI / 180;
-        valueDisplay.textContent = `${value}°`;
+    ['x', 'y', 'z'].forEach(axis => {
+      const slider = this.container.querySelector(`#rotation-${axis}`);
+      const valueDisplay = slider?.nextElementSibling;
+
+      slider?.addEventListener('input', (e) => {
+        this.rotation[axis] = parseFloat(e.target.value);
+        const degrees = Math.round((this.rotation[axis] * 180) / Math.PI);
+        if (valueDisplay) valueDisplay.textContent = `${degrees}°`;
+        if (!this.isAnimating) this.drawShape();
       });
     });
   }
 
-  startAnimation() {
-    const animate = () => {
-      this.render();
-      this.animationId = requestAnimationFrame(animate);
-    };
-    animate();
-  }
-
-  render() {
-    // Clear canvas
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  toggleAnimation() {
+    const animateBtn = this.container.querySelector('#animate-btn');
     
-    // Set up drawing context
-    this.ctx.save();
-    this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    this.isAnimating = !this.isAnimating;
     
-    // Draw the selected shape
-    switch (this.currentShape) {
-      case 'cube':
-        this.drawCube();
-        break;
-      case 'pyramid':
-        this.drawPyramid();
-        break;
-      case 'sphere':
-        this.drawSphere();
-        break;
+    if (this.isAnimating) {
+      animateBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+      this.animate();
+    } else {
+      animateBtn.innerHTML = '<i class="fas fa-play"></i> Animate';
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
     }
-    
-    this.ctx.restore();
   }
 
-  drawCube() {
-    const size = 80;
-    const vertices = [
-      [-size, -size, -size], [size, -size, -size], [size, size, -size], [-size, size, -size],
-      [-size, -size, size], [size, -size, size], [size, size, size], [-size, size, size]
-    ];
+  animate() {
+    if (!this.isAnimating) return;
 
-    const rotatedVertices = vertices.map(vertex => this.rotateVertex(vertex));
-    const projectedVertices = rotatedVertices.map(vertex => this.projectVertex(vertex));
+    this.rotation.x += 0.01;
+    this.rotation.y += 0.02;
+    this.rotation.z += 0.005;
 
-    // Draw edges
-    this.ctx.strokeStyle = '#3b82f6';
-    this.ctx.lineWidth = 2;
-    
-    const edges = [
-      [0, 1], [1, 2], [2, 3], [3, 0], // front face
-      [4, 5], [5, 6], [6, 7], [7, 4], // back face
-      [0, 4], [1, 5], [2, 6], [3, 7]  // connecting edges
-    ];
+    this.updateSliders();
+    this.drawShape();
 
-    edges.forEach(edge => {
-      const [start, end] = edge;
-      this.ctx.beginPath();
-      this.ctx.moveTo(projectedVertices[start][0], projectedVertices[start][1]);
-      this.ctx.lineTo(projectedVertices[end][0], projectedVertices[end][1]);
-      this.ctx.stroke();
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+
+  updateSliders() {
+    ['x', 'y', 'z'].forEach(axis => {
+      const slider = this.container.querySelector(`#rotation-${axis}`);
+      const valueDisplay = slider?.nextElementSibling;
+      
+      if (slider) {
+        slider.value = this.rotation[axis];
+        const degrees = Math.round((this.rotation[axis] * 180) / Math.PI);
+        if (valueDisplay) valueDisplay.textContent = `${degrees}°`;
+      }
     });
   }
 
-  drawPyramid() {
-    const size = 80;
-    const vertices = [
-      [0, -size, 0], // apex
-      [-size, size, -size], [size, size, -size], [size, size, size], [-size, size, size] // base
+  resetRotation() {
+    this.rotation = { x: 0, y: 0, z: 0 };
+    this.isAnimating = false;
+    
+    const animateBtn = this.container.querySelector('#animate-btn');
+    animateBtn.innerHTML = '<i class="fas fa-play"></i> Animate';
+    
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+    }
+    
+    this.updateSliders();
+    this.drawShape();
+  }
+
+  // 3D transformation functions
+  rotateX(point, angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return [
+      point[0],
+      point[1] * cos - point[2] * sin,
+      point[1] * sin + point[2] * cos
+    ];
+  }
+
+  rotateY(point, angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return [
+      point[0] * cos + point[2] * sin,
+      point[1],
+      -point[0] * sin + point[2] * cos
+    ];
+  }
+
+  rotateZ(point, angle) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return [
+      point[0] * cos - point[1] * sin,
+      point[0] * sin + point[1] * cos,
+      point[2]
+    ];
+  }
+
+  project(point) {
+    const distance = 5;
+    const scale = 100;
+    
+    const projected = [
+      (point[0] * distance) / (point[2] + distance) * scale + this.canvas.width / 2,
+      (point[1] * distance) / (point[2] + distance) * scale + this.canvas.height / 2
+    ];
+    
+    return projected;
+  }
+
+  drawShape() {
+    if (!this.ctx || !this.canvas) return;
+
+    this.ctx.fillStyle = '#1f2937';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    const currentShapeData = this.shapes[this.currentShape];
+    
+    // Transform vertices
+    const transformedVertices = currentShapeData.vertices.map(vertex => {
+      let point = [...vertex];
+      point = this.rotateX(point, this.rotation.x);
+      point = this.rotateY(point, this.rotation.y);
+      point = this.rotateZ(point, this.rotation.z);
+      return point;
+    });
+
+    // Draw faces
+    currentShapeData.faces.forEach(face => {
+      const projectedVertices = face.map(vertexIndex => 
+        this.project(transformedVertices[vertexIndex])
+      );
+
+      // Calculate face center for depth testing
+      const center = face.reduce((acc, vertexIndex) => {
+        const vertex = transformedVertices[vertexIndex];
+        return [acc[0] + vertex[0], acc[1] + vertex[1], acc[2] + vertex[2]];
+      }, [0, 0, 0]).map(sum => sum / face.length);
+
+      if (center[2] > -2) { // Simple depth test
+        this.ctx.beginPath();
+        this.ctx.moveTo(projectedVertices[0][0], projectedVertices[0][1]);
+        projectedVertices.slice(1).forEach(vertex => {
+          this.ctx.lineTo(vertex[0], vertex[1]);
+        });
+        this.ctx.closePath();
+
+        // Simple lighting
+        const lightIntensity = Math.max(0.3, (center[2] + 3) / 4);
+        const color = currentShapeData.color;
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
+        
+        this.ctx.fillStyle = `rgba(${Math.floor(r * lightIntensity)}, ${Math.floor(g * lightIntensity)}, ${Math.floor(b * lightIntensity)}, 0.8)`;
+        this.ctx.fill();
+        
+        this.ctx.strokeStyle = '#94a3b8';
+        this.ctx.lineWidth = 1;
+        this.ctx.stroke();
+      }
+    });
+
+    // Draw coordinate axes
+    this.drawAxes(transformedVertices);
+  }
+
+  drawAxes(transformedVertices) {
+    const axisLength = 2;
+    const axes = [
+      { start: [0, 0, 0], end: [axisLength, 0, 0], color: '#ef4444' }, // X - Red
+      { start: [0, 0, 0], end: [0, axisLength, 0], color: '#10b981' }, // Y - Green
+      { start: [0, 0, 0], end: [0, 0, axisLength], color: '#3b82f6' }  // Z - Blue
     ];
 
-    const rotatedVertices = vertices.map(vertex => this.rotateVertex(vertex));
-    const projectedVertices = rotatedVertices.map(vertex => this.projectVertex(vertex));
+    axes.forEach(axis => {
+      let start = this.rotateX([...axis.start], this.rotation.x);
+      start = this.rotateY(start, this.rotation.y);
+      start = this.rotateZ(start, this.rotation.z);
+      
+      let end = this.rotateX([...axis.end], this.rotation.x);
+      end = this.rotateY(end, this.rotation.y);
+      end = this.rotateZ(end, this.rotation.z);
 
-    this.ctx.strokeStyle = '#10b981';
-    this.ctx.lineWidth = 2;
+      const projectedStart = this.project(start);
+      const projectedEnd = this.project(end);
 
-    const edges = [
-      [0, 1], [0, 2], [0, 3], [0, 4], // apex to base
-      [1, 2], [2, 3], [3, 4], [4, 1]  // base edges
-    ];
-
-    edges.forEach(edge => {
-      const [start, end] = edge;
       this.ctx.beginPath();
-      this.ctx.moveTo(projectedVertices[start][0], projectedVertices[start][1]);
-      this.ctx.lineTo(projectedVertices[end][0], projectedVertices[end][1]);
+      this.ctx.moveTo(projectedStart[0], projectedStart[1]);
+      this.ctx.lineTo(projectedEnd[0], projectedEnd[1]);
+      this.ctx.strokeStyle = axis.color;
+      this.ctx.lineWidth = 2;
       this.ctx.stroke();
     });
-  }
-
-  drawSphere() {
-    const radius = 80;
-    const segments = 16;
-    
-    this.ctx.strokeStyle = '#8b5cf6';
-    this.ctx.lineWidth = 2;
-
-    // Draw latitude lines
-    for (let i = 0; i <= segments; i++) {
-      const lat = (i / segments) * Math.PI - Math.PI / 2;
-      const y = Math.sin(lat) * radius;
-      const circleRadius = Math.cos(lat) * radius;
-      
-      this.drawRotatedCircle(0, y, 0, circleRadius, 'horizontal');
-    }
-
-    // Draw longitude lines
-    for (let i = 0; i < segments; i++) {
-      const lon = (i / segments) * 2 * Math.PI;
-      this.drawRotatedCircle(0, 0, 0, radius, 'vertical', lon);
-    }
-  }
-
-  drawRotatedCircle(centerX, centerY, centerZ, radius, orientation, angle = 0) {
-    const points = 32;
-    this.ctx.beginPath();
-    
-    for (let i = 0; i <= points; i++) {
-      const t = (i / points) * 2 * Math.PI;
-      let x, y, z;
-      
-      if (orientation === 'horizontal') {
-        x = Math.cos(t) * radius;
-        y = centerY;
-        z = Math.sin(t) * radius;
-      } else {
-        x = Math.cos(t + angle) * radius;
-        y = Math.sin(t) * radius;
-        z = Math.cos(t + angle) * radius * 0.3;
-      }
-      
-      const rotated = this.rotateVertex([x, y, z]);
-      const projected = this.projectVertex(rotated);
-      
-      if (i === 0) {
-        this.ctx.moveTo(projected[0], projected[1]);
-      } else {
-        this.ctx.lineTo(projected[0], projected[1]);
-      }
-    }
-    
-    this.ctx.stroke();
-  }
-
-  rotateVertex([x, y, z]) {
-    // Rotate around X axis
-    const cosX = Math.cos(this.rotation.x);
-    const sinX = Math.sin(this.rotation.x);
-    const y1 = y * cosX - z * sinX;
-    const z1 = y * sinX + z * cosX;
-    
-    // Rotate around Y axis
-    const cosY = Math.cos(this.rotation.y);
-    const sinY = Math.sin(this.rotation.y);
-    const x2 = x * cosY + z1 * sinY;
-    const z2 = -x * sinY + z1 * cosY;
-    
-    // Rotate around Z axis
-    const cosZ = Math.cos(this.rotation.z);
-    const sinZ = Math.sin(this.rotation.z);
-    const x3 = x2 * cosZ - y1 * sinZ;
-    const y3 = x2 * sinZ + y1 * cosZ;
-    
-    return [x3, y3, z2];
-  }
-
-  projectVertex([x, y, z]) {
-    const distance = 300;
-    const scale = distance / (distance + z);
-    return [x * scale, y * scale];
   }
 
   destroy() {
@@ -1291,19 +1465,100 @@ function addUser() {
   portfolioApp.showToast(`User ${newUser.name} added successfully!`, 'success');
 }
 
-function resetPassword() {
+function showPasswordResetModal() {
   const demo = demoInstances.infrastructure;
   if (!demo) return;
-  
+
   const activeUsers = demo.users.filter(user => user.status === 'active');
-  if (activeUsers.length > 0) {
-    const randomUser = activeUsers[Math.floor(Math.random() * activeUsers.length)];
-    portfolioApp.showToast(`Password reset for ${randomUser.name} completed!`, 'success');
+  
+  const modalHtml = `
+    <div class="password-reset-modal">
+      <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+        <i class="fas fa-key"></i> Reset User Password
+      </h3>
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--secondary);">
+          Select User:
+        </label>
+        <select id="passwordResetUserSelect" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem; font-size: 1rem;">
+          <option value="">Choose a user...</option>
+          ${activeUsers.map(user => `
+            <option value="${user.id}">${user.name} (${user.email})</option>
+          `).join('')}
+        </select>
+      </div>
+      <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+        <button class="btn btn-secondary" onclick="closePasswordResetModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="executePasswordReset()">
+          <i class="fas fa-key"></i> Reset Password
+        </button>
+      </div>
+    </div>
+  `;
+
+  // Create and show modal
+  const existingModal = document.getElementById('password-reset-temp-modal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  const modalWrapper = document.createElement('div');
+  modalWrapper.id = 'password-reset-temp-modal';
+  modalWrapper.className = 'modal active';
+  modalWrapper.style.zIndex = '2001';
+  
+  modalWrapper.innerHTML = `
+    <div class="modal-content" style="max-width: 500px;">
+      <span class="modal-close" onclick="closePasswordResetModal()">&times;</span>
+      ${modalHtml}
+    </div>
+  `;
+  
+  document.body.appendChild(modalWrapper);
+}
+
+function closePasswordResetModal() {
+  const modal = document.getElementById('password-reset-temp-modal');
+  if (modal) {
+    modal.remove();
+  }
+}
+
+function executePasswordReset() {
+  const demo = demoInstances.infrastructure;
+  const selectElement = document.getElementById('passwordResetUserSelect');
+  
+  if (!demo || !selectElement) return;
+  
+  const selectedUserId = selectElement.value;
+  if (!selectedUserId) {
+    portfolioApp.showToast('Please select a user first.', 'error');
+    return;
+  }
+  
+  const selectedUser = demo.users.find(user => user.id === selectedUserId);
+  if (selectedUser) {
+    portfolioApp.showToast(`Password reset for ${selectedUser.name} completed! New temporary password sent to ${selectedUser.email}`, 'success');
+    closePasswordResetModal();
   }
 }
 
 function downloadResume() {
-  portfolioApp.showToast('Resume download will be available soon!', 'info');
+  try {
+    // Create a temporary link element for the download
+    const link = document.createElement('a');
+    link.href = './Résumé-Evan_Dos_Santos-2025-NA.pdf';
+    link.download = 'Evan_Dos_Santos_Resume_2025.pdf';
+    link.style.display = 'none';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    portfolioApp.showToast('Resume download started!', 'success');
+  } catch (error) {
+    portfolioApp.showToast('Resume download failed. Please try again later.', 'error');
+  }
 }
 
 // Initialize the application when DOM is loaded
