@@ -1,252 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evan Dos Santos | Software Engineer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evan Dos Santos | Software Engineer</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        /* Reset */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; background-color:#eff4f; font-size:1.15rem; }
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico">
 
-        a { text-decoration:none; color:inherit; }
+<style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Roboto',sans-serif; line-height:1.6; color:#344256; scroll-behavior:smooth; }
+    a { text-decoration:none; color:inherit; }
 
-        /* Navbar */
-        nav {
-            width:100%;
-            background-color:#ffffff;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:15px 10%;
-            position:fixed;
-            top:0;
-            left:0;
-            z-index:1000;
-            box-shadow:0 2px 6px rgba(0,0,0,0.1);
-        }
-        nav .logo { font-size:1.8rem; font-weight:bold; color:#2463eb; }
-        nav ul { display:flex; gap:30px; list-style:none; }
-        nav ul li a { font-size:1.1rem; padding:5px 0; position:relative; }
-        nav ul li a.active::after { content:''; position:absolute; left:0; bottom:-4px; width:100%; height:3px; background:#2463eb; }
+    /* Navbar */
+    nav {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(255,255,255,0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    .nav-container {
+        display: flex;
+        width: 90%;
+        max-width: 1200px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    nav .logo {
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: #2463eb;
+        margin-right: 50px;
+    }
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+    }
+    .nav-links li a {
+        color: #344256;
+        font-weight: 500;
+        transition: 0.3s;
+        font-size: 1rem;
+    }
+    .nav-links li a.active, .nav-links li a:hover {
+        color: #2463eb;
+    }
 
-        /* Landing Section */
-        .landing {
-            display:flex; flex-direction:column; justify-content:center; align-items:center;
-            height:100vh;
-            text-align:center;
-            background: linear-gradient(rgba(239, 244, 255, 0.7), rgba(239, 244, 255, 0.7)), url('background-placeholder.jpg') no-repeat center center/cover;
-            padding:0 20px;
-        }
-        .landing h1 { font-size:3rem; margin-bottom:0.5rem; }
-        .landing h1 .name-highlight { color:#2463eb; }
-        .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; }
-        .landing p { font-size:1.2rem; max-width:700px; margin-bottom:2rem; }
+    /* Sections */
+    section {
+        padding:100px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
-        .landing-buttons { display:flex; gap:15px; }
-        .cta-button {
-            display:inline-block;
-            padding:12px 30px;
-            background-color:#2463eb;
-            color:#ffffff;
-            font-weight:bold;
-            border-radius:5px;
-            transition:0.3s;
-        }
-        .cta-button:hover { background-color:#1a4ac0; }
+    /* Section headings */
+    section h2 {
+        font-size: 2.2rem;
+        color: #344256;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 40px;
+    }
+    section h2::after {
+        content: "";
+        display: block;
+        width: 50%;
+        height: 3px;
+        background-color: #2463eb;
+        margin: 6px auto 0 auto;
+    }
 
-        .cta-button-outline {
-            display:inline-block;
-            padding:12px 30px;
-            background-color: transparent;
-            color: #344256;
-            font-weight:bold;
-            border: 2px solid #2463eb;
-            border-radius:5px;
-            transition: 0.3s;
-        }
-        .cta-button-outline:hover { background-color:#2463eb; color:#ffffff; }
+    /* Landing Section */
+    .landing {
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background: linear-gradient(rgba(239,244,255,0.85), rgba(239,244,255,0.85)), url('background-placeholder.jpg') no-repeat center center/cover;
+        color:#344256;
+        padding:0 20px;
+    }
+    .landing h1 { font-size:3rem; margin-bottom:0.5rem; animation:fadeInUp 1s ease forwards; }
+    .landing h1 span.name { color:#2463eb; }
+    .landing h2 { font-size:1.5rem; font-weight:400; margin-bottom:1.5rem; animation:fadeInUp 1.5s ease forwards; }
+    .landing p { font-size:1.2rem; max-width:600px; margin-bottom:2rem; animation:fadeInUp 2s ease forwards; }
 
-        /* About Section */
-        .about { display:flex; flex-direction:row; align-items:flex-start; gap:50px; background-color:#ffffff; padding:100px 10%; }
-        .about img { width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .about-text { max-width:700px; }
-        .about-text h2 { font-size:2rem; margin-bottom:20px; text-align:center; color:#344256; position:relative; }
-        .about-text h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
-        .about-text p { font-size:1.15rem; margin-bottom:15px; text-align:justify; }
+    /* CTA Buttons */
+    .cta-buttons { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; animation:fadeInUp 2.5s ease forwards; }
+    .cta-buttons a {
+        padding:12px 30px;
+        background-color:#2463eb;
+        color:#fff;
+        font-weight:bold;
+        border-radius:5px;
+        transition:0.3s;
+    }
+    .cta-buttons a:hover { background-color:#1c4acb; }
 
-        /* Projects Section */
-        .projects { background-color:#f8fafc; padding:100px 10%; }
-        .projects h2 { font-size:2rem; text-align:center; margin-bottom:40px; color:#344256; position:relative; }
-        .projects h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
+    /* About Section */
+    .about {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 50px;
+        background-color: #ffffff;
+    }
+    .about img {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .about-text {
+        max-width: 600px;
+        text-align: left;
+    }
 
-        .project-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
-        .project-card { background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; }
-        .project-card:hover { transform:translateY(-5px); }
-        .project-card img { width:100%; height:150px; object-fit:cover; }
-        .project-card-content { padding:20px; }
-        .project-card-content h3 { font-size:1.3rem; margin-bottom:10px; color:#2463eb; }
-        .project-card-content p { font-size:1.1rem; margin-bottom:10px; }
-        .tech-stack { font-size:0.95rem; color:#555; margin-bottom:10px; }
-        .project-links a { margin-right:10px; color:#2463eb; font-weight:bold; }
+    /* Projects Section */
+    .projects { background-color:#f8fafc; }
+    .project-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+    .project-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; width: 300px; }
+    .project-card:hover { transform:translateY(-5px); }
+    .project-card img { width:100%; height:150px; object-fit:cover; }
+    .project-card-content { padding:20px; }
+    .project-card-content h3 { font-size:1.3rem; margin-bottom:10px; color:#2463eb; text-align:center; position:relative; }
+    .project-card-content h3::after { content:""; display:block; width:50%; height:3px; background-color:#2463eb; margin:6px auto 0 auto; }
+    .project-card-content p { font-size:0.95rem; margin-bottom:10px; color:#344256; }
+    .tech-stack { font-size:0.85rem; color:#555; margin-bottom:10px; }
+    .project-links a { margin-right:10px; color:#2463eb; font-weight:bold; }
 
-        /* Resume Section */
-        .resume { background-color:#ffffff; padding:100px 10%; text-align:center; }
-        .resume h2 { font-size:2rem; margin-bottom:30px; color:#344256; position:relative; }
-        .resume h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
-        .resume a { display:inline-block; margin-top:20px; padding:12px 30px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; text-decoration:none; }
-        .resume a:hover { background-color:#1a4ac0; }
+    /* Resume Section */
+    .resume { background-color: #ffffff; }
+    .resume a { display:inline-block; margin-top:20px; padding:12px 25px; background-color:#2463eb; color:#fff; border-radius:5px; transition:0.3s; }
+    .resume a:hover { background-color:#1c4acb; }
 
-        /* Skills Section */
-        .skills { background-color:#ffffff; padding:100px 10%; }
-        .skills h2 { font-size:2rem; text-align:center; margin-bottom:40px; color:#344256; position:relative; }
-        .skills h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
-        .skill-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:20px; justify-items:center; }
-        .skill { background:#ffffff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; font-size:1.15rem; }
+    /* Skills Section */
+    .skills { background-color:#f8fafc; }
+    .skill-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    .skill { background:#fff; padding:15px 10px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; font-weight:bold; color:#344256; width: 120px; }
 
-        /* Contact Section */
-        .contact { background-color:#f8fafc; max-width:700px; margin:0 auto; border-radius:10px; padding:60px 40px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
-        .contact h2 { text-align:center; font-size:2rem; margin-bottom:30px; color:#344256; position:relative; }
-        .contact h2::after { content:''; display:block; width:60px; height:3px; background:#2463eb; margin:8px auto 0 auto; }
-        .contact form { display:flex; flex-direction:column; gap:20px; }
-        .contact input, .contact textarea { padding:12px; border-radius:5px; border:1px solid #ccc; font-size:1.15rem; width:100%; }
-        .contact button { padding:14px; border:none; border-radius:5px; background-color:#2463eb; color:#fff; font-weight:bold; font-size:1.15rem; cursor:pointer; transition:0.3s; }
-        .contact button:hover { background-color:#1a4ac0; }
+    /* Contact Section */
+    .contact { background-color: #ffffff; max-width: 700px; margin: 0 auto; border-radius: 10px; padding: 40px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .contact form {
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .contact input, .contact textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        color: #344256;
+    }
+    .contact button {
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background-color: #2463eb;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .contact button:hover { background-color: #1c4acb; }
+    .social-links { text-align: center; margin-top: 20px; }
+    .social-links a { margin: 0 10px; font-weight: bold; color:#2463eb; }
 
-        /* Footer */
-        footer {
-            background-color:#344256;
-            color:#dfe3ea;
-            text-align:center;
-            padding:40px 20px 20px 20px;
-            font-size:0.95rem;
-        }
-        footer .name { color:#ffffff; font-size:1.5rem; font-weight:bold; margin-bottom:5px; }
-        footer hr { border:0; border-top:1px solid #567; margin:15px auto; width:80%; }
-        footer .social-icons { margin:15px 0; display:flex; justify-content:center; gap:20px; }
-        footer .social-icons svg { width:24px; height:24px; fill:#ffffff; transition:0.3s; cursor:pointer; }
-        footer .social-icons svg:hover { fill:#2463eb; }
+    /* Footer */
+    footer {
+        background-color: #344256;
+        color: #eff4f;
+        padding:40px 20px;
+        text-align:center;
+    }
+    footer h2 { color:#ffffff; font-size:1.8rem; font-weight:bold; margin-bottom:5px; }
+    footer p { color:#eff4f; margin:0; }
+    footer hr { border:1px solid #eff4f; width:90%; margin:20px auto; }
 
-        /* Responsive */
-        @media (max-width:768px){
-            .landing h1{ font-size:2.2rem; }
-            .landing h2{ font-size:1.2rem; }
-            .landing p{ font-size:1rem; }
-            .about { flex-direction:column; text-align:center; align-items:center; }
-            .about img{ width:200px; height:200px; margin-bottom:20px; }
-        }
-    </style>
+    .footer-social a { margin:0 10px; font-size:1.4rem; color:#eff4f; transition:0.3s; }
+    .footer-social a:hover { color:#2463eb; }
+
+    /* Animations */
+    @keyframes fadeInUp { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+
+    /* Responsive */
+    @media (max-width:768px){
+        nav { padding: 10px 20px; }
+        .nav-container { flex-direction:column; gap:10px; }
+        .landing h1{ font-size:2.2rem; }
+        .landing h2{ font-size:1.2rem; }
+        .landing p{ font-size:1rem; }
+        .cta-buttons { flex-direction:column; gap:15px; }
+        .about { flex-direction: column; align-items: center; text-align: center; }
+        .about-text { text-align: center; }
+        .about img { width: 200px; height: 200px; }
+        .project-card { width: 90%; }
+        .skill { width: 100px; }
+    }
+</style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav>
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav-container">
         <div class="logo">Evan Dos Santos</div>
-        <ul>
-            <li><a href="#landing" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <ul class="nav-links">
+            <li><a href="#landing" class="nav-item">Home</a></li>
+            <li><a href="#about" class="nav-item">About</a></li>
+            <li><a href="#projects" class="nav-item">Projects</a></li>
+            <li><a href="#resume" class="nav-item">Resume</a></li>
+            <li><a href="#skills" class="nav-item">Skills</a></li>
+            <li><a href="#contact" class="nav-item">Contact</a></li>
         </ul>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Landing Section -->
-    <section class="landing" id="landing">
-        <h1>Hi, I'm <span class="name-highlight">Evan Dos Santos</span></h1>
-        <h2>Software Engineer | Building scalable and modern applications</h2>
-        <p>Passionate about creating impactful software solutions, contributing to open-source projects, and continuously learning cutting-edge technologies.</p>
-        <div class="landing-buttons">
-            <a href="#projects" class="cta-button">View My Work</a>
-            <a href="#contact" class="cta-button-outline">Get in Touch</a>
+<!-- Landing Section -->
+<section class="landing" id="landing">
+    <h1><span>Hi, I'm </span><span class="name">Evan Dos Santos</span></h1>
+    <h2>Software Engineer & IT Systems Specialist</h2>
+    <p>Computer Science graduate with a Software Engineering specialization, passionate about building robust systems and providing exceptional technical solutions. Experienced in full-stack development, system administration, and client support.</p>
+    <div class="cta-buttons">
+        <a href="#projects">View My Work</a>
+        <a href="#contact">Get in Touch</a>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about" style="background-color:#ffffff; padding:80px 20px;">
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:40px; max-width:1200px; margin:0 auto;">
+        <img src="_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos - Headshot" style="width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+        <div style="max-width:700px; text-align:left;">
+            <h2 style="color:#2463eb; font-size:2rem; margin-bottom:20px; text-align:center;">About Me</h2>
+            <p style="margin-bottom:20px;">Hello! I'm Evan, a Computer Science Honours graduate from the University of Windsor with a Software Engineering specialization. I have hands-on experience in IT services, system administration, and software development, with over 2 years of professional experience in technical support and system management.</p>
+            <p style="margin-bottom:20px;">My technical journey includes developing robust server systems using C++, managing domain services with Active Directory, and providing comprehensive IT support to clients. I'm proficient in multiple programming languages including C++, C, Java, and have experience with OpenGL graphics programming.</p>
+            <p style="margin-bottom:0;">I'm passionate about solving complex technical problems, optimizing system performance, and delivering exceptional customer service. Whether it's deploying enterprise systems, managing network infrastructure, or developing software solutions, I bring a detail-oriented approach and strong problem-solving skills to every project.</p>
         </div>
-    </section>
+    </div>
+</section>
 
-       <!-- About Section -->
-    <section class="about" id="about">
-        <img src="_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos - Headshot">
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>Hello! I'm Evan, a Computer Science Honours graduate from the University of Windsor with a Software Engineering specialization. I have hands-on experience in IT services, system administration, and software development, with over 2 years of professional experience in technical support and system management.</p>
-            <p>My technical journey includes developing robust server systems using C++, managing domain services with Active Directory, and providing comprehensive IT support to clients. I'm proficient in multiple programming languages including C++, C, Java, and have experience with OpenGL graphics programming.</p>
-            <p>I'm passionate about solving complex technical problems, optimizing system performance, and delivering exceptional customer service. Whether it's deploying enterprise systems, managing network infrastructure, or developing software solutions, I bring a detail-oriented approach and strong problem-solving skills to every project.</p>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <img src="project1-placeholder.jpg" alt="Project 1">
-                <div class="project-card-content">
-                    <h3>Project One</h3>
-                    <p>A brief description of Project One.</p>
-                    <div class="tech-stack">Technologies: HTML, CSS, JavaScript</div>
-                    <div class="project-links">
-                        <a href="#" target="_blank">Live</a>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
+<!-- Projects Section -->
+<section class="projects" id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+        <div class="project-card">
+            <img src="project1-placeholder.jpg" alt="Project 1">
+            <div class="project-card-content">
+                <h3>Project One</h3>
+                <p>A brief description of Project One, highlighting its purpose and key features.</p>
+                <div class="tech-stack">Technologies: HTML, CSS, JavaScript</div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live</a>
+                    <a href="#" target="_blank">GitHub</a>
                 </div>
             </div>
-            <!-- Add other project cards as needed -->
         </div>
-    </section>
-
-    <!-- Resume Section -->
-    <section class="resume" id="resume">
-        <h2>Resume</h2>
-        <a href="resume-placeholder.pdf" download>Download Resume</a>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <h2>Skills</h2>
-        <div class="skill-grid">
-            <div class="skill">JavaScript</div>
-            <div class="skill">Python</div>
-            <div class="skill">React</div>
-            <div class="skill">Node.js</div>
-            <div class="skill">HTML & CSS</div>
+        <div class="project-card">
+            <img src="project2-placeholder.jpg" alt="Project 2">
+            <div class="project-card-content">
+                <h3>Project Two</h3>
+                <p>A brief description of Project Two, highlighting its purpose and key features.</p>
+                <div class="tech-stack">Technologies: React, Node.js, MongoDB</div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2>Contact Me</h2>
-        <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="name">Evan Dos Santos</div>
-        <div>Software Engineer & IT Systems Specialist</div>
-        <div class="social-icons">
-            <a href="#" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="#ffffff" d="M22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/>
-                </svg>
-            </a>
-            <a href="#" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="#ffffff" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.41 7.86 10.95.57.1.78-.25.78-.55v-2.17c-3.2.7-3.87-1.55-3.87-1.55-.52-1.31-1.28-1.66-1.28-1.66-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.46-2.3 1.22-3.12-.12-.3-.53-1.52.12-3.18 0 0 .99-.32 3.24 1.18a11.3 11.3 0 0 1 5.88 0c2.25-1.5 3.24-1.18 3.24-1.18.65 1.66.24 2.88.12 3.18.76.82 1.22 1.86 1.22 3.12 0 4.43-2.69 5.41-5.25 5.7.42.36.8 1.09.8 2.2v3.25c0 .31.21.66.79.55A10.51 10.51 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
-                </svg>
-            </a>
-            <!-- Add additional social icons as needed -->
+        <div class="project-card">
+            <img src="project3-placeholder.jpg" alt="Project 3">
+            <div class="project-card-content">
+                <h3>Project Three</h3>
+                <p>A brief description of Project Three, highlighting its purpose and key features.</p>
+                <div class="tech-stack">Technologies: Python, Flask, SQL</div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
         </div>
-        <hr>
-        <p>© 2024 Evan Dos Santos. All rights reserved. Built with passion and modern web technologies.</p>
-    </footer>
+    </div>
+</section>
+
+<!-- Resume Section -->
+<section class="resume" id="resume">
+    <h2>Resume</h2>
+    <p>Download my professional resume in PDF format.</p>
+    <a href="resume-placeholder.pdf" download>Download Resume</a>
+</section>
+
+<!-- Skills Section -->
+<section class="skills" id="skills">
+    <h2>Skills</h2>
+    <div class="skill-grid">
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+        <div class="skill">React</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">HTML & CSS</div>
+        <div class="skill">Git & GitHub</div>
+        <div class="skill">SQL / Databases</div>
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Team Collaboration</div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <div class="social-links">
+        <a href="mailto:your-email@example.com">Email</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">GitHub</a>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer style="background-color:#344256; color:#dfe6ef; padding:40px 20px; text-align:center;">
+    <div style="margin-bottom:20px;">
+        <h2 style="color:#ffffff; font-size:1.8rem; margin-bottom:5px;">Evan Dos Santos</h2>
+        <p style="color:#dfe6ef; margin:0;">Software Engineer & IT Systems Specialist</p>
+    </div>
+    <div class="footer-social" style="display:flex; justify-content:center; gap:20px; margin-bottom:20px;">
+        <!-- LinkedIn -->
+        <a href="#" target="_blank" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.16h.07c.66-1.26 2.28-2.6 4.69-2.6 5.01 0 5.93 3.29 5.93 7.57V24h-5v-7.57c0-1.8-.03-4.12-2.51-4.12-2.51 0-2.9 1.97-2.9 4v7.69H7.5V8z"/>
+            </svg>
+        </a>
+        <!-- GitHub -->
+        <a href="#" target="_blank" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.55 0-.27-.01-1.16-.01-2.11-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.11-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.44.11-3 0 0 .97-.31 3.18 1.18a11.08 11.08 0 012.89-.39c.98 0 1.97.13 2.89.39 2.2-1.5 3.17-1.18 3.17-1.18.63 1.56.23 2.71.12 3 .74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.35.77 1.05.77 2.12 0 1.53-.01 2.77-.01 3.15 0 .3.21.66.79.55C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/>
+            </svg>
+        </a>
+        <!-- Twitter -->
+        <a href="#" target="_blank" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M24 4.56c-.89.39-1.84.65-2.84.77 1.02-.61 1.8-1.57 2.17-2.72-.95.56-2.01.97-3.13 1.19-.9-.95-2.18-1.54-3.6-1.54-2.73 0-4.95 2.22-4.95 4.95 0 .39.04.77.13 1.13C7.69 8.09 4.07 6.13 1.64 3.16c-.43.74-.68 1.6-.68 2.52 0 1.74.89 3.28 2.24 4.18-.82-.03-1.58-.25-2.25-.62v.06c0 2.43 1.73 4.46 4.03 4.92-.42.12-.85.18-1.3.18-.32 0-.63-.03-.93-.09.63 1.97 2.44 3.4 4.6 3.44-1.68 1.32-3.8 2.11-6.1 2.11-.4 0-.79-.02-1.17-.07C2.29 19.74 5.01 21 7.95 21c9.54 0 14.76-7.91 14.76-14.76 0-.23-.01-.46-.02-.69.99-.72 1.84-1.62 2.52-2.64z"/>
+            </svg>
+        </a>
+        <!-- Email -->
+        <a href="mailto:your-email@example.com" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M12 13.5l-11-7V18c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6.5l-11 7zM12 12l11-7H1l11 7z"/>
+            </svg>
+        </a>
+    </div>
+    <hr style="border-color:#ffffff33; border-width:0.5px; margin:20px 0;">
+    <p style="color:#dfe6ef; font-size:0.85rem; margin:0;">© 2024 Evan Dos Santos. All rights reserved. Built with passion and modern web technologies.</p>
+</footer>
+
+<script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-links li a");
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            if(pageYOffset >= sectionTop){
+                current = section.getAttribute("id");
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if(link.getAttribute("href") === "#" + current){
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
