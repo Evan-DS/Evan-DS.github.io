@@ -1,193 +1,507 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Evan Dos Santos | Software Engineer</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- Favicon (optional) -->
-  <link rel="icon" href="favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evan Dos Santos - Software Engineer & Full Stack Developer. Experienced in React, Node.js, Python, and modern web technologies. View my portfolio and projects.">
+    <meta property="og:title" content="Evan Dos Santos - Software Engineer Portfolio">
+    <meta property="og:description" content="Experienced Software Engineer specializing in full-stack development with React, Node.js, and modern web technologies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://evandossantos.github.io">
+    
+    <title>Evan Dos Santos - Software Engineer Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-container container">
-      <div class="logo">Evan Dos Santos</div>
-      <ul class="nav-links">
-        <li><a href="#landing">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- LANDING / HERO -->
-  <section id="landing" class="landing">
-    <div class="container">
-      <h1>Hi, I'm <span class="name">Evan Dos Santos</span></h1>
-      <h2 class="subtitle">Software Engineer &amp; IT Systems Specialist</h2>
-      <p class="lead">
-        Computer Science graduate with a Software Engineering specialization. Passionate about building robust systems,
-        improving performance, and delivering practical technical solutions. Experienced in full-stack development and system administration.
-      </p>
-
-      <div class="cta-buttons">
-        <a class="btn primary" href="#projects">View My Work</a>
-        <a class="btn outline" href="#contact">Get In Touch</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT (Download resume moved here) -->
-  <section id="about" class="about">
-    <h2>About Me</h2>
-
-    <div class="about-wrap container">
-      <img class="headshot" src="Evan-DS.github.io/_afc4cea7-392a-404b-a1c1-6994f696daab.jpg" alt="Evan Dos Santos headshot" />
-
-      <div class="about-text">
-        <p>
-          Hello! I'm Evan, a Computer Science Honours graduate from the University of Windsor with a Software Engineering specialization.
-          I have hands-on experience in IT services, system administration, and software development.
-        </p>
-
-        <p>
-          My technical journey includes developing robust server systems with C++, managing domain services with Active Directory,
-          and doing OpenGL graphics work. I enjoy solving complicated technical problems and building maintainable systems.
-        </p>
-
-        <p>
-          I'm detail-oriented, client-focused, and thrive in collaborative environments where practical results matter.
-        </p>
-
-        <div class="about-meta">
-          <div>📍 London, Ontario, Canada</div>
-          <div>✉️ evangeorgedossantos@yahoo.ca</div>
-          <div>💼 5+ Years Experience</div>
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#home" class="nav-link brand-link">Evan Dos Santos</a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <!-- Mobile Hamburger -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
+    </nav>
 
-        <!-- DOWNLOAD RESUME -->
-        <a class="download-resume" href="resume-placeholder.pdf" download>Download Resume</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-
-    <div class="project-grid container">
-      <article class="project-card">
-        <img src="project1-placeholder.jpg" alt="Project 1 preview" />
-        <div class="project-card-content">
-          <h3>Project One</h3>
-          <p>Short summary of project one — problem solved and impact.</p>
-          <div class="tech-stack">HTML · CSS · JavaScript</div>
-          <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Live</a>
-            <a href="#" target="_blank" rel="noopener">GitHub</a>
-          </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-background">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
         </div>
-      </article>
-
-      <article class="project-card">
-        <img src="project2-placeholder.jpg" alt="Project 2 preview" />
-        <div class="project-card-content">
-          <h3>Project Two</h3>
-          <p>Short summary of project two — architecture & outcome.</p>
-          <div class="tech-stack">React · Node.js · MongoDB</div>
-          <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Live</a>
-            <a href="#" target="_blank" rel="noopener">GitHub</a>
-          </div>
+        
+        <div class="hero-content">
+            <div class="hero-text animate-fade-in">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="text-primary">Evan Dos Santos</span>
+                </h1>
+                <h2 class="hero-subtitle">Software Engineer</h2>
+                <p class="hero-description">
+                    Passionate software engineer with expertise in full-stack development, 
+                    creating innovative solutions with modern technologies and best practices.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary nav-link">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary nav-link">Get In Touch</a>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
-      </article>
+    </section>
 
-      <article class="project-card">
-        <img src="project3-placeholder.jpg" alt="Project 3 preview" />
-        <div class="project-card-content">
-          <h3>Project Three</h3>
-          <p>Short summary describing the problem and what you built.</p>
-          <div class="tech-stack">Python · Flask · SQL</div>
-          <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Live</a>
-            <a href="#" target="_blank" rel="noopener">GitHub</a>
-          </div>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Professional Software Engineer</h3>
+                    <p>
+                        I'm a passionate software engineer with a strong foundation in full-stack development. 
+                        My journey in technology has led me to specialize in creating robust, scalable applications 
+                        using modern frameworks and best practices.
+                    </p>
+                    <p>
+                        With experience in both frontend and backend development, I enjoy tackling complex 
+                        problems and turning ideas into reality. I'm always eager to learn new technologies 
+                        and contribute to innovative projects.
+                    </p>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-code"></i>
+                            <div>
+                                <h4>Clean Code</h4>
+                                <p>Writing maintainable, well-documented code</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4>Problem Solving</h4>
+                                <p>Innovative solutions to complex challenges</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Collaboration</h4>
+                                <p>Effective teamwork and communication</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-      </article>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Some of my recent work</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>3D Graphics Renderer</h3>
+                        <p>Advanced 3D graphics rendering using OpenGL concepts with vector mathematics and real-time rendering.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Canvas API</span>
+                            <span class="tech-tag">3D Mathematics</span>
+                        </div>
+                        <div class="project-links">
+                            <button class="btn btn-primary" onclick="openGraphicsDemo()">
+                                <i class="fas fa-play"></i> Live Demo
+                            </button>
+                            <a href="https://github.com/evandossantos" class="btn btn-secondary" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Algorithm Visualizer</h3>
+                        <p>Interactive visualization of sorting and pathfinding algorithms with real-time performance metrics.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Algorithms</span>
+                        </div>
+                        <div class="project-links">
+                            <button class="btn btn-primary" onclick="openAlgorithmDemo()">
+                                <i class="fas fa-play"></i> Live Demo
+                            </button>
+                            <a href="https://github.com/evandossantos" class="btn btn-secondary" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>Full-stack e-commerce solution with payment processing, inventory management, and admin dashboard.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <button class="btn btn-primary" onclick="openEcommerceDemo()">
+                                <i class="fas fa-play"></i> Live Demo
+                            </button>
+                            <a href="https://github.com/evandossantos" class="btn btn-secondary" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Technologies I work with</p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Frontend Development</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span>React</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>TypeScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>CSS/Sass</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Backend Development</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span>Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Express.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="87"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>REST APIs</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Database & Tools</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span>PostgreSQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="82"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>MongoDB</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="78"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Git</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="92"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Docker</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's work together</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always interested in hearing about new opportunities and exciting projects.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>evandossantos@email.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <h4>LinkedIn</h4>
+                                <p>linkedin.com/in/evandossantos</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <h4>GitHub</h4>
+                                <p>github.com/evandossantos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Evan Dos Santos</h3>
+                    <p>Software Engineer</p>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="https://linkedin.com/in/evandossantos" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/evandossantos" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://twitter.com/evandossantos" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="mailto:evandossantos@email.com">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Evan Dos Santos. All rights reserved. Built with passion and modern web technologies.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Demo Modals -->
+    <div id="graphics-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>3D Graphics Renderer</h2>
+            <div id="graphics-demo-container"></div>
+        </div>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="skills">
-    <h2>Skills</h2>
-    <div class="skill-grid container">
-      <div class="skill">JavaScript</div>
-      <div class="skill">Python</div>
-      <div class="skill">React</div>
-      <div class="skill">Node.js</div>
-      <div class="skill">HTML &amp; CSS</div>
-      <div class="skill">Git &amp; GitHub</div>
-      <div class="skill">SQL / Databases</div>
-      <div class="skill">Problem Solving</div>
-      <div class="skill">Team Collaboration</div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <h2>Contact Me</h2>
-
-    <div class="container">
-      <form class="contact-form" action="mailto:your-email@example.com" method="POST" enctype="text/plain">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn primary">Send Message</button>
-      </form>
-
-      <div class="social-links" aria-label="social links">
-        <a href="mailto:your-email@example.com">Email</a>
-        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="#" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-  </section>
-
- <!-- FOOTER -->
-<footer>
-  <div class="container">
-    <h2>Evan Dos Santos</h2>
-    <p>Software Engineer &amp; IT Systems Specialist</p>
-
-    <div class="footer-socials">
-      <!-- Example SVGs -->
-      <a href="#" aria-label="GitHub">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.2.8-.5v-2c-3.3.7-4-1.6-4-1.6a3.1 3.1 0 0 0-1.2-1.6c-1-.7.1-.7.1-.7a2.5 2.5 0 0 1 1.8 1.2 2.6 2.6 0 0 0 3.6 1 2.6 2.6 0 0 1 .8-1.6c-2.7-.3-5.6-1.4-5.6-6.1a4.8 4.8 0 0 1 1.3-3.3 4.4 4.4 0 0 1 .1-3.3s1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2a4.4 4.4 0 0 1 .1 3.3 4.8 4.8 0 0 1 1.3 3.3c0 4.7-2.9 5.8-5.6 6.1a2.8 2.8 0 0 1 .8 2.2v3.3c0 .3.2.6.8.5A12 12 0 0 0 12 .3z"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="LinkedIn">
-        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20.5 20.5h-3.6v-5.4c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9v5.5H9.2V9h3.4v1.6h.1c.5-.9 1.7-1.9 3.6-1.9 3.9 0 4.6 2.6 4.6 6v5.8zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.5H3.5V9h3.6v11.5z"/>
-        </svg>
-      </a>
+    <div id="algorithm-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Algorithm Visualizer</h2>
+            <div id="algorithm-demo-container">
+                <div class="demo-placeholder">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Algorithm Visualizer Demo</h3>
+                    <p>Interactive visualization of sorting and pathfinding algorithms</p>
+                    <div class="demo-features">
+                        <div class="feature-item">
+                            <i class="fas fa-sort"></i>
+                            <span>Sorting Algorithms</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-route"></i>
+                            <span>Pathfinding</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Performance Metrics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <p class="legal">© 2024 Evan Dos Santos. All rights reserved.</p>
-  </div>
-</footer>
+    <div id="ecommerce-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>E-Commerce Platform</h2>
+            <div id="ecommerce-demo-container">
+                <div class="demo-placeholder">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>E-Commerce Platform Demo</h3>
+                    <p>Full-stack e-commerce solution with modern features</p>
+                    <div class="demo-features">
+                        <div class="feature-item">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Payment Processing</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-boxes"></i>
+                            <span>Inventory Management</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Admin Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- JS -->
-  <script src="main.js"></script>
+    <!-- Success/Error Messages -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span class="toast-message"></span>
+            <button class="toast-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/portfolio-data.js"></script>
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/animations.js"></script>
+    <script src="scripts/contact-form.js"></script>
+    <script src="scripts/graphics-demo.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
