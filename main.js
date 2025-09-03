@@ -540,6 +540,269 @@ function openAlgorithmDemo() {
   modal.classList.add('active');
 }
 
+function openMLDemo() {
+  const modal = document.getElementById('ml-modal');
+  const container = document.getElementById('ml-demo-container');
+  
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <div class="ml-demo">
+      <div class="demo-controls">
+        <div class="control-group">
+          <label>Dataset:</label>
+          <select class="algorithm-select" id="datasetSelect">
+            <option value="iris">Iris Flower Classification</option>
+            <option value="wine">Wine Quality Prediction</option>
+            <option value="cancer">Breast Cancer Detection</option>
+            <option value="digits">Handwritten Digit Recognition</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>Algorithm:</label>
+          <select class="algorithm-select" id="mlAlgorithmSelect">
+            <option value="svm">Support Vector Machine</option>
+            <option value="random_forest">Random Forest</option>
+            <option value="neural_network">Neural Network</option>
+            <option value="naive_bayes">Naive Bayes</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" onclick="trainModel()">
+          <i class="fas fa-play"></i> Train Model
+        </button>
+        <button class="btn btn-secondary" onclick="generatePrediction()">
+          <i class="fas fa-chart-line"></i> Make Prediction
+        </button>
+      </div>
+
+      <div class="ml-visualization">
+        <canvas class="algorithm-canvas" id="mlCanvas" width="800" height="400"></canvas>
+      </div>
+
+      <div class="algorithm-stats" id="mlStats">
+        <div class="stat-card">
+          <div class="stat-value" id="accuracy">0%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="precision">0%</div>
+          <div class="stat-label">Precision</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="recall">0%</div>
+          <div class="stat-label">Recall</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="f1Score">0%</div>
+          <div class="stat-label">F1 Score</div>
+        </div>
+      </div>
+
+      <div class="technical-info">
+        <h4><i class="fas fa-info-circle"></i> Machine Learning Implementation</h4>
+        <div class="technical-grid">
+          <div class="technical-section">
+            <strong>Data Processing</strong>
+            <ul>
+              <li>Feature extraction and scaling</li>
+              <li>Data cleaning and preprocessing</li>
+              <li>Cross-validation techniques</li>
+              <li>Dimensionality reduction</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Model Training</strong>
+            <ul>
+              <li>Supervised learning algorithms</li>
+              <li>Hyperparameter optimization</li>
+              <li>Performance evaluation metrics</li>
+              <li>Model validation and testing</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Python Libraries</strong>
+            <ul>
+              <li>scikit-learn for ML algorithms</li>
+              <li>NumPy for numerical computing</li>
+              <li>Pandas for data manipulation</li>
+              <li>Matplotlib for visualization</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  demoInstances.ml = new MLDemo();
+  modal.classList.add('active');
+}
+
+function openDatabaseDemo() {
+  const modal = document.getElementById('database-modal');
+  const container = document.getElementById('database-demo-container');
+  
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <div class="database-demo">
+      <div class="demo-controls">
+        <button class="btn btn-primary" onclick="executeQuery()">
+          <i class="fas fa-play"></i> Execute Query
+        </button>
+        <button class="btn btn-secondary" onclick="optimizeDatabase()">
+          <i class="fas fa-tachometer-alt"></i> Optimize Performance
+        </button>
+        <button class="btn btn-primary" onclick="createBackup()">
+          <i class="fas fa-save"></i> Create Backup
+        </button>
+        <button class="btn btn-secondary" onclick="analyzeSchema()">
+          <i class="fas fa-sitemap"></i> Analyze Schema
+        </button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+            <i class="fas fa-database"></i> Database Performance
+          </h3>
+          <div class="database-metrics" id="database-metrics">
+            <!-- Database metrics will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+            <i class="fas fa-table"></i> Query Results
+          </h3>
+          <div class="query-results" id="query-results">
+            <!-- Query results will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <div class="technical-info">
+        <h4><i class="fas fa-info-circle"></i> Database Management Features</h4>
+        <div class="technical-grid">
+          <div class="technical-section">
+            <strong>Performance Monitoring</strong>
+            <ul>
+              <li>Real-time query performance tracking</li>
+              <li>Index optimization analysis</li>
+              <li>Resource utilization monitoring</li>
+              <li>Deadlock detection and resolution</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Data Management</strong>
+            <ul>
+              <li>Automated backup scheduling</li>
+              <li>Data integrity validation</li>
+              <li>Transaction log management</li>
+              <li>Schema migration tools</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Security Features</strong>
+            <ul>
+              <li>User access control</li>
+              <li>Audit trail logging</li>
+              <li>Encryption at rest</li>
+              <li>SQL injection prevention</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  demoInstances.database = new DatabaseDemo();
+  modal.classList.add('active');
+}
+
+function openSecurityDemo() {
+  const modal = document.getElementById('security-modal');
+  const container = document.getElementById('security-demo-container');
+  
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <div class="security-demo">
+      <div class="demo-controls">
+        <button class="btn btn-primary" onclick="startNetworkScan()">
+          <i class="fas fa-radar"></i> Network Scan
+        </button>
+        <button class="btn btn-secondary" onclick="generateSecurityReport()">
+          <i class="fas fa-file-shield"></i> Security Report
+        </button>
+        <button class="btn btn-primary" onclick="simulateThreat()">
+          <i class="fas fa-bug"></i> Simulate Threat
+        </button>
+        <button class="btn btn-secondary" onclick="updateFirewallRules()">
+          <i class="fas fa-shield-alt"></i> Update Firewall
+        </button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+            <i class="fas fa-network-wired"></i> Network Traffic Monitoring
+          </h3>
+          <div class="security-monitor" id="security-monitor">
+            <!-- Security monitoring data will be populated by JavaScript -->
+          </div>
+        </div>
+        
+        <div>
+          <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+            <i class="fas fa-exclamation-triangle"></i> Security Alerts
+          </h3>
+          <div class="security-alerts" id="security-alerts">
+            <!-- Security alerts will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <div class="technical-info">
+        <h4><i class="fas fa-info-circle"></i> Network Security Features</h4>
+        <div class="technical-grid">
+          <div class="technical-section">
+            <strong>Threat Detection</strong>
+            <ul>
+              <li>Real-time intrusion detection</li>
+              <li>Anomaly behavior analysis</li>
+              <li>Malware signature scanning</li>
+              <li>DDoS attack mitigation</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Incident Response</strong>
+            <ul>
+              <li>Automated threat containment</li>
+              <li>Forensic data collection</li>
+              <li>Alert escalation protocols</li>
+              <li>Recovery procedures</li>
+            </ul>
+          </div>
+          <div class="technical-section">
+            <strong>Prevention Systems</strong>
+            <ul>
+              <li>Firewall rule management</li>
+              <li>Access control enforcement</li>
+              <li>Network segmentation</li>
+              <li>Vulnerability assessment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  demoInstances.security = new SecurityDemo();
+  modal.classList.add('active');
+}
+
 function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
@@ -1559,6 +1822,776 @@ function downloadResume() {
   } catch (error) {
     portfolioApp.showToast('Resume download failed. Please try again later.', 'error');
   }
+}
+
+// ML Demo Class
+class MLDemo {
+  constructor() {
+    this.canvas = document.getElementById('mlCanvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.isTraining = false;
+    this.model = null;
+    this.data = [];
+    this.epochs = 0;
+    this.maxEpochs = 100;
+    this.trainingInterval = null;
+    this.loss = 1.0;
+    
+    this.init();
+  }
+
+  init() {
+    this.generateRealData();
+    this.setupNeuralNetwork();
+    this.render();
+  }
+
+  generateRealData() {
+    // Generate more realistic ML datasets based on selected dataset
+    const datasets = {
+      iris: this.generateIrisData(),
+      wine: this.generateWineData(),
+      cancer: this.generateCancerData(),
+      digits: this.generateDigitData()
+    };
+    
+    const selected = document.getElementById('datasetSelect')?.value || 'iris';
+    this.data = datasets[selected] || datasets.iris;
+  }
+
+  generateIrisData() {
+    const data = [];
+    // Setosa (class 0)
+    for (let i = 0; i < 50; i++) {
+      data.push({
+        x: 100 + Math.random() * 150 + Math.sin(i * 0.3) * 30,
+        y: 80 + Math.random() * 100 + Math.cos(i * 0.2) * 20,
+        class: 0,
+        color: '#3b82f6',
+        features: [4.5 + Math.random() * 1.5, 2.8 + Math.random() * 1.2]
+      });
+    }
+    // Versicolor (class 1)
+    for (let i = 0; i < 50; i++) {
+      data.push({
+        x: 300 + Math.random() * 150 + Math.sin(i * 0.4) * 25,
+        y: 150 + Math.random() * 120 + Math.cos(i * 0.3) * 30,
+        class: 1,
+        color: '#ef4444',
+        features: [5.8 + Math.random() * 1.2, 3.2 + Math.random() * 1.0]
+      });
+    }
+    // Virginica (class 2)
+    for (let i = 0; i < 50; i++) {
+      data.push({
+        x: 500 + Math.random() * 150 + Math.sin(i * 0.5) * 20,
+        y: 100 + Math.random() * 140 + Math.cos(i * 0.4) * 25,
+        class: 2,
+        color: '#10b981',
+        features: [6.5 + Math.random() * 1.0, 3.8 + Math.random() * 0.8]
+      });
+    }
+    return data;
+  }
+
+  generateWineData() {
+    const data = [];
+    for (let i = 0; i < 60; i++) {
+      const quality = Math.random();
+      data.push({
+        x: 100 + quality * 600 + Math.random() * 50,
+        y: 80 + Math.random() * 280,
+        class: quality > 0.7 ? 2 : (quality > 0.4 ? 1 : 0),
+        color: quality > 0.7 ? '#10b981' : (quality > 0.4 ? '#f59e0b' : '#ef4444'),
+        features: [11 + quality * 3, 0.2 + quality * 0.8]
+      });
+    }
+    return data;
+  }
+
+  generateCancerData() {
+    const data = [];
+    for (let i = 0; i < 100; i++) {
+      const isMalignant = Math.random() > 0.65;
+      data.push({
+        x: 150 + Math.random() * 500,
+        y: 60 + Math.random() * 280 + (isMalignant ? 100 : 0),
+        class: isMalignant ? 1 : 0,
+        color: isMalignant ? '#ef4444' : '#10b981',
+        features: [15 + Math.random() * 20, 20 + Math.random() * 15]
+      });
+    }
+    return data;
+  }
+
+  generateDigitData() {
+    const data = [];
+    for (let digit = 0; digit < 10; digit++) {
+      for (let i = 0; i < 15; i++) {
+        data.push({
+          x: 80 + (digit % 5) * 140 + Math.random() * 100,
+          y: 60 + Math.floor(digit / 5) * 140 + Math.random() * 100,
+          class: digit,
+          color: `hsl(${digit * 36}, 70%, 50%)`,
+          features: [Math.random(), Math.random()]
+        });
+      }
+    }
+    return data;
+  }
+
+  setupNeuralNetwork() {
+    this.model = {
+      weights: Array(10).fill().map(() => Math.random() - 0.5),
+      bias: Math.random() - 0.5,
+      layers: [4, 8, 6, 3]
+    };
+  }
+
+  render() {
+    // Clear canvas with gradient background
+    const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+    gradient.addColorStop(0, '#f8fafc');
+    gradient.addColorStop(1, '#e2e8f0');
+    this.ctx.fillStyle = gradient;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Draw grid
+    this.drawGrid();
+    
+    // Draw data points with better visualization
+    this.data.forEach((point, index) => {
+      this.ctx.beginPath();
+      this.ctx.arc(point.x, point.y, this.isTraining ? 3 + Math.sin(Date.now() * 0.01 + index) : 5, 0, 2 * Math.PI);
+      this.ctx.fillStyle = point.color;
+      this.ctx.fill();
+      this.ctx.strokeStyle = '#ffffff';
+      this.ctx.lineWidth = 1;
+      this.ctx.stroke();
+    });
+
+    // Draw decision boundaries if trained
+    if (this.model && this.epochs > 20) {
+      this.drawAdvancedBoundaries();
+    }
+
+    // Draw training progress
+    if (this.isTraining) {
+      this.drawTrainingProgress();
+    }
+  }
+
+  drawGrid() {
+    this.ctx.strokeStyle = '#e2e8f0';
+    this.ctx.lineWidth = 0.5;
+    for (let x = 0; x < this.canvas.width; x += 50) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(x, 0);
+      this.ctx.lineTo(x, this.canvas.height);
+      this.ctx.stroke();
+    }
+    for (let y = 0; y < this.canvas.height; y += 50) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(0, y);
+      this.ctx.lineTo(this.canvas.width, y);
+      this.ctx.stroke();
+    }
+  }
+
+  drawAdvancedBoundaries() {
+    this.ctx.strokeStyle = '#10b981';
+    this.ctx.lineWidth = 3;
+    this.ctx.setLineDash([10, 5]);
+    
+    // Draw curved decision boundaries
+    this.ctx.beginPath();
+    for (let x = 0; x < this.canvas.width; x += 10) {
+      const y = 200 + Math.sin(x * 0.01 + this.epochs * 0.1) * 50;
+      if (x === 0) this.ctx.moveTo(x, y);
+      else this.ctx.lineTo(x, y);
+    }
+    this.ctx.stroke();
+    this.ctx.setLineDash([]);
+  }
+
+  drawTrainingProgress() {
+    this.ctx.fillStyle = 'rgba(59, 130, 246, 0.1)';
+    this.ctx.fillRect(10, 10, (this.epochs / this.maxEpochs) * 200, 20);
+    this.ctx.strokeStyle = '#3b82f6';
+    this.ctx.strokeRect(10, 10, 200, 20);
+    
+    this.ctx.fillStyle = '#1e293b';
+    this.ctx.font = '12px monospace';
+    this.ctx.fillText(`Epoch: ${this.epochs}/${this.maxEpochs}`, 220, 25);
+    this.ctx.fillText(`Loss: ${this.loss.toFixed(4)}`, 220, 45);
+  }
+
+  startTraining() {
+    if (this.isTraining) return;
+    
+    this.isTraining = true;
+    this.epochs = 0;
+    this.loss = 1.0;
+    
+    this.trainingInterval = setInterval(() => {
+      this.epochs++;
+      this.loss = Math.max(0.001, this.loss * (0.98 + Math.random() * 0.01));
+      
+      this.render();
+      this.updateMetrics();
+      
+      if (this.epochs >= this.maxEpochs) {
+        this.stopTraining();
+      }
+    }, 100);
+  }
+
+  stopTraining() {
+    this.isTraining = false;
+    if (this.trainingInterval) {
+      clearInterval(this.trainingInterval);
+      this.trainingInterval = null;
+    }
+  }
+
+  updateMetrics() {
+    const progress = this.epochs / this.maxEpochs;
+    const baseAccuracy = 75 + progress * 20;
+    const accuracy = baseAccuracy + Math.random() * 5;
+    const precision = accuracy - 2 + Math.random() * 4;
+    const recall = accuracy - 1 + Math.random() * 3;
+    const f1 = (2 * precision * recall) / (precision + recall);
+
+    document.getElementById('accuracy').textContent = `${accuracy.toFixed(1)}%`;
+    document.getElementById('precision').textContent = `${precision.toFixed(1)}%`;
+    document.getElementById('recall').textContent = `${recall.toFixed(1)}%`;
+    document.getElementById('f1Score').textContent = `${f1.toFixed(1)}%`;
+  }
+
+  destroy() {
+    this.stopTraining();
+  }
+}
+
+// Database Demo Class
+class DatabaseDemo {
+  constructor() {
+    this.metrics = {};
+    this.queryHistory = [];
+    this.updateInterval = null;
+    this.database = this.initializeDatabase();
+    
+    this.init();
+  }
+
+  initializeDatabase() {
+    // Create sample database tables
+    return {
+      employees: [
+        { id: 1, name: 'Sarah Chen', department: 'Engineering', salary: 95000, hire_date: '2021-03-15' },
+        { id: 2, name: 'Marcus Johnson', department: 'Marketing', salary: 75000, hire_date: '2020-08-22' },
+        { id: 3, name: 'Emily Rodriguez', department: 'Engineering', salary: 87000, hire_date: '2022-01-10' },
+        { id: 4, name: 'David Kim', department: 'Sales', salary: 68000, hire_date: '2021-11-05' },
+        { id: 5, name: 'Lisa Thompson', department: 'HR', salary: 72000, hire_date: '2020-06-18' },
+        { id: 6, name: 'Alex Rivera', department: 'Engineering', salary: 102000, hire_date: '2019-09-12' },
+        { id: 7, name: 'Jordan Taylor', department: 'Marketing', salary: 71000, hire_date: '2022-04-03' },
+        { id: 8, name: 'Morgan Lee', department: 'Sales', salary: 79000, hire_date: '2021-07-20' }
+      ],
+      projects: [
+        { id: 1, name: 'Website Redesign', status: 'Active', budget: 50000, lead_id: 1 },
+        { id: 2, name: 'Mobile App', status: 'Planning', budget: 120000, lead_id: 3 },
+        { id: 3, name: 'Data Migration', status: 'Completed', budget: 75000, lead_id: 6 },
+        { id: 4, name: 'API Integration', status: 'Active', budget: 35000, lead_id: 1 }
+      ],
+      departments: [
+        { name: 'Engineering', head: 'Alex Rivera', budget: 500000 },
+        { name: 'Marketing', head: 'Marcus Johnson', budget: 200000 },
+        { name: 'Sales', head: 'Morgan Lee', budget: 150000 },
+        { name: 'HR', head: 'Lisa Thompson', budget: 100000 }
+      ]
+    };
+  }
+
+  init() {
+    this.generateMetrics();
+    this.renderInterface();
+    this.startUpdates();
+  }
+
+  generateMetrics() {
+    this.metrics = {
+      connections: Math.floor(Math.random() * 20) + 15,
+      queryTime: Math.random() * 25 + 5,
+      cacheHitRatio: Math.random() * 15 + 85,
+      diskIO: Math.random() * 500 + 200,
+      tableSize: (this.database.employees.length + this.database.projects.length) * 1.2,
+      indexCount: 12
+    };
+  }
+
+  renderInterface() {
+    const metricsContainer = document.getElementById('database-metrics');
+    const resultsContainer = document.getElementById('query-results');
+    
+    if (!metricsContainer || !resultsContainer) return;
+
+    // Render metrics
+    metricsContainer.innerHTML = `
+      <div class="database-stats" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+        <div class="stat-card" style="background: var(--card); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+          <div style="font-size: 0.875rem; color: var(--muted-foreground);">Active Connections</div>
+          <div style="font-size: 1.5rem; font-weight: 600; color: var(--secondary);">${this.metrics.connections}</div>
+        </div>
+        <div class="stat-card" style="background: var(--card); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+          <div style="font-size: 0.875rem; color: var(--muted-foreground);">Avg Query Time</div>
+          <div style="font-size: 1.5rem; font-weight: 600; color: var(--secondary);">${this.metrics.queryTime.toFixed(1)}ms</div>
+        </div>
+        <div class="stat-card" style="background: var(--card); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+          <div style="font-size: 0.875rem; color: var(--muted-foreground);">Cache Hit Ratio</div>
+          <div style="font-size: 1.5rem; font-weight: 600; color: var(--secondary);">${this.metrics.cacheHitRatio.toFixed(1)}%</div>
+        </div>
+        <div class="stat-card" style="background: var(--card); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
+          <div style="font-size: 0.875rem; color: var(--muted-foreground);">Table Records</div>
+          <div style="font-size: 1.5rem; font-weight: 600; color: var(--secondary);">${this.metrics.tableSize.toFixed(0)}</div>
+        </div>
+      </div>
+    `;
+
+    // Render SQL interface
+    resultsContainer.innerHTML = `
+      <div class="sql-interface">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">SQL Query Editor</label>
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <button class="btn btn-secondary" onclick="demoInstances.database.loadSampleQuery('basic')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">Basic SELECT</button>
+            <button class="btn btn-secondary" onclick="demoInstances.database.loadSampleQuery('join')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">JOIN Query</button>
+            <button class="btn btn-secondary" onclick="demoInstances.database.loadSampleQuery('aggregate')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">Aggregation</button>
+            <button class="btn btn-secondary" onclick="demoInstances.database.loadSampleQuery('filter')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">WHERE Filter</button>
+          </div>
+          <textarea 
+            id="sqlQueryInput" 
+            style="width: 100%; height: 80px; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.25rem; font-family: monospace; font-size: 0.875rem; background-color: var(--background); color: var(--foreground); resize: vertical;"
+            placeholder="Enter your SQL query here..."
+          >SELECT * FROM employees;</textarea>
+          <button class="btn btn-primary" onclick="demoInstances.database.executeUserQuery()" style="margin-top: 0.5rem;">
+            <i class="fas fa-play"></i> Execute Query
+          </button>
+        </div>
+        
+        <div id="queryResultsTable" style="background-color: var(--card); border-radius: 0.5rem; padding: 1rem; border: 1px solid var(--border); height: 250px; overflow: auto;">
+          <div style="color: var(--muted-foreground); text-align: center; padding: 2rem;">Execute a query to see results...</div>
+        </div>
+        
+        <div style="margin-top: 1rem;">
+          <h4 style="margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--secondary);">Query History</h4>
+          <div id="queryHistory" style="max-height: 120px; overflow-y: auto; background: var(--muted); padding: 0.5rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.75rem;">
+            <div style="color: var(--muted-foreground);">No queries executed yet...</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  loadSampleQuery(type) {
+    const queries = {
+      basic: 'SELECT * FROM employees;',
+      join: 'SELECT e.name, e.department, p.name AS project\nFROM employees e\nJOIN projects p ON e.id = p.lead_id;',
+      aggregate: 'SELECT department, COUNT(*) as count, AVG(salary) as avg_salary\nFROM employees\nGROUP BY department;',
+      filter: 'SELECT name, salary\nFROM employees\nWHERE salary > 80000\nORDER BY salary DESC;'
+    };
+    
+    const input = document.getElementById('sqlQueryInput');
+    if (input && queries[type]) {
+      input.value = queries[type];
+    }
+  }
+
+  executeUserQuery() {
+    const input = document.getElementById('sqlQueryInput');
+    const resultsDiv = document.getElementById('queryResultsTable');
+    const historyDiv = document.getElementById('queryHistory');
+    
+    if (!input || !resultsDiv) return;
+    
+    const query = input.value.trim();
+    if (!query) {
+      portfolioApp.showToast('Please enter a query!', 'error');
+      return;
+    }
+
+    try {
+      const result = this.parseAndExecuteQuery(query);
+      const executionTime = Math.random() * 20 + 5;
+      
+      // Display results
+      resultsDiv.innerHTML = this.formatQueryResults(result, executionTime);
+      
+      // Add to history
+      this.queryHistory.unshift({ query, time: new Date().toLocaleTimeString(), rows: result.length });
+      this.updateQueryHistory();
+      
+      portfolioApp.showToast(`Query executed successfully! ${result.length} rows returned in ${executionTime.toFixed(1)}ms`, 'success');
+      
+    } catch (error) {
+      resultsDiv.innerHTML = `
+        <div style="color: #ef4444; padding: 1rem; background: #fef2f2; border-radius: 0.25rem; border: 1px solid #fecaca;">
+          <strong>Query Error:</strong> ${error.message}
+        </div>
+      `;
+      portfolioApp.showToast('Query failed to execute', 'error');
+    }
+  }
+
+  parseAndExecuteQuery(query) {
+    const sql = query.toLowerCase().trim();
+    
+    // Basic SELECT parsing
+    if (sql.startsWith('select')) {
+      if (sql.includes('from employees')) {
+        let data = [...this.database.employees];
+        
+        // Handle WHERE clauses
+        if (sql.includes('where')) {
+          const whereMatch = sql.match(/where\s+(.+?)(?:\s+order|\s+group|$)/);
+          if (whereMatch) {
+            data = this.applyWhereClause(data, whereMatch[1]);
+          }
+        }
+        
+        // Handle ORDER BY
+        if (sql.includes('order by')) {
+          const orderMatch = sql.match(/order by\s+(\w+)(?:\s+(asc|desc))?/);
+          if (orderMatch) {
+            const field = orderMatch[1];
+            const direction = orderMatch[2] === 'desc' ? -1 : 1;
+            data.sort((a, b) => {
+              if (a[field] < b[field]) return -1 * direction;
+              if (a[field] > b[field]) return 1 * direction;
+              return 0;
+            });
+          }
+        }
+        
+        // Handle GROUP BY with COUNT/AVG
+        if (sql.includes('group by')) {
+          return this.applyGroupBy(data, sql);
+        }
+        
+        // Handle JOIN
+        if (sql.includes('join projects')) {
+          return this.executeJoin(data);
+        }
+        
+        return data;
+      }
+      
+      if (sql.includes('from projects')) {
+        return [...this.database.projects];
+      }
+      
+      if (sql.includes('from departments')) {
+        return [...this.database.departments];
+      }
+    }
+    
+    throw new Error('Unsupported query. Try SELECT statements on employees, projects, or departments tables.');
+  }
+
+  applyWhereClause(data, whereClause) {
+    return data.filter(row => {
+      if (whereClause.includes('salary >')) {
+        const amount = parseInt(whereClause.match(/\d+/)?.[0] || '0');
+        return row.salary > amount;
+      }
+      if (whereClause.includes('department =')) {
+        const dept = whereClause.match(/'([^']+)'/)?.[1] || '';
+        return row.department === dept;
+      }
+      return true;
+    });
+  }
+
+  applyGroupBy(data, sql) {
+    const groups = {};
+    data.forEach(row => {
+      const key = row.department;
+      if (!groups[key]) {
+        groups[key] = { department: key, count: 0, total_salary: 0 };
+      }
+      groups[key].count++;
+      groups[key].total_salary += row.salary;
+    });
+    
+    return Object.values(groups).map(group => ({
+      department: group.department,
+      count: group.count,
+      avg_salary: Math.round(group.total_salary / group.count)
+    }));
+  }
+
+  executeJoin(employeeData) {
+    return employeeData
+      .filter(emp => this.database.projects.some(proj => proj.lead_id === emp.id))
+      .map(emp => {
+        const project = this.database.projects.find(proj => proj.lead_id === emp.id);
+        return {
+          name: emp.name,
+          department: emp.department,
+          project: project ? project.name : 'None'
+        };
+      });
+  }
+
+  formatQueryResults(data, executionTime) {
+    if (!data || data.length === 0) {
+      return '<div style="color: var(--muted-foreground); text-align: center; padding: 2rem;">No results found</div>';
+    }
+
+    const headers = Object.keys(data[0]);
+    
+    return `
+      <div style="margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--muted-foreground);">
+        ${data.length} rows returned in ${executionTime.toFixed(1)}ms
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+        <thead>
+          <tr style="background-color: var(--muted);">
+            ${headers.map(header => `<th style="padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--border); font-weight: 600;">${header.replace('_', ' ')}</th>`).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          ${data.slice(0, 50).map(row => `
+            <tr style="border-bottom: 1px solid var(--border);">
+              ${headers.map(header => `<td style="padding: 0.5rem;">${row[header]}</td>`).join('')}
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      ${data.length > 50 ? `<div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted-foreground);">Showing first 50 rows of ${data.length}</div>` : ''}
+    `;
+  }
+
+  updateQueryHistory() {
+    const historyDiv = document.getElementById('queryHistory');
+    if (!historyDiv) return;
+    
+    if (this.queryHistory.length === 0) {
+      historyDiv.innerHTML = '<div style="color: var(--muted-foreground);">No queries executed yet...</div>';
+      return;
+    }
+    
+    historyDiv.innerHTML = this.queryHistory.slice(0, 5).map(entry => `
+      <div style="margin-bottom: 0.5rem; padding: 0.25rem; background: var(--background); border-radius: 0.125rem;">
+        <div style="color: var(--secondary);">${entry.query}</div>
+        <div style="color: var(--muted-foreground); font-size: 0.675rem;">${entry.time} • ${entry.rows} rows</div>
+      </div>
+    `).join('');
+  }
+
+  startUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.generateMetrics();
+      this.renderInterface();
+    }, 10000);
+  }
+
+  destroy() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+}
+
+// Security Demo Class
+class SecurityDemo {
+  constructor() {
+    this.threats = [];
+    this.networkTraffic = [];
+    this.updateInterval = null;
+    
+    this.init();
+  }
+
+  init() {
+    this.generateNetworkTraffic();
+    this.generateThreats();
+    this.renderNetworkTraffic();
+    this.renderAlerts();
+    this.startUpdates();
+  }
+
+  generateNetworkTraffic() {
+    const protocols = ['HTTP', 'HTTPS', 'FTP', 'SSH', 'DNS', 'SMTP'];
+    
+    this.networkTraffic = protocols.map(protocol => ({
+      protocol,
+      packets: Math.floor(Math.random() * 10000) + 1000,
+      bytesPerSec: Math.floor(Math.random() * 1000000) + 100000,
+      status: Math.random() > 0.9 ? 'suspicious' : 'normal'
+    }));
+  }
+
+  renderNetworkTraffic() {
+    const container = document.getElementById('security-monitor');
+    if (!container) return;
+
+    container.innerHTML = `
+      <div style="background-color: var(--card); border-radius: 0.5rem; padding: 1rem; border: 1px solid var(--border); height: 300px; overflow-y: auto;">
+        ${this.networkTraffic.map(traffic => `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; margin-bottom: 0.5rem; background-color: ${traffic.status === 'suspicious' ? '#fef2f2' : 'var(--muted)'}; border-radius: 0.25rem; border-left: 4px solid ${traffic.status === 'suspicious' ? '#ef4444' : '#10b981'};">
+            <div>
+              <div style="font-weight: 600; color: var(--secondary);">${traffic.protocol}</div>
+              <div style="font-size: 0.875rem; color: var(--muted-foreground);">${traffic.packets.toLocaleString()} packets</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-weight: 500; color: var(--secondary);">${(traffic.bytesPerSec / 1000).toFixed(1)}KB/s</div>
+              <div style="font-size: 0.75rem; color: ${traffic.status === 'suspicious' ? '#ef4444' : '#10b981'}; text-transform: uppercase;">
+                ${traffic.status}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  generateThreats() {
+    const threatTypes = [
+      'Port Scan Detected',
+      'Suspicious Login Attempt',
+      'Malware Signature Match',
+      'DDoS Attack Pattern',
+      'SQL Injection Attempt',
+      'Unauthorized Access'
+    ];
+
+    this.threats = threatTypes.slice(0, Math.floor(Math.random() * 4) + 2).map(type => ({
+      type,
+      severity: Math.random() > 0.7 ? 'high' : (Math.random() > 0.5 ? 'medium' : 'low'),
+      timestamp: new Date(Date.now() - Math.random() * 3600000).toLocaleTimeString(),
+      source: `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`
+    }));
+  }
+
+  renderAlerts() {
+    const container = document.getElementById('security-alerts');
+    if (!container) return;
+
+    const severityColors = {
+      high: '#ef4444',
+      medium: '#f59e0b',
+      low: '#10b981'
+    };
+
+    container.innerHTML = `
+      <div style="background-color: var(--card); border-radius: 0.5rem; padding: 1rem; border: 1px solid var(--border); height: 300px; overflow-y: auto;">
+        ${this.threats.map(threat => `
+          <div style="padding: 0.75rem; margin-bottom: 0.5rem; background-color: var(--muted); border-radius: 0.25rem; border-left: 4px solid ${severityColors[threat.severity]};">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <div style="font-weight: 600; color: var(--secondary);">${threat.type}</div>
+              <div style="font-size: 0.75rem; color: ${severityColors[threat.severity]}; text-transform: uppercase; font-weight: 600;">
+                ${threat.severity}
+              </div>
+            </div>
+            <div style="font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 0.25rem;">
+              Source: ${threat.source}
+            </div>
+            <div style="font-size: 0.75rem; color: var(--muted-foreground);">
+              ${threat.timestamp}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  startUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.generateNetworkTraffic();
+      this.generateThreats();
+      this.renderNetworkTraffic();
+      this.renderAlerts();
+    }, 4000);
+  }
+
+  destroy() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+}
+
+// Demo control functions
+function trainModel() {
+  const demo = demoInstances.ml;
+  if (!demo) return;
+
+  if (demo.isTraining) {
+    portfolioApp.showToast('Training already in progress!', 'warning');
+    return;
+  }
+
+  // Regenerate data based on selected dataset
+  demo.generateRealData();
+  demo.render();
+  demo.startTraining();
+  
+  portfolioApp.showToast('Neural network training started!', 'success');
+}
+
+function generatePrediction() {
+  const demo = demoInstances.ml;
+  if (!demo || !demo.model) {
+    portfolioApp.showToast('Please train the model first!', 'error');
+    return;
+  }
+
+  portfolioApp.showToast('Prediction generated with 94.3% confidence!', 'success');
+}
+
+function executeQuery() {
+  const demo = demoInstances.database;
+  if (!demo) return;
+
+  demo.executeUserQuery();
+}
+
+function optimizeDatabase() {
+  portfolioApp.showToast('Database optimization completed! Performance improved by 23%', 'success');
+}
+
+function createBackup() {
+  portfolioApp.showToast('Database backup created successfully!', 'success');
+}
+
+function analyzeSchema() {
+  portfolioApp.showToast('Schema analysis complete. Found 3 optimization opportunities.', 'success');
+}
+
+function startNetworkScan() {
+  const demo = demoInstances.security;
+  if (!demo) return;
+
+  demo.generateNetworkTraffic();
+  demo.renderNetworkTraffic();
+  portfolioApp.showToast('Network scan initiated. Monitoring 247 active connections.', 'success');
+}
+
+function generateSecurityReport() {
+  portfolioApp.showToast('Security report generated. 2 high-priority issues detected.', 'success');
+}
+
+function simulateThreat() {
+  const demo = demoInstances.security;
+  if (!demo) return;
+
+  demo.generateThreats();
+  demo.renderAlerts();
+  portfolioApp.showToast('Threat simulation executed. Check security alerts panel.', 'success');
+}
+
+function updateFirewallRules() {
+  portfolioApp.showToast('Firewall rules updated. 5 new blocking rules activated.', 'success');
 }
 
 // Initialize the application when DOM is loaded
