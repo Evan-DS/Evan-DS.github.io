@@ -3,12 +3,11 @@ const portfolioData = {
   personalInfo: {
     name: "Evan Dos Santos",
     title: "Software Engineer",
-    tagline: "Computer Science graduate with Software Engineering specialization. Experienced in IT consulting, systems administration, and developing innovative solutions with modern technologies.",
+    tagline: "B.Sc. (Hons) Computer Science, Software Engineering (Co-op). Experienced in full-stack development, IT consulting, systems administration, and developing innovative solutions with modern technologies.",
     email: "evangeorgedossantos@yahoo.ca",
     social: {
       linkedin: "https://linkedin.com/in/evan-g-dos-santos",
       github: "https://github.com/Evan-DS",
-      twitter: "https://twitter.com/evandossantos"
     }
   }
 };
