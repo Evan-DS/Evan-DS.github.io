@@ -1,16 +1,5 @@
-// Portfolio Data Configuration
-const portfolioData = {
-  personalInfo: {
-    name: "Evan Dos Santos",
-    title: "Software Engineer",
-    tagline: "B.Sc. (Hons) Computer Science, Software Engineering (Co-op). Experienced in full-stack development, IT consulting, systems administration, and developing innovative solutions with modern technologies.",
-    email: "evangeorgedossantos@yahoo.ca",
-    social: {
-      linkedin: "https://linkedin.com/in/evan-g-dos-santos",
-      github: "https://github.com/Evan-DS",
-    }
-  }
-};
+// Where contact form messages are sent
+const CONTACT_EMAIL = 'evangeorgedossantos@yahoo.ca';
 
 // Global application state
 let portfolioApp = null;
@@ -19,15 +8,12 @@ let demoInstances = {};
 // Main Portfolio Application
 class PortfolioApp {
   constructor() {
-    this.isLoaded = false;
     this.init();
   }
 
   init() {
     this.setupEventListeners();
     this.setupScrollAnimations();
-    this.setupSkillAnimations();
-    this.markAsLoaded();
   }
 
   setupEventListeners() {
@@ -38,8 +24,8 @@ class PortfolioApp {
     // Contact form
     this.setupContactForm();
     
-    // Resume download
-    this.setupResumeDownload();
+    // Resume download page
+    this.setupResumePage();
 
     // Global keyboard handlers
     document.addEventListener('keydown', (e) => {
@@ -131,36 +117,98 @@ class PortfolioApp {
       e.preventDefault();
       this.handleContactSubmit(form);
     });
+
+    // Hide the send options when the message changes so the links never go stale
+    form.addEventListener('input', () => {
+      document.getElementById('send-options').hidden = true;
+    });
+
+    document.getElementById('send-copy').addEventListener('click', () => this.copyContactDraft());
   }
 
-  async handleContactSubmit(form) {
-    const submitButton = form.querySelector('button[type="submit"]');
-    const buttonText = submitButton.querySelector('.btn-text');
-    const buttonLoading = submitButton.querySelector('.btn-loading');
+  handleContactSubmit(form) {
+    const data = new FormData(form);
+    const name = data.get('name').trim();
+    const email = data.get('email').trim();
+    const subject = data.get('subject').trim();
+    const body = `${data.get('message').trim()}\n\n${name}\n${email}`;
 
-    // Show loading state
-    buttonText.style.display = 'none';
-    buttonLoading.style.display = 'flex';
-    submitButton.disabled = true;
+    // Not every visitor has a mail app set up, so offer webmail and copy options too
+    const q = encodeURIComponent;
+    const links = {
+      'send-mailto': `mailto:${CONTACT_EMAIL}?subject=${q(subject)}&body=${q(body.replace(/\n/g, '\r\n'))}`,
+      'send-gmail': `https://mail.google.com/mail/?view=cm&fs=1&to=${q(CONTACT_EMAIL)}&su=${q(subject)}&body=${q(body)}`,
+      'send-outlook': `https://outlook.live.com/mail/0/deeplink/compose?to=${q(CONTACT_EMAIL)}&subject=${q(subject)}&body=${q(body)}`,
+      'send-yahoo': `https://compose.mail.yahoo.com/?to=${q(CONTACT_EMAIL)}&subject=${q(subject)}&body=${q(body)}`
+    };
+    Object.entries(links).forEach(([id, url]) => {
+      document.getElementById(id).href = url;
+    });
 
+    this.contactDraft = `To: ${CONTACT_EMAIL}\nSubject: ${subject}\n\n${body}`;
+
+    const panel = document.getElementById('send-options');
+    panel.hidden = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  async copyContactDraft() {
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      this.showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-      form.reset();
+      await navigator.clipboard.writeText(this.contactDraft);
+      this.showToast(`Message copied. Paste it into an email to ${CONTACT_EMAIL}.`, 'success');
     } catch (error) {
-      this.showToast('Failed to send message. Please try again later.', 'error');
-    } finally {
-      buttonText.style.display = 'inline';
-      buttonLoading.style.display = 'none';
-      submitButton.disabled = false;
+      this.showToast(`Couldn't copy automatically. Please email me at ${CONTACT_EMAIL}.`, 'error');
     }
   }
 
-  setupResumeDownload() {
-    // Resume download functionality will be added here
+  setupResumePage() {
+    const link = document.getElementById('resume-download-link');
+    if (!link) return;
+
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.downloadResume(link);
+    });
+
+    // Start the download automatically; the button stays as a fallback
+    setTimeout(() => this.downloadResume(link), 800);
   }
+
+  // Fetching the file and saving it as a blob forces a real download, instead of
+  // letting the browser open the PDF in this tab and replace the page
+  async downloadResume(link) {
+    try {
+      const response = await fetch(link.getAttribute('href'));
+      if (!response.ok) throw new Error('Resume file not found');
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+      const temp = document.createElement('a');
+      temp.href = url;
+      temp.download = link.getAttribute('download') || 'resume.pdf';
+      document.body.appendChild(temp);
+      temp.click();
+      temp.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      // Cloudflare Web Analytics counts a route change as a pageview, so this logs the
+      // PDF's own path as a completed download, separate from visits to this page
+      try {
+        history.pushState(null, '', link.getAttribute('href'));
+      } catch (error) {
+        // Not critical: the download itself has already started
+      }
+    } catch (error) {
+      // Fall back to the plain link, e.g. when the page is opened straight from disk
+      const fallback = document.createElement('a');
+      fallback.href = link.getAttribute('href');
+      fallback.download = link.getAttribute('download') || 'resume.pdf';
+      document.body.appendChild(fallback);
+      fallback.click();
+      fallback.remove();
+    }
+  }
+
 
   setupScrollAnimations() {
     const observerOptions = {
@@ -185,16 +233,6 @@ class PortfolioApp {
     document.querySelectorAll('section').forEach(section => {
       section.classList.add('scroll-animate');
       observer.observe(section);
-    });
-  }
-
-  setupSkillAnimations() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    skillBars.forEach(bar => {
-      const width = bar.getAttribute('data-width');
-      if (width) {
-        bar.style.setProperty('--target-width', `${width}%`);
-      }
     });
   }
 
@@ -223,6 +261,12 @@ class PortfolioApp {
   }
 
   closeModals() {
+    const resetModal = document.getElementById('user-popup');
+    if (resetModal) {
+      resetModal.remove();
+      return;
+    }
+
     const activeModals = document.querySelectorAll('.modal.active');
     activeModals.forEach(modal => {
       modal.classList.remove('active');
@@ -270,11 +314,6 @@ class PortfolioApp {
       }
     }, 300);
   }
-
-  markAsLoaded() {
-    this.isLoaded = true;
-    document.body.classList.add('loaded');
-  }
 }
 
 // Demo Functions
@@ -283,73 +322,6 @@ function openGraphicsDemo() {
   const container = document.getElementById('graphics-demo-container');
   
   if (!modal || !container) return;
-
-  container.innerHTML = `
-    <div class="graphics-demo">
-      <div class="graphics-controls">
-        <div class="shape-controls">
-          <button class="shape-btn active" data-shape="cube">Cube</button>
-          <button class="shape-btn" data-shape="pyramid">Pyramid</button>
-          <button class="shape-btn" data-shape="sphere">Sphere</button>
-        </div>
-      </div>
-      
-      <div class="graphics-canvas-container">
-        <canvas class="graphics-canvas" width="600" height="400"></canvas>
-      </div>
-
-      <div class="rotation-controls">
-        <div class="rotation-control">
-          <label>X Rotation</label>
-          <input type="range" id="rotationX" min="0" max="360" value="0">
-          <div class="rotation-value">0°</div>
-        </div>
-        <div class="rotation-control">
-          <label>Y Rotation</label>
-          <input type="range" id="rotationY" min="0" max="360" value="0">
-          <div class="rotation-value">0°</div>
-        </div>
-        <div class="rotation-control">
-          <label>Z Rotation</label>
-          <input type="range" id="rotationZ" min="0" max="360" value="0">
-          <div class="rotation-value">0°</div>
-        </div>
-      </div>
-
-      <div class="technical-info">
-        <h4><i class="fas fa-info-circle"></i> Technical Implementation</h4>
-        <div class="technical-grid">
-          <div class="technical-section">
-            <strong>Core Technologies</strong>
-            <ul>
-              <li>C++ with OpenGL</li>
-              <li>GLFW for window management</li>
-              <li>GLM for matrix mathematics</li>
-              <li>Custom shader pipeline</li>
-            </ul>
-          </div>
-          <div class="technical-section">
-            <strong>Rendering Features</strong>
-            <ul>
-              <li>Real-time 3D transformations</li>
-              <li>Vector-based calculations</li>
-              <li>Backface culling optimization</li>
-              <li>Perspective projection</li>
-            </ul>
-          </div>
-          <div class="technical-section">
-            <strong>Performance Optimizations</strong>
-            <ul>
-              <li>Vertex buffer objects</li>
-              <li>Efficient matrix operations</li>
-              <li>Frustum culling</li>
-              <li>Level-of-detail rendering</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
 
   // Initialize 3D graphics demo
   demoInstances.graphics = new GraphicsDemo('graphics-demo-container');
@@ -373,6 +345,9 @@ function openInfrastructureDemo() {
         </button>
         <button class="btn btn-primary" onclick="addUser()">
           <i class="fas fa-user-plus"></i> Add User
+        </button>
+        <button class="btn btn-secondary" onclick="showRemoveUserModal()">
+          <i class="fas fa-user-minus"></i> Remove User
         </button>
         <button class="btn btn-secondary" onclick="showPasswordResetModal()">
           <i class="fas fa-key"></i> Reset Password
@@ -398,6 +373,8 @@ function openInfrastructureDemo() {
           </div>
         </div>
       </div>
+
+      <div id="infrastructure-report"></div>
 
       <div class="technical-info">
         <h4><i class="fas fa-info-circle"></i> Infrastructure Management Features</h4>
@@ -907,10 +884,10 @@ class GraphicsDemo {
     });
 
     // Draw coordinate axes
-    this.drawAxes(transformedVertices);
+    this.drawAxes();
   }
 
-  drawAxes(transformedVertices) {
+  drawAxes() {
     const axisLength = 2;
     const axes = [
       { start: [0, 0, 0], end: [axisLength, 0, 0], color: '#ef4444' }, // X - Red
@@ -1099,7 +1076,7 @@ class InfrastructureDemo {
 
     container.innerHTML = `
       <div class="users-list">
-        ${this.users.map(user => `
+        ${this.users.length === 0 ? '<p>No users in the directory.</p>' : ''}${this.users.map(user => `
           <div class="user-card ${user.status}">
             <div class="user-header">
               <div class="user-avatar">
@@ -1133,6 +1110,71 @@ class InfrastructureDemo {
         `).join('')}
       </div>
     `;
+  }
+
+  showReport() {
+    const container = document.getElementById('infrastructure-report');
+    if (!container) return;
+
+    const servers = this.servers;
+    const users = this.users;
+    const average = key => (servers.reduce((sum, server) => sum + server[key], 0) / servers.length).toFixed(1);
+    const online = servers.filter(server => server.status === 'online').length;
+    const disabled = users.filter(user => user.status === 'disabled');
+    const departments = users.reduce((counts, user) => {
+      counts[user.department] = (counts[user.department] || 0) + 1;
+      return counts;
+    }, {});
+
+    const issues = server => [
+      server.status !== 'online' ? server.status : null,
+      server.cpu > 90 ? 'CPU over 90%' : null,
+      server.memory > 90 ? 'memory over 90%' : null,
+      server.disk > 90 ? 'disk over 90%' : null
+    ].filter(Boolean).join(', ');
+    const flagged = servers.filter(server => issues(server));
+
+    container.innerHTML = `
+      <div class="report-panel">
+        <div class="report-header">
+          <h4><i class="fas fa-file-alt"></i> Infrastructure Report</h4>
+          <span class="report-time">Snapshot taken ${new Date().toLocaleTimeString()}</span>
+          <button class="btn btn-secondary" onclick="closeInfrastructureReport()">
+            <i class="fas fa-times"></i> Close
+          </button>
+        </div>
+
+        <div class="algorithm-stats">
+          <div class="stat-card"><div class="stat-value">${online}/${servers.length}</div><div class="stat-label">Servers Online</div></div>
+          <div class="stat-card"><div class="stat-value">${average('cpu')}%</div><div class="stat-label">Average CPU</div></div>
+          <div class="stat-card"><div class="stat-value">${average('memory')}%</div><div class="stat-label">Average Memory</div></div>
+          <div class="stat-card"><div class="stat-value">${average('disk')}%</div><div class="stat-label">Average Disk</div></div>
+          <div class="stat-card"><div class="stat-value">${users.length - disabled.length}/${users.length}</div><div class="stat-label">Active Users</div></div>
+        </div>
+
+        <div class="technical-grid" style="margin-top: 1.5rem;">
+          <div class="technical-section">
+            <strong>Servers Needing Attention</strong>
+            <ul>${flagged.length ? flagged.map(server => `<li>${server.name}: ${issues(server)}</li>`).join('') : '<li>All servers healthy</li>'}</ul>
+          </div>
+          <div class="technical-section">
+            <strong>Disabled Accounts</strong>
+            <ul>${disabled.length ? disabled.map(user => `<li>${user.name} (${user.department})</li>`).join('') : '<li>None</li>'}</ul>
+          </div>
+          <div class="technical-section">
+            <strong>Users by Department</strong>
+            <ul>${Object.entries(departments).map(([name, count]) => `<li>${name}: ${count}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  hideReport() {
+    const container = document.getElementById('infrastructure-report');
+    if (container) container.innerHTML = '';
   }
 
   destroy() {
@@ -1316,9 +1358,100 @@ class AlgorithmDemo {
     return i + 1;
   }
 
+  async mergeSort(left = 0, right = this.array.length - 1) {
+    if (left >= right) return;
+    const mid = Math.floor((left + right) / 2);
+    await this.mergeSort(left, mid);
+    await this.mergeSort(mid + 1, right);
+    await this.merge(left, mid, right);
+  }
+
+  async merge(left, mid, right) {
+    const leftPart = this.array.slice(left, mid + 1).map(element => element.value);
+    const rightPart = this.array.slice(mid + 1, right + 1).map(element => element.value);
+    let i = 0;
+    let j = 0;
+    let k = left;
+
+    // Highlight the range being merged
+    for (let x = left; x <= right; x++) this.array[x].state = 'comparing';
+
+    const place = async (value) => {
+      this.array[k] = { value, state: 'swapping' };
+      this.stats.swaps++;
+      await this.delay();
+      this.render();
+      this.array[k].state = 'default';
+      k++;
+    };
+
+    while (i < leftPart.length && j < rightPart.length) {
+      this.stats.comparisons++;
+      await place(leftPart[i] <= rightPart[j] ? leftPart[i++] : rightPart[j++]);
+    }
+    while (i < leftPart.length) await place(leftPart[i++]);
+    while (j < rightPart.length) await place(rightPart[j++]);
+  }
+
+  async heapSort() {
+    const n = this.array.length;
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      await this.heapify(n, i);
+    }
+    for (let end = n - 1; end > 0; end--) {
+      await this.swapElements(0, end);
+      this.array[end].state = 'sorted';
+      await this.heapify(end, 0);
+    }
+    this.array[0].state = 'sorted';
+  }
+
+  async heapify(size, root) {
+    const left = 2 * root + 1;
+    const right = left + 1;
+    const nodes = [root, left, right].filter(index => index < size);
+
+    nodes.forEach(index => { this.array[index].state = 'comparing'; });
+    await this.delay();
+    this.render();
+    nodes.forEach(index => { this.array[index].state = 'default'; });
+
+    let largest = root;
+    if (left < size) {
+      this.stats.comparisons++;
+      if (this.array[left].value > this.array[largest].value) largest = left;
+    }
+    if (right < size) {
+      this.stats.comparisons++;
+      if (this.array[right].value > this.array[largest].value) largest = right;
+    }
+
+    if (largest !== root) {
+      await this.swapElements(root, largest);
+      await this.heapify(size, largest);
+    }
+  }
+
+  async swapElements(a, b) {
+    this.array[a].state = 'swapping';
+    this.array[b].state = 'swapping';
+    [this.array[a], this.array[b]] = [this.array[b], this.array[a]];
+    this.stats.swaps++;
+    await this.delay();
+    this.render();
+    this.array[a].state = 'default';
+    this.array[b].state = 'default';
+  }
+
+  markAllSorted() {
+    this.array.forEach(element => { element.state = 'sorted'; });
+    this.render();
+    this.updateStats();
+  }
+
   delay() {
     const speed = document.getElementById('speed').value;
-    const delayTime = 1000 / speed;
+    const delayTime = 1000 / (speed * speed);
     return new Promise(resolve => {
       this.currentAnimation = setTimeout(resolve, delayTime);
     });
@@ -1394,14 +1527,16 @@ function startSorting() {
           await demo.quickSort();
           break;
         case 'merge':
-          await demo.bubbleSort(); // Simplified - using bubble for now
+          await demo.mergeSort();
           break;
         case 'heap':
-          await demo.bubbleSort(); // Simplified - using bubble for now
+          await demo.heapSort();
           break;
         default:
           await demo.bubbleSort();
       }
+
+      if (!demo.shouldStop) demo.markAllSorted();
     } catch (error) {
       console.log('Sorting interrupted');
     } finally {
@@ -1431,10 +1566,17 @@ function refreshInfrastructure() {
   demo.generateUsers();
   demo.renderServers();
   demo.renderUsers();
+  demo.hideReport();
 }
 
 function generateReport() {
-  portfolioApp.showToast('Infrastructure report generated successfully!', 'success');
+  const demo = demoInstances.infrastructure;
+  if (demo) demo.showReport();
+}
+
+function closeInfrastructureReport() {
+  const demo = demoInstances.infrastructure;
+  if (demo) demo.hideReport();
 }
 
 function addUser() {
@@ -1450,7 +1592,7 @@ function addUser() {
   const department = departments[Math.floor(Math.random() * departments.length)];
   
   const newUser = {
-    id: `user${demo.users.length + 1}`,
+    id: `user${Date.now()}`,
     name: `${firstName} ${lastName}`,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@company.com`,
     department,
@@ -1487,7 +1629,7 @@ function showPasswordResetModal() {
         </select>
       </div>
       <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
-        <button class="btn btn-secondary" onclick="closePasswordResetModal()">Cancel</button>
+        <button class="btn btn-secondary" onclick="closeUserPopup()">Cancel</button>
         <button class="btn btn-primary" onclick="executePasswordReset()">
           <i class="fas fa-key"></i> Reset Password
         </button>
@@ -1495,29 +1637,32 @@ function showPasswordResetModal() {
     </div>
   `;
 
-  // Create and show modal
-  const existingModal = document.getElementById('password-reset-temp-modal');
+  openUserPopup(modalHtml);
+}
+
+function openUserPopup(modalHtml) {
+  const existingModal = document.getElementById('user-popup');
   if (existingModal) {
     existingModal.remove();
   }
 
   const modalWrapper = document.createElement('div');
-  modalWrapper.id = 'password-reset-temp-modal';
+  modalWrapper.id = 'user-popup';
   modalWrapper.className = 'modal active';
   modalWrapper.style.zIndex = '2001';
-  
+
   modalWrapper.innerHTML = `
     <div class="modal-content" style="max-width: 500px;">
-      <span class="modal-close" onclick="closePasswordResetModal()">&times;</span>
+      <span class="modal-close" onclick="closeUserPopup()">&times;</span>
       ${modalHtml}
     </div>
   `;
-  
+
   document.body.appendChild(modalWrapper);
 }
 
-function closePasswordResetModal() {
-  const modal = document.getElementById('password-reset-temp-modal');
+function closeUserPopup() {
+  const modal = document.getElementById('user-popup');
   if (modal) {
     modal.remove();
   }
@@ -1538,26 +1683,65 @@ function executePasswordReset() {
   const selectedUser = demo.users.find(user => user.id === selectedUserId);
   if (selectedUser) {
     portfolioApp.showToast(`Password reset for ${selectedUser.name} completed! New temporary password sent to ${selectedUser.email}`, 'success');
-    closePasswordResetModal();
+    closeUserPopup();
   }
 }
 
-function downloadResume() {
-  try {
-    // Create a temporary link element for the download
-    const link = document.createElement('a');
-    link.href = './Résumé-Evan_Dos_Santos-2025-NA.pdf';
-    link.download = 'Evan_Dos_Santos_Resume_2025.pdf';
-    link.style.display = 'none';
-    
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    portfolioApp.showToast('Resume download started!', 'success');
-  } catch (error) {
-    portfolioApp.showToast('Resume download failed. Please try again later.', 'error');
+function showRemoveUserModal() {
+  const demo = demoInstances.infrastructure;
+  if (!demo) return;
+
+  if (demo.users.length === 0) {
+    portfolioApp.showToast('There are no users to remove.', 'error');
+    return;
   }
+
+  openUserPopup(`
+    <div>
+      <h3 style="margin-bottom: 1rem; color: var(--secondary);">
+        <i class="fas fa-user-minus"></i> Remove User
+      </h3>
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--secondary);">
+          Select User:
+        </label>
+        <select id="removeUserSelect" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem; font-size: 1rem;">
+          <option value="">Choose a user...</option>
+          ${demo.users.map(user => `
+            <option value="${user.id}">${user.name} (${user.email})${user.status === 'disabled' ? ' - disabled' : ''}</option>
+          `).join('')}
+        </select>
+      </div>
+      <p style="margin-bottom: 0;">This removes the account from the directory.</p>
+      <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+        <button class="btn btn-secondary" onclick="closeUserPopup()">Cancel</button>
+        <button class="btn btn-primary" onclick="executeRemoveUser()">
+          <i class="fas fa-user-minus"></i> Remove User
+        </button>
+      </div>
+    </div>
+  `);
+}
+
+function executeRemoveUser() {
+  const demo = demoInstances.infrastructure;
+  const selectElement = document.getElementById('removeUserSelect');
+  if (!demo || !selectElement) return;
+
+  const selectedUserId = selectElement.value;
+  if (!selectedUserId) {
+    portfolioApp.showToast('Please select a user first.', 'error');
+    return;
+  }
+
+  const selectedUser = demo.users.find(user => user.id === selectedUserId);
+  if (!selectedUser) return;
+
+  demo.users = demo.users.filter(user => user.id !== selectedUserId);
+  demo.renderUsers();
+  demo.hideReport();
+  closeUserPopup();
+  portfolioApp.showToast(`User ${selectedUser.name} removed successfully!`, 'success');
 }
 
 // Initialize the application when DOM is loaded

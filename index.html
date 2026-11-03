@@ -7,9 +7,12 @@
     <meta property="og:title" content="Evan Dos Santos - Software Engineer Portfolio">
     <meta property="og:description" content="B.Sc. (Hons) Computer Science, Software Engineering (Co-op). Experienced in full-stack development, IT consulting, systems administration, and 3D graphics development.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://evan-ds.github.io">
+    <meta property="og:url" content="https://resume.evandos.com">
+    <meta property="og:image" content="https://resume.evandos.com/headshot.png">
+    <link rel="canonical" href="https://resume.evandos.com/">
     
     <title>Evan Dos Santos - Software Engineer Portfolio</title>
+    <link rel="icon" href="favicon.ico">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,9 +24,6 @@
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -35,7 +35,6 @@
             
             <!-- Desktop Navigation -->
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -95,7 +94,7 @@
                     <h3>Software Engineering Graduate & IT Professional</h3>
                     <p>
                         I'm a recent Honours Software Engineering graduate from the University of Windsor with 
-                        Co-op experience applying my skills in enterprise enviornments. My academic journey and 
+                        Co-op experience applying my skills in enterprise environments. My academic journey and 
                         professional experience have equipped me with a strong foundation in software development, 
                         systems administration, cloud services, networking architecture, and IT consulting.
                     </p>
@@ -130,14 +129,14 @@
                     </div>
                     
                     <div class="resume-download">
-                        <a href="#" class="btn btn-primary" onclick="downloadResume()">
+                        <a href="resume_download.html" class="btn btn-primary" target="_blank" rel="noopener">
                             <i class="fas fa-download"></i> Download Resume
                         </a>
                     </div>
                 </div>
                 
                 <div class="about-image">
-                    <img src="headshot.jpg" alt="Evan Dos Santos" class="profile-photo">
+                    <img src="headshot.png" alt="Evan Dos Santos" class="profile-photo">
                 </div>
             </div>
         </div>
@@ -169,6 +168,7 @@
                             <button class="btn btn-primary" onclick="openGraphicsDemo()">
                                 <i class="fas fa-play"></i> Live Demo
                             </button>
+                            <!-- TODO: link to this project's own repo once it exists; for now this goes to the GitHub profile -->
                             <a href="https://github.com/Evan-DS" class="btn btn-secondary" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
@@ -193,6 +193,7 @@
                             <button class="btn btn-primary" onclick="openInfrastructureDemo()">
                                 <i class="fas fa-play"></i> View Demo
                             </button>
+                            <!-- TODO: link to this project's own repo once it exists; for now this goes to the GitHub profile -->
                             <a href="https://github.com/Evan-DS" class="btn btn-secondary" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
@@ -217,6 +218,7 @@
                             <button class="btn btn-primary" onclick="openAlgorithmDemo()">
                                 <i class="fas fa-play"></i> Live Demo
                             </button>
+                            <!-- TODO: link to this project's own repo once it exists; for now this goes to the GitHub profile -->
                             <a href="https://github.com/Evan-DS" class="btn btn-secondary" target="_blank">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
@@ -425,12 +427,18 @@
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">
-                        <span class="btn-text">Send Message</span>
-                        <span class="btn-loading" style="display: none;">
-                            <i class="fas fa-spinner fa-spin"></i> Sending...
-                        </span>
-                    </button>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+
+                    <div id="send-options" class="send-options" hidden>
+                        <p>Choose how you'd like to send your message:</p>
+                        <div class="send-options-buttons">
+                            <a id="send-mailto" href="#" class="btn btn-primary"><i class="fas fa-envelope"></i> Email App</a>
+                            <a id="send-gmail" href="#" class="btn btn-secondary" target="_blank" rel="noopener"><i class="fab fa-google"></i> Gmail</a>
+                            <a id="send-outlook" href="#" class="btn btn-secondary" target="_blank" rel="noopener"><i class="fab fa-microsoft"></i> Outlook</a>
+                            <a id="send-yahoo" href="#" class="btn btn-secondary" target="_blank" rel="noopener"><i class="fab fa-yahoo"></i> Yahoo Mail</a>
+                            <button type="button" id="send-copy" class="btn btn-secondary"><i class="fas fa-copy"></i> Copy Message</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
