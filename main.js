@@ -349,7 +349,7 @@ function openInfrastructureDemo() {
         <button class="btn btn-secondary" onclick="showRemoveUserModal()">
           <i class="fas fa-user-minus"></i> Remove User
         </button>
-        <button class="btn btn-secondary" onclick="showPasswordResetModal()">
+        <button class="btn btn-primary" onclick="showPasswordResetModal()">
           <i class="fas fa-key"></i> Reset Password
         </button>
       </div>
